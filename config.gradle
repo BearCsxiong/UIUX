@@ -1,0 +1,80 @@
+apply from: versions
+if (isRunnable()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    defaultConfig {
+        compileSdkVersion _compileSdkVersion
+        minSdkVersion _minSdkVersion
+        targetSdkVersion _targetSdkVersion
+        versionCode _versionCode
+        versionName _versionName
+
+        if (isRunnable()) {
+            applicationId "me.csxiong.ui.${this.name}"
+        } else {
+            applicationId "me.csxiong.ui"
+        }
+
+        ndk {
+//            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "armeabi"
+//            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+        }
+
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['libs']
+            res.srcDirs = [
+                    'src/main/res',
+            ]
+
+            if (isModule && this.name.startsWith("module")) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude '**/debug/**'
+                }
+            }
+        }
+    }
+
+}
+
+//define isRunnable module for create
+def isRunnable() {
+
+    if (this.name.equals("app")) {
+        return true
+    }
+
+    if (this.name.startsWith("module")) {
+        return isModule
+    }
+
+    if (this.name.startsWith("lib")) {
+        return false
+    }
+
+    return false
+}
