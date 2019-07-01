@@ -15,8 +15,6 @@ android {
 
         if (isRunnable()) {
             applicationId "me.csxiong.ui.${this.name}"
-        } else {
-            applicationId "me.csxiong.ui"
         }
 
         ndk {
@@ -28,14 +26,18 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
+            if (isRunnable()) {
+                shrinkResources true
+                minifyEnabled true
+            }
             debuggable false
         }
 
         debug {
-            shrinkResources false
-            minifyEnabled false
+            if (isRunnable()) {
+                shrinkResources false
+                minifyEnabled false
+            }
             debuggable true
         }
     }
@@ -73,6 +75,10 @@ def isRunnable() {
     }
 
     if (this.name.startsWith("lib")) {
+        return false
+    }
+
+    if (this.name.startsWith("res")) {
         return false
     }
 
