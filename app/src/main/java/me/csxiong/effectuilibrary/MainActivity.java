@@ -1,17 +1,12 @@
 package me.csxiong.effectuilibrary;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import me.csxiong.effectuilibrary.transition.TransitionBeginDelayActivity;
+import me.csxiong.ui.transition.TestTransitionActivity;
+import me.csxiong.ui.transition.TransitionBeginDelayActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     public void toBeginDelayTransition(View view) {
         Intent intent = new Intent();
         intent.setClass(this, TransitionBeginDelayActivity.class);
+        startActivity(intent);
+    }
+
+    public void toTestTransition(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this, TestTransitionActivity.class);
         startActivity(intent);
     }
 }

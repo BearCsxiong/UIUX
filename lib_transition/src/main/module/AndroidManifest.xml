@@ -5,9 +5,9 @@
 
     <application>
 
-        <activity android:name=".TestTransitionActivity"/>
+        <activity android:name="me.csxiong.ui.transition.TransitionBeginDelayActivity" />
 
-        <activity android:name=".TransitionBeginDelayActivity"/>
+        <activity android:name=".TestTransitionActivity"/>
 
     </application>
 

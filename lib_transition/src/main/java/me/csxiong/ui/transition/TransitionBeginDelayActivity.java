@@ -1,18 +1,18 @@
-package me.csxiong.effectuilibrary.transition;
+package me.csxiong.ui.transition;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.AutoTransition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
-import me.csxiong.effectuilibrary.R;
-
+/**
+ * Desc : 使用延迟过渡
+ * Author : csxiong - 2019/7/2
+ */
 public class TransitionBeginDelayActivity extends AppCompatActivity {
 
     ViewGroup mRoot;
@@ -25,7 +25,6 @@ public class TransitionBeginDelayActivity extends AppCompatActivity {
     ImageView mIv4;
     ImageView mIv5;
     ImageView mIv6;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +40,24 @@ public class TransitionBeginDelayActivity extends AppCompatActivity {
         mIv4 = findViewById(R.id.iv_4);
         mIv5 = findViewById(R.id.iv_5);
         mIv6 = findViewById(R.id.iv_6);
-
-        findViewById(android.R.id.content).getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                return false;
-            }
-        });
     }
 
     private boolean isSmallWindow = false;
 
     public void exChange(View view) {
         isSmallWindow = !isSmallWindow;
-        executeToolWindow();
+//        executeToolWindow();
         executeTransition(mIv1, mIv2, mIv3, mIv4, mIv5, mIv6);
+
+        ViewGroup.LayoutParams lp = mGlGroup.getLayoutParams();
+        if (isSmallWindow) {
+            lp.width = 300;
+            lp.height = 200;
+        } else {
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+        mGlGroup.setLayoutParams(lp);
     }
 
     public void changeSize(View... views) {
@@ -72,18 +74,27 @@ public class TransitionBeginDelayActivity extends AppCompatActivity {
         }
     }
 
+    public void changeAlpha(View... views) {
+        for (View view : views) {
+            view.setAlpha(isSmallWindow ? 0 : 1);
+        }
+        mIv1.setAlpha(1.0f);
+        mIv2.setAlpha(1.0f);
+    }
+
     public void executeTransition(View... views) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             TransitionManager.beginDelayedTransition(mGlGroup, TransitionInflater.from(this).inflateTransition(R.transition.explode_slide));
 //            TransitionManager.beginDelayedTransition(mGlGroup,new AutoTransition());
         }
-        changeSize(views);
+//        changeAlpha(views);
         for (View view : views) {
             view.setVisibility(isSmallWindow ? View.INVISIBLE : View.VISIBLE);
         }
 
         mIv2.setVisibility(View.VISIBLE);
         mIv1.setVisibility(View.VISIBLE);
+        changeSize(views);
     }
 
     public void executeToolWindow() {
@@ -92,9 +103,10 @@ public class TransitionBeginDelayActivity extends AppCompatActivity {
 //            TransitionManager.beginDelayedTransition(mRoot,new AutoTransition());
         }
         ViewGroup.LayoutParams lp = mGlGroup.getLayoutParams();
+
         if (isSmallWindow) {
-            lp.width = 200;
-            lp.height = 100;
+            lp.width = 300;
+            lp.height = 200;
         } else {
             lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
