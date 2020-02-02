@@ -22,6 +22,7 @@ import android.view.animation.LinearInterpolator;
 
 import me.csxiong.library.base.APP;
 import me.csxiong.library.utils.XDisplayUtil;
+import me.csxiong.uiux.R;
 
 
 /**
@@ -421,7 +422,7 @@ public class NewCaptureView extends View {
 
         argbEvaluator = new ArgbEvaluator();
 
-        captureDrawable = ContextCompat.getDrawable(APP.get(), me.csxiong.library.R.mipmap.icon_group_capture);
+        captureDrawable = ContextCompat.getDrawable(APP.get(), R.mipmap.icon_group_capture);
     }
 
     /**

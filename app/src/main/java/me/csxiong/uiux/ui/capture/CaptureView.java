@@ -23,6 +23,7 @@ import android.view.animation.LinearInterpolator;
 import me.csxiong.library.base.APP;
 import me.csxiong.library.utils.ThreadExecutor;
 import me.csxiong.library.utils.XDisplayUtil;
+import me.csxiong.uiux.R;
 
 
 /**
@@ -396,7 +397,7 @@ public class CaptureView extends View {
         captureAnimator.addUpdateListener(captureUpdateListener);
         captureAnimator.addListener(captureListener);
 
-        faceDrawable = ContextCompat.getDrawable(APP.get(), me.csxiong.library.R.mipmap.icon_face);
+        faceDrawable = ContextCompat.getDrawable(APP.get(), R.mipmap.icon_face);
     }
 
     @Override

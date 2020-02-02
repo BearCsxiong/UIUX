@@ -3602,20 +3602,6 @@
     </declare-styleable>
     <declare-styleable name="Chip"><attr format="color" name="chipBackgroundColor"/><attr format="dimension" name="chipMinHeight"/><attr format="dimension" name="chipCornerRadius"/><attr format="color" name="chipStrokeColor"/><attr format="dimension" name="chipStrokeWidth"/><attr name="rippleColor"/><attr name="android:text"/><attr name="android:textAppearance"/><attr name="android:ellipsize"/><attr name="android:maxWidth"/><attr format="boolean" name="chipIconVisible"/><attr format="boolean" name="chipIconEnabled"/><attr format="reference" name="chipIcon"/><attr format="color" name="chipIconTint"/><attr format="dimension" name="chipIconSize"/><attr format="boolean" name="closeIconVisible"/><attr format="boolean" name="closeIconEnabled"/><attr format="reference" name="closeIcon"/><attr format="color" name="closeIconTint"/><attr format="dimension" name="closeIconSize"/><attr name="android:checkable"/><attr format="boolean" name="checkedIconVisible"/><attr format="boolean" name="checkedIconEnabled"/><attr format="reference" name="checkedIcon"/><attr name="showMotionSpec"/><attr name="hideMotionSpec"/><attr format="dimension" name="chipStartPadding"/><attr format="dimension" name="iconStartPadding"/><attr format="dimension" name="iconEndPadding"/><attr format="dimension" name="textStartPadding"/><attr format="dimension" name="textEndPadding"/><attr format="dimension" name="closeIconStartPadding"/><attr format="dimension" name="closeIconEndPadding"/><attr format="dimension" name="chipEndPadding"/></declare-styleable>
     <declare-styleable name="ChipGroup"><attr format="dimension" name="chipSpacing"/><attr format="dimension" name="chipSpacingHorizontal"/><attr format="dimension" name="chipSpacingVertical"/><attr format="boolean" name="singleLine"/><attr format="boolean" name="singleSelection"/><attr format="reference" name="checkedChip"/></declare-styleable>
-    <declare-styleable name="CirclePageIndicator">
-        <attr format="integer" name="cpi_size"/>
-        <attr format="integer" name="cpi_position"/>
-        <attr format="dimension|reference" name="cpi_radius"/>
-        <attr format="color|reference" name="cpi_unselect_color"/>
-        <attr format="color|reference" name="cpi_select_color"/>
-        <attr format="float" name="cpi_ratio"/>
-    </declare-styleable>
-    <declare-styleable name="CircularImage">
-        <attr format="dimension" name="border_width"/>
-        <attr format="color" name="border_color"/>
-        <attr format="color" name="src_color"/>
-        <attr format="boolean" name="src_color_use"/>
-    </declare-styleable>
     <declare-styleable name="CollapsingToolbarLayout"><attr format="dimension" name="expandedTitleMargin"/><attr format="dimension" name="expandedTitleMarginStart"/><attr format="dimension" name="expandedTitleMarginTop"/><attr format="dimension" name="expandedTitleMarginEnd"/><attr format="dimension" name="expandedTitleMarginBottom"/><attr format="reference" name="expandedTitleTextAppearance"/><attr format="reference" name="collapsedTitleTextAppearance"/><attr format="color" name="contentScrim"/><attr format="color" name="statusBarScrim"/><attr format="reference" name="toolbarId"/><attr format="dimension" name="scrimVisibleHeightTrigger"/><attr format="integer" name="scrimAnimationDuration"/><attr name="collapsedTitleGravity">
       
       <flag name="top" value="0x30"/>
@@ -3799,16 +3785,6 @@
             <flag name="all" value="0x77"/>
         </attr>
     </declare-styleable>
-    <declare-styleable name="CustomInput">
-        <attr format="string" name="text"/>
-        <attr format="color" name="text_color"/>
-        <attr format="dimension" name="text_size"/>
-        <attr format="string" name="hint"/>
-        <attr format="color" name="hint_color"/>
-        <attr format="reference" name="right_last_src"/>
-        <attr format="reference" name="img_clear_src"/>
-        <attr format="string" name="reg_ex"/>
-    </declare-styleable>
     <declare-styleable name="DesignTheme"><attr name="bottomSheetDialogTheme"/><attr name="bottomSheetStyle"/></declare-styleable>
     <declare-styleable name="DrawerArrowToggle">
         <!-- The drawing color for the bars -->
@@ -3827,18 +3803,6 @@
         <attr format="dimension" name="barLength"/>
         <!-- The thickness (stroke size) for the bar paint -->
         <attr format="dimension" name="thickness"/>
-    </declare-styleable>
-    <declare-styleable name="DropDownMenu">
-        <attr format="color" name="ddunderlineColor"/>
-        <attr format="color" name="dddividerColor"/>
-        <attr format="color" name="ddtextSelectedColor"/>
-        <attr format="color" name="ddtextUnselectedColor"/>
-        <attr format="color" name="ddmenuBackgroundColor"/>
-        <attr format="color" name="ddmaskColor"/>
-        <attr format="dimension" name="ddmenuTextSize"/>
-        <attr format="reference" name="ddmenuSelectedIcon"/>
-        <attr format="reference" name="ddmenuUnselectedIcon"/>
-        <attr format="float" name="ddmenuMenuHeightPercent"/>
     </declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr name="rippleColor"/><attr name="fabSize">
       

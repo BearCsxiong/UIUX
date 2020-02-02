@@ -1,50 +1,42 @@
 [
     {
-        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher_round.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_group_capture.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/icon_group_capture.png"
-    },
-    {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_error_outline_white_48dp.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_error_outline_white_48dp.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_error_outline_white_48dp.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/qmui_icon_notify_done.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/qmui_icon_notify_done.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/qmui_icon_notify_done.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_check_white_48dp.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_check_white_48dp.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_check_white_48dp.png"
     },
     {
-        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_face.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/icon_face.png"
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher_round.png",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_launcher_round.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_launcher.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_launcher.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_clear.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/icon_clear.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/icon_clear.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/qmui_icon_notify_error.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/qmui_icon_notify_error.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/qmui_icon_notify_error.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_info_outline_white_48dp.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_info_outline_white_48dp.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_info_outline_white_48dp.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_clear_white_48dp.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/ic_clear_white_48dp.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/ic_clear_white_48dp.png"
     },
     {
         "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/qmui_icon_notify_info.png",
-        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/eafff5238a70f78051c2b9c172bebfab/res/mipmap-xxhdpi-v4/qmui_icon_notify_info.png"
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/2a1f9af11552fecd646f875df4180d4c/res/mipmap-xxhdpi-v4/qmui_icon_notify_info.png"
     }
 ]

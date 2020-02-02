@@ -88,8 +88,6 @@ attr behavior_overlapTop
 attr behavior_peekHeight
 attr behavior_skipCollapsed
 attr borderWidth
-attr border_color
-attr border_width
 attr borderlessButtonStyle
 attr bottomAppBarStyle
 attr bottomNavigationStyle
@@ -192,23 +190,7 @@ attr counterEnabled
 attr counterMaxLength
 attr counterOverflowTextAppearance
 attr counterTextAppearance
-attr cpi_position
-attr cpi_radius
-attr cpi_ratio
-attr cpi_select_color
-attr cpi_size
-attr cpi_unselect_color
 attr customNavigationLayout
-attr dddividerColor
-attr ddmaskColor
-attr ddmenuBackgroundColor
-attr ddmenuMenuHeightPercent
-attr ddmenuSelectedIcon
-attr ddmenuTextSize
-attr ddmenuUnselectedIcon
-attr ddtextSelectedColor
-attr ddtextUnselectedColor
-attr ddunderlineColor
 attr defaultQueryHint
 attr dialogCornerRadius
 attr dialogPreferredPadding
@@ -274,11 +256,9 @@ attr helperTextTextAppearance
 attr hideMotionSpec
 attr hideOnContentScroll
 attr hideOnScroll
-attr hint
 attr hintAnimationEnabled
 attr hintEnabled
 attr hintTextAppearance
-attr hint_color
 attr homeAsUpIndicator
 attr homeLayout
 attr hoveredFocusedTranslationZ
@@ -292,7 +272,6 @@ attr iconTint
 attr iconTintMode
 attr iconifiedByDefault
 attr imageButtonStyle
-attr img_clear_src
 attr indeterminateProgressStyle
 attr initialActivityCount
 attr insetForeground
@@ -379,9 +358,7 @@ attr radioButtonStyle
 attr ratingBarStyle
 attr ratingBarStyleIndicator
 attr ratingBarStyleSmall
-attr reg_ex
 attr reverseLayout
-attr right_last_src
 attr rippleColor
 attr rv_backgroundColor
 attr rv_backgroundPressColor
@@ -422,8 +399,6 @@ attr spinnerDropDownItemStyle
 attr spinnerStyle
 attr splitTrack
 attr srcCompat
-attr src_color
-attr src_color_use
 attr stackFromEnd
 attr state_above_anchor
 attr state_collapsed
@@ -471,7 +446,6 @@ attr tabStyle
 attr tabTextAppearance
 attr tabTextColor
 attr tabUnboundedRipple
-attr text
 attr textAllCaps
 attr textAppearanceBody1
 attr textAppearanceBody2
@@ -499,8 +473,6 @@ attr textColorSearchUrl
 attr textEndPadding
 attr textInputStyle
 attr textStartPadding
-attr text_color
-attr text_size
 attr theme
 attr thickness
 attr thumbTextPadding
@@ -2307,8 +2279,6 @@ mipmap ic_info_outline_white_48dp
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap icon_clear
-mipmap icon_face
-mipmap icon_group_capture
 mipmap qmui_icon_notify_done
 mipmap qmui_icon_notify_error
 mipmap qmui_icon_notify_info
@@ -2924,18 +2894,14 @@ styleable ButtonBarLayout allowStacking
 styleable CardView android_minHeight android_minWidth cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable Chip android_checkable android_ellipsize android_maxWidth android_text android_textAppearance checkedIcon checkedIconEnabled checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipStartPadding chipStrokeColor chipStrokeWidth closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible hideMotionSpec iconEndPadding iconStartPadding rippleColor showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical singleLine singleSelection
-styleable CirclePageIndicator cpi_position cpi_radius cpi_ratio cpi_select_color cpi_size cpi_unselect_color
-styleable CircularImage border_color border_width src_color src_color_use
 styleable CollapsingToolbarLayout collapsedTitleGravity collapsedTitleTextAppearance contentScrim expandedTitleGravity expandedTitleMargin expandedTitleMarginBottom expandedTitleMarginEnd expandedTitleMarginStart expandedTitleMarginTop expandedTitleTextAppearance scrimAnimationDuration scrimVisibleHeightTrigger statusBarScrim title titleEnabled toolbarId
 styleable CollapsingToolbarLayout_Layout layout_collapseMode layout_collapseParallaxMultiplier
 styleable ColorStateListItem alpha android_alpha android_color
 styleable CompoundButton android_button buttonTint buttonTintMode
 styleable CoordinatorLayout keylines statusBarBackground
 styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_anchorGravity layout_behavior layout_dodgeInsetEdges layout_insetEdge layout_keyline
-styleable CustomInput hint hint_color img_clear_src reg_ex right_last_src text text_color text_size
 styleable DesignTheme bottomSheetDialogTheme bottomSheetStyle
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
-styleable DropDownMenu dddividerColor ddmaskColor ddmenuBackgroundColor ddmenuMenuHeightPercent ddmenuSelectedIcon ddmenuTextSize ddmenuUnselectedIcon ddtextSelectedColor ddtextUnselectedColor ddunderlineColor
 styleable FloatingActionButton backgroundTint backgroundTintMode borderWidth elevation fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor showMotionSpec useCompatPadding
 styleable FloatingActionButton_Behavior_Layout behavior_autoHide
 styleable FlowLayout itemSpacing lineSpacing
