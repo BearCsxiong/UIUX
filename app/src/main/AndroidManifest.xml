@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="me.csxiong.uiux">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name="me.csxiong.library.base.APP"
@@ -16,12 +16,21 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <!-- 注入全局配置 -->
-        <meta-data android:name="me.csxiong.uiux.config.MainGlobalConfig"
-            android:value="@string/GlobalConfig"/>
+        <meta-data
+            android:name="me.csxiong.uiux.config.MainGlobalConfig"
+            android:value="@string/GlobalConfig" />
 
-        <activity android:name=".ui.capture.CaptureViewActivity"/>
+        <activity android:name=".ui.capture.CaptureViewActivity" />
 
-        <activity android:name=".ui.capture.NewCaptureViewActivity"/>
+        <activity android:name=".ui.capture.NewCaptureViewActivity" />
+
+        <activity android:name=".ui.gesture.GestureViewActivity" />
+
+        <activity android:name=".ui.polygon.PolygonActivity" />
+
+        <activity android:name=".ui.seek.SeekBarActivity" />
+
+        <activity android:name=".ui.radar.RadarActivity" />
 
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>

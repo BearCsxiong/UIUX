@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/avd_show_password.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/31a940c6e36affe263ff2d0c4932ba14/res/drawable-v21/avd_show_password.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/841963ee9f193cfe811ab0d2e66831a9/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/design_bottom_navigation_item_background.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/31a940c6e36affe263ff2d0c4932ba14/res/drawable-v21/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/841963ee9f193cfe811ab0d2e66831a9/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/avd_hide_password.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/31a940c6e36affe263ff2d0c4932ba14/res/drawable-v21/avd_hide_password.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/design_password_eye.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/31a940c6e36affe263ff2d0c4932ba14/res/drawable-v21/design_password_eye.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/abc_dialog_material_background.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/841963ee9f193cfe811ab0d2e66831a9/res/drawable-v21/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/f22f33f3f26dec66ccd6519100e54733/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/abc_list_divider_material.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/841963ee9f193cfe811ab0d2e66831a9/res/drawable-v21/abc_list_divider_material.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/841963ee9f193cfe811ab0d2e66831a9/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    }
+]

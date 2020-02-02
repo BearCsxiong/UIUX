@@ -7,7 +7,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    api 'com.github.csxiong:xPort:v1.0.3'
+    api xport
+    api project(':module_camera')
     annotationProcessor aroutercompiler
     annotationProcessor dagger2compiler
     annotationProcessor dagger2androidprocessor

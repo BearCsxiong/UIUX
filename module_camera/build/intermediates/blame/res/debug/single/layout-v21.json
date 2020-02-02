@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/f22f33f3f26dec66ccd6519100e54733/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/f22f33f3f26dec66ccd6519100e54733/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/f22f33f3f26dec66ccd6519100e54733/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/csxiong/Documents/GitHub/UIUX/module_camera/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/csxiong/.gradle/caches/transforms-2/files-2.1/f22f33f3f26dec66ccd6519100e54733/res/layout-v21/notification_action_tombstone.xml"
+    }
+]

@@ -8,6 +8,7 @@ ext {
     _buildToolsVersion = "28.0.2"
     supportLibraryVersion = "28.0.0"
     butterknifeSdkVersion = "9.0.0"
+    xportVersion = "v1.0.3"
 
     version = [
             arouterVersion    : '1.4.0',
@@ -85,5 +86,7 @@ ext {
     okio = "com.squareup.okio:okio:${version.okioVersion}"
     //permission
     ipermission = "com.github.csxiong:IPermission:${version.ipermission}"
+    //base
+    xport = "com.github.csxiong:xPort:$xportVersion"
 }
 
