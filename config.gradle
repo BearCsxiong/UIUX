@@ -1,47 +1,77 @@
 apply from: versions
-if (isRunnable()) {
+if (isIndependent()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
 }
-
 android {
+    compileSdkVersion _compileSdkVersion
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
-        compileSdkVersion _compileSdkVersion
+        if (isIndependent()) {
+            if (this.name.equals("app")) {
+                applicationId "me.csxiong.uiux"
+            } else if (this.name.contains("library")) {
+                applicationId "me.csxiong.uiux"
+                println("this == ${this.name} , applicationId")
+            } else {
+                applicationId "me.csxiong.uiux.${this.name}"
+                println("this == ${this.name} , applicationId")
+            }
+        }
         minSdkVersion _minSdkVersion
         targetSdkVersion _targetSdkVersion
-        versionCode _versionCode
+        versionCode _versionCode//1 ~ 2147483647 17年10月30号1版本
         versionName _versionName
 
-        if (isRunnable()) {
-            applicationId "me.csxiong.ui.${this.name}"
-        }
 
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         ndk {
 //            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "armeabi"
 //            abiFilters "armeabi-v7a", "x86"
             abiFilters "armeabi-v7a"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
-
     buildTypes {
         release {
-            if (isRunnable()) {
+            debuggable false
+            if (isIndependent()) {
                 shrinkResources true
                 minifyEnabled true
             }
-            debuggable false
+            buildConfigField "String", "MAIN_HOST", "\"http://www.yourhost.com\""
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
         debug {
-            if (isRunnable()) {
-                shrinkResources false
-                minifyEnabled false
-            }
             debuggable true
+            crunchPngs false //关闭crunchPng优化, 以加快构建
+            shrinkResources false
+            minifyEnabled false
+            testCoverageEnabled false
+            buildConfigField "String", "MAIN_HOST", "\"http://www.yourhost.com\""
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets {
         main {
             jni.srcDirs = []
@@ -49,38 +79,99 @@ android {
             res.srcDirs = [
                     'src/main/res',
             ]
+        }
+    }
+    if (this.name.startsWith("app")) {
+        signingConfigs {
+            debug {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+            release {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        }
+    }
 
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            //未开启独立编译 并且是独立的module，才会使用总是使用 library/AndroidManifest.xml
             if (isModule && this.name.startsWith("module")) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 java {
+                    //全部Module一起编译的时候剔除debug目录
                     exclude '**/debug/**'
                 }
             }
         }
     }
-
+    packagingOptions {
+//        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/rxjava.properties'
+//        exclude 'META-INF/NOTICE'
+//        exclude 'META-INF/LICENSE'
+//        exclude 'META-INF/LICENSE.txt'
+//        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
-//define isRunnable module for create
-def isRunnable() {
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "$supportLibraryVersion"
+            }
+        }
+    }
+    resolutionStrategy.force "com.google.code.findbugs:jsr305:3.0.2"
+}
 
-    if (this.name.equals("app")) {
+//dif module single build
+def isIndependent() {
+    if (this.name.startsWith("app")) {
+        println("this module's name is not startsWith [module] , this.name = ${this.name}")
         return true
     }
-
-    if (this.name.startsWith("module")) {
-        return isModule
-    }
-
-    if (this.name.startsWith("lib")) {
+    if (this.name.startsWith("library")) {
+        println("this module's name is library , this.name = ${this.name}")
         return false
     }
-
-    if (this.name.startsWith("res")) {
+    if (this.name.contains("module_example")) {
+        println("this module's name is module , this.name = ${this.name}")
+        return isExampleModule
+    }
+    if (this.name.contains("module_login")) {
+        println("this module's name is module , this.name = ${this.name}")
+        return isExampleModule
+    }
+    if (this.name.contains("module_camera")) {
+        println("this module's name is module , this.name = ${this.name}")
+        return isExampleModule
+    }
+    if (!isModule) {
+        println("not independent!")
         return false
     }
-
-    return false
+    if (!this.name.startsWith("module")) {
+        println("this module's name is not startsWith [module] , this.name = ${this.name}")
+        return false
+    }
+    println("this module is independent!")
+    return true
 }

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="me.csxiong.effectuilibrary">
+    package="me.csxiong.uiux">
 
     <application
+        android:name="me.csxiong.library.base.APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <!-- 注入全局配置 -->
+        <meta-data android:name="me.csxiong.uiux.config.MainGlobalConfig"
+            android:value="@string/GlobalConfig"/>
+
+        <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package me.csxiong.effectuilibrary;
+package me.csxiong.uiux;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
