@@ -39,8 +39,8 @@ public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> 
 
     @Override
     public void initData() {
-        mDataList.add(new FeatureBean("多人拍照的手势控件", "/login/capture"));
-        mDataList.add(new FeatureBean("新多人拍照的手势控件", "/login/new/capture"));
+        mDataList.add(new FeatureBean("多人拍照的手势控件", "/main/capture"));
+        mDataList.add(new FeatureBean("新多人拍照的手势控件", "/main/new/capture"));
         mDataList.add(new FeatureBean("多边形", "/login/polygon"));
         mDataList.add(new FeatureBean("相册页面", "/camera/album"));
         mDataList.add(new FeatureBean("ViewPager泄漏检测", "/login/leakViewPager"));
