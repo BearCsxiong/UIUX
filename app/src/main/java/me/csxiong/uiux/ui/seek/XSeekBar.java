@@ -11,10 +11,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.login.R;
-
 import me.csxiong.library.utils.XAnimator;
 import me.csxiong.library.utils.XDisplayUtil;
+import me.csxiong.uiux.R;
 
 /**
  * @Desc : 一个内容可编辑的Seekbar 比较简易
