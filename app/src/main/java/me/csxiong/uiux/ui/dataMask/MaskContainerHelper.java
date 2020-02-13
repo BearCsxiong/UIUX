@@ -13,13 +13,13 @@ import me.csxiong.uiux.ui.dataMask.listener.OnInflateListener;
  * @Desc : 数据蒙版帮助类
  * @Author : csxiong - 2020-02-13
  */
-public class DataMaskHelper {
+public class MaskContainerHelper {
 
     private Map<String, MaskActions> maskMap;
 
     private View.OnClickListener onClickListener;
 
-    public DataMaskHelper() {
+    public MaskContainerHelper() {
     }
 
     private Builder builder;
@@ -39,19 +39,19 @@ public class DataMaskHelper {
 
     public static class Builder {
 
-        private DataMaskHelper dataMaskHelper;
+        private MaskContainerHelper maskContainerHelper;
 
-        public Builder(DataMaskHelper helper) {
-            dataMaskHelper = helper;
-            dataMaskHelper.maskMap = new HashMap<>();
+        public Builder(MaskContainerHelper helper) {
+            maskContainerHelper = helper;
+            maskContainerHelper.maskMap = new HashMap<>();
         }
 
         public Builder bindView(String tag, int resId) {
-            MaskActions maskActions = dataMaskHelper.maskMap.get(tag);
+            MaskActions maskActions = maskContainerHelper.maskMap.get(tag);
             if (maskActions == null) {
                 MaskActions _maskActions = new MaskActions(new ArrayList<>());
                 _maskActions.getMaskActions().add(new MaskAction(resId, tag));
-                dataMaskHelper.maskMap.put(tag, _maskActions);
+                maskContainerHelper.maskMap.put(tag, _maskActions);
             } else {
                 maskActions.getMaskActions().add(new MaskAction(resId, tag));
             }
@@ -59,11 +59,11 @@ public class DataMaskHelper {
         }
 
         public Builder setOnInflateViewListener(String tag, OnInflateListener listener) {
-            MaskActions maskActions = dataMaskHelper.maskMap.get(tag);
+            MaskActions maskActions = maskContainerHelper.maskMap.get(tag);
             if (maskActions == null) {
                 MaskActions _maskActions = new MaskActions(new ArrayList<>());
                 _maskActions.setOnInflateListener(listener);
-                dataMaskHelper.maskMap.put(tag, _maskActions);
+                maskContainerHelper.maskMap.put(tag, _maskActions);
             } else {
                 maskActions.setOnInflateListener(listener);
             }
@@ -71,12 +71,12 @@ public class DataMaskHelper {
         }
 
         public Builder bindClickListener(View.OnClickListener listener) {
-            dataMaskHelper.onClickListener = listener;
+            maskContainerHelper.onClickListener = listener;
             return this;
         }
 
-        public DataMaskHelper build() {
-            return dataMaskHelper;
+        public MaskContainerHelper build() {
+            return maskContainerHelper;
         }
     }
 

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <me.csxiong.uiux.ui.dataMask.DataMask
+        <me.csxiong.uiux.ui.dataMask.MaskContainer
             android:id="@+id/dm"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </me.csxiong.uiux.ui.dataMask.DataMask>
+        </me.csxiong.uiux.ui.dataMask.MaskContainer>
 
         <LinearLayout
             android:layout_width="match_parent"

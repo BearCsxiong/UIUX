@@ -13,7 +13,7 @@ import me.csxiong.library.base.APP;
 import me.csxiong.library.base.IAppDelegate;
 import me.csxiong.uiux.BuildConfig;
 import me.csxiong.uiux.di.DaggerUIComponent;
-import me.csxiong.uiux.ui.dataMask.DataMask;
+import me.csxiong.uiux.ui.dataMask.MaskContainer;
 import me.csxiong.uiux.ui.dataMask.MaskType;
 import me.csxiong.uiux.ui.dataMask.mask.BaseMask;
 import me.csxiong.uiux.ui.dataMask.mask.EmptyMask;
@@ -50,7 +50,7 @@ public class MainAppDelegate implements IAppDelegate {
         /**
          * mask代理
          */
-        DataMask.setMasksDelegate(new DataMask.MasksDelegate() {
+        MaskContainer.setMasksDelegate(new MaskContainer.MasksDelegate() {
             @Override
             public void onCreateMasks(Map<String, BaseMask> masks) {
                 masks.put(MaskType.EMPTY, new EmptyMask());

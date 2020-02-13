@@ -1,18 +1,12 @@
 package me.csxiong.uiux.ui.dataMask;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewStub;
-import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import me.csxiong.uiux.ui.dataMask.mask.BaseMask;
@@ -21,7 +15,7 @@ import me.csxiong.uiux.ui.dataMask.mask.BaseMask;
  * @Desc : 数据蒙版
  * @Author : csxiong - 2020-02-13
  */
-public class DataMask extends RelativeLayout {
+public class MaskContainer extends RelativeLayout {
 
     /**
      * 蒙版
@@ -36,17 +30,17 @@ public class DataMask extends RelativeLayout {
     /**
      * 数据蒙版帮助类
      */
-    private DataMaskHelper dataMaskHelper;
+    private MaskContainerHelper maskContainerHelper;
 
-    public DataMask(@NonNull Context context) {
+    public MaskContainer(@NonNull Context context) {
         super(context);
     }
 
-    public DataMask(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MaskContainer(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DataMask(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MaskContainer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -64,11 +58,11 @@ public class DataMask extends RelativeLayout {
      *
      * @return
      */
-    public DataMaskHelper getDataMaskHelper() {
-        if (dataMaskHelper == null) {
-            dataMaskHelper = new DataMaskHelper();
+    public MaskContainerHelper getMaskContainerHelper() {
+        if (maskContainerHelper == null) {
+            maskContainerHelper = new MaskContainerHelper();
         }
-        return dataMaskHelper;
+        return maskContainerHelper;
     }
 
     /**
@@ -115,7 +109,7 @@ public class DataMask extends RelativeLayout {
         if (mask != null) {
             int index = indexOfChild(mask.getViewStub());
             if (index < 0) {
-                mask.onCreateViewStub(this, dataMaskHelper);
+                mask.onCreateViewStub(this, maskContainerHelper);
             }
             mask.getViewStub().setVisibility(VISIBLE);
         }
@@ -159,6 +153,6 @@ public class DataMask extends RelativeLayout {
     }
 
     public static void setMasksDelegate(MasksDelegate masksDelegate) {
-        DataMask.masksDelegate = masksDelegate;
+        MaskContainer.masksDelegate = masksDelegate;
     }
 }

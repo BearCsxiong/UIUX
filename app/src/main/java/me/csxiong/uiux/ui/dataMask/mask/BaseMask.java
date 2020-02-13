@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
-import me.csxiong.uiux.ui.dataMask.DataMaskHelper;
+import me.csxiong.uiux.ui.dataMask.MaskContainerHelper;
 import me.csxiong.uiux.ui.dataMask.MaskAction;
 import me.csxiong.uiux.ui.dataMask.MaskActions;
 
@@ -32,7 +32,7 @@ public abstract class BaseMask implements ViewStub.OnInflateListener {
     /**
      * 布局帮助类
      */
-    private DataMaskHelper maskHelper;
+    private MaskContainerHelper maskHelper;
 
     /**
      * 获取布局ID
@@ -52,12 +52,12 @@ public abstract class BaseMask implements ViewStub.OnInflateListener {
      * 创建目标View
      *
      * @param container
-     * @param dataMaskHelper
+     * @param maskContainerHelper
      */
-    public void onCreateViewStub(ViewGroup container, DataMaskHelper dataMaskHelper) {
+    public void onCreateViewStub(ViewGroup container, MaskContainerHelper maskContainerHelper) {
         //保存parent
         this.container = container;
-        this.maskHelper = dataMaskHelper;
+        this.maskHelper = maskContainerHelper;
         //创建目标ViewStub
         viewStub = new ViewStub(container.getContext(), getLayoutId());
         //对目标创建监听

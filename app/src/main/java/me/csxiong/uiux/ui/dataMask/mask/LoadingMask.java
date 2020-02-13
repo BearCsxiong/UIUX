@@ -1,12 +1,6 @@
 package me.csxiong.uiux.ui.dataMask.mask;
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-
-import me.csxiong.library.widget.XLoadingView;
 import me.csxiong.uiux.R;
-import me.csxiong.uiux.ui.dataMask.DataMaskHelper;
 import me.csxiong.uiux.ui.dataMask.MaskType;
 
 /**
