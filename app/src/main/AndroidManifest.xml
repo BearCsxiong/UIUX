@@ -32,6 +32,8 @@
 
         <activity android:name=".ui.radar.RadarActivity" />
 
+        <activity android:name=".ui.dataMask.DataMaskActivity"/>
+
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

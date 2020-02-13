@@ -44,8 +44,9 @@ public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> 
         mDataList.add(new FeatureBean("新多人拍照的手势控件", "/main/new/capture"));
         mDataList.add(new FeatureBean("多边形", "/main/polygon"));
         mDataList.add(new FeatureBean("雷达图", "/main/radar"));
-        mDataList.add(new FeatureBean("SeekBar测试界面", "/main/seekbar"));
-        mDataList.add(new FeatureBean("手势View测试界面", "/main/gesture"));
+        mDataList.add(new FeatureBean("SeekBar测试", "/main/seekbar"));
+        mDataList.add(new FeatureBean("手势View测试", "/main/gesture"));
+        mDataList.add(new FeatureBean("DataMask测试", "/main/data/mask"));
         mAdapter.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder.class).build());
 
