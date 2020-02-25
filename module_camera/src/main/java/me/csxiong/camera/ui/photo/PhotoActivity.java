@@ -18,11 +18,11 @@ import me.csxiong.camera.R;
 import me.csxiong.camera.album.ImageEntity;
 import me.csxiong.camera.databinding.ActivityPhotoBinding;
 import me.csxiong.camera.ui.album.AlbumRepository;
+import me.csxiong.camera.widget.GestureImageView;
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.imageloader.IImageLoader;
 import me.csxiong.library.integration.imageloader.ImageLoader;
 import me.csxiong.library.utils.gesture.SimpleTransitionAdapter;
-import me.csxiong.library.widget.GestureImageView;
 
 @Route(path = "/camera/photo", name = "相片界面")
 public class PhotoActivity extends BaseActivity<ActivityPhotoBinding> {

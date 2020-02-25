@@ -18,9 +18,14 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import me.csxiong.library.base.APP;
+import me.csxiong.library.utils.XAnimator;
 import me.csxiong.library.utils.XDisplayUtil;
 import me.csxiong.uiux.R;
 
@@ -239,131 +244,109 @@ public class NewCaptureView extends View {
      */
     private Drawable captureDrawable;
 
+
     /**
      * 相机单击动画
      */
-    private ValueAnimator captureAnimator = ValueAnimator.ofFloat(0f, 1f, 0f)
-            .setDuration(300);
+    private XAnimator captureAnimator = XAnimator.ofFloat(0, 1)
+            .duration(200)
+            .interpolator(new BounceInterpolator())
+            .setAnimationListener(new XAnimator.XAnimationListener() {
+                @Override
+                public void onAnimationUpdate(float fraction, float value) {
+                    inRadius = captureStartInRadius + value * captureDifferInRadius;
+                    invalidate();
+                }
+
+                @Override
+                public void onAnimationStart(XAnimator animation) {
+                    captureStartInRadius = inRadius;
+                    captureDifferInRadius = shrinkInRadius - inRadius;
+                }
+
+                @Override
+                public void onAnimationEnd(XAnimator animation) {
+                    inRadius = normalInRadius;
+                    alpha = shrinkAlpha;
+                }
+
+                @Override
+                public void onAnimationCancel(XAnimator animation) {
+                    inRadius = normalInRadius;
+                    alpha = shrinkAlpha;
+                }
+            });
 
 
     /**
      * 改变动画 都是从0～1变化 内部因子使用 自己控制差值
      */
-    private ValueAnimator changeAnimator = ValueAnimator.ofFloat(0f, 1f)
-            .setDuration(200);
-
-    /**
-     * 相机单击更新
-     */
-    private ValueAnimator.AnimatorUpdateListener captureUpdateListener = animation -> {
-        float value = (float) animation.getAnimatedValue();
-        inRadius = captureStartInRadius + value * captureDifferInRadius;
-//        alpha = (int) (captureStartAlpha + value * captureDifferAlpha);
-        invalidate();
-    };
-
-    /**
-     * 相机单击监听
-     */
-    private AnimatorListenerAdapter captureListener = new AnimatorListenerAdapter() {
-
-        @Override
-        public void onAnimationCancel(Animator animation) {
-            super.onAnimationCancel(animation);
-            inRadius = normalInRadius;
-            alpha = shrinkAlpha;
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            super.onAnimationEnd(animation);
-            inRadius = normalInRadius;
-            alpha = shrinkAlpha;
-        }
-
-        @Override
-        public void onAnimationStart(Animator animation) {
-            super.onAnimationStart(animation);
-            captureStartInRadius = inRadius;
-//            captureStartAlpha = alpha;
-
-            captureDifferInRadius = shrinkInRadius - inRadius;
-//            captureDifferAlpha = 255 - alpha;
-        }
-    };
-
-    /**
-     * 动画更新回调 当前进度 0~1
-     */
-    private ValueAnimator.AnimatorUpdateListener updateListener = animation -> {
-        //动画因子
-        float fract = animation.getAnimatedFraction();
-        outRadius = differOutRadius * fract + startOutRadius;
-        inRadius = differInRadius * fract + startInRadius;
-        alpha = (int) (fract * differAlpha + startAlpha);
-        if (!isPress) {
-            degree = fract * differDegree + startDegree;
-        }
-        captureIconAlpha = (int) (fract * captureIconDifferAlpha + captureIconStartAlpha);
-        indicatorColor = getIndicatorColor(fract, indicatorStartColor, isPress);
-        invalidate();
-    };
-
-    /**
-     * 参数计算时机
-     */
-    private AnimatorListenerAdapter listenerAdapter = new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationCancel(Animator animation) {
-            super.onAnimationCancel(animation);
-            differOutRadius = 0;
-            differInRadius = 0;
-            differAlpha = 0;
-            differDegree = 0;
-            captureIconDifferAlpha = 0;
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            super.onAnimationEnd(animation);
-            differOutRadius = 0;
-            differInRadius = 0;
-            differAlpha = 0;
-            differDegree = 0;
-            captureIconDifferAlpha = 0;
-        }
-
-        @Override
-        public void onAnimationStart(Animator animation) {
-            super.onAnimationStart(animation);
-            startOutRadius = outRadius;
-            startInRadius = inRadius;
-            startAlpha = alpha;
-            startDegree = degree;
-            captureIconStartAlpha = captureIconAlpha;
-            indicatorStartColor = indicatorColor;
-            if (isPress) {
-                differAlpha = expandAlpha - startAlpha;
-                differOutRadius = expandOutRadius - outRadius;
-                differInRadius = expandInRadius - inRadius;
-                captureIconDifferAlpha = 0 - captureIconAlpha;
-            } else {
-                differAlpha = shrinkAlpha - startAlpha;
-                differOutRadius = shrinkOutRadius - outRadius;
-                differInRadius = normalInRadius - inRadius;
-                captureIconDifferAlpha = 255 - captureIconAlpha;
-
-                if (degree > MAX_DEGREE) {
-                    differDegree = MAX_DEGREE - degree;
-                } else if (degree < MIN_DEGREE) {
-                    differDegree = MIN_DEGREE - degree;
-                } else {
-                    differDegree = 0;
+    private XAnimator changeAnimator = XAnimator.ofFloat(0f, 1f)
+            .duration(1000)
+            .interpolator(new DecelerateInterpolator(2))
+            .setAnimationListener(new XAnimator.XAnimationListener() {
+                @Override
+                public void onAnimationUpdate(float fraction, float value) {
+                    //动画因子
+                    outRadius = differOutRadius * fraction + startOutRadius;
+                    inRadius = differInRadius * fraction + startInRadius;
+                    alpha = (int) (fraction * differAlpha + startAlpha);
+                    if (!isPress) {
+                        degree = fraction * differDegree + startDegree;
+                    }
+                    captureIconAlpha = (int) (fraction * captureIconDifferAlpha + captureIconStartAlpha);
+                    indicatorColor = getIndicatorColor(fraction, indicatorStartColor, isPress);
+                    invalidate();
                 }
-            }
 
-        }
-    };
+                @Override
+                public void onAnimationStart(XAnimator animation) {
+                    startOutRadius = outRadius;
+                    startInRadius = inRadius;
+                    startAlpha = alpha;
+                    startDegree = degree;
+                    captureIconStartAlpha = captureIconAlpha;
+                    indicatorStartColor = indicatorColor;
+                    if (isPress) {
+                        differAlpha = expandAlpha - startAlpha;
+                        differOutRadius = expandOutRadius - outRadius;
+                        differInRadius = expandInRadius - inRadius;
+                        captureIconDifferAlpha = 0 - captureIconAlpha;
+                    } else {
+                        differAlpha = shrinkAlpha - startAlpha;
+                        differOutRadius = shrinkOutRadius - outRadius;
+                        differInRadius = normalInRadius - inRadius;
+                        captureIconDifferAlpha = 255 - captureIconAlpha;
+
+                        if (degree > MAX_DEGREE) {
+                            differDegree = MAX_DEGREE - degree;
+                        } else if (degree < MIN_DEGREE) {
+                            differDegree = MIN_DEGREE - degree;
+                        } else {
+                            differDegree = 0;
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onAnimationEnd(XAnimator animation) {
+                    differOutRadius = 0;
+                    differInRadius = 0;
+                    differAlpha = 0;
+                    differDegree = 0;
+                    captureIconDifferAlpha = 0;
+                }
+
+                @Override
+                public void onAnimationCancel(XAnimator animation) {
+                    differOutRadius = 0;
+                    differInRadius = 0;
+                    differAlpha = 0;
+                    differDegree = 0;
+                    captureIconDifferAlpha = 0;
+                }
+            });
 
     public NewCaptureView(Context context) {
         this(context, null);
@@ -412,13 +395,6 @@ public class NewCaptureView extends View {
         mIndicatorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mIndicatorPaint.setStyle(Paint.Style.FILL);
         mIndicatorPaint.setColor(0xFFFD5A5C);
-
-        changeAnimator.addUpdateListener(updateListener);
-        changeAnimator.addListener(listenerAdapter);
-
-        captureAnimator.setInterpolator(new LinearInterpolator());
-        captureAnimator.addUpdateListener(captureUpdateListener);
-        captureAnimator.addListener(captureListener);
 
         argbEvaluator = new ArgbEvaluator();
 
