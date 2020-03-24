@@ -2,6 +2,7 @@ package me.csxiong.uiux.ui.gesture;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
+import me.csxiong.camera.opengl.AbsEglRenderer;
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.utils.XResUtils;
 import me.csxiong.uiux.R;
@@ -17,7 +18,9 @@ public class GestureViewActivity extends BaseActivity<ActivityGestureBinding> {
 
     @Override
     public void initView() {
-        mViewBinding.gv.setImageDrawable(XResUtils.getDrawable(R.mipmap.ic_launcher));
+        mViewBinding.gltv.requestRender();
+        mViewBinding.gltv.setRenderer(new ImageRender());
+        mViewBinding.gltv.requestRender();
     }
 
     @Override

@@ -10,8 +10,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <me.csxiong.camera.widget.GestureImageView
-            android:id="@+id/gv"
+        <me.csxiong.camera.opengl.GLTextureView
+            android:id="@+id/gltv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

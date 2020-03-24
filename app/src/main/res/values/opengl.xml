@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vertex_shader">
+        uniform mat4 mMVPMatrix;
+        uniform mat4 mTexMatrix;
+        attribute vec4 aPosition;
+        attribute vec4 aTexCoordinate;
+        varying vec2 vTextureCoord;
+        void main(){
+            gl_Position = mMVPMatrix * aPosition;
+            vTextureCoord = (mTexMatrix * aTexCoordinate).xy;
+        }
+    </string>
+
+    <string name="fragment_shader">
+        precision mediump float;
+        varying vec2 vTextureCoord;
+        uniform sampler2D sTexture;
+        void main(){
+            vec4 color = texture2D(sTexture, vTextureCoord.xy);
+            float c = (color.r + color.g + color.b)/3.0;
+            gl_FragColor = vec4(color.r*2.0,c,c,color.a);
+        }
+    </string>
+</resources>

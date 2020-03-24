@@ -38,6 +38,7 @@ public class PhotoActivity extends BaseActivity<ActivityPhotoBinding> {
     public void initView() {
         mAdapter = new ImagePagerAdpter();
         mViewBinding.vp.setAdapter(mAdapter);
+        mViewBinding.vp.setOffscreenPageLimit(2);
 
         mViewBinding.vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

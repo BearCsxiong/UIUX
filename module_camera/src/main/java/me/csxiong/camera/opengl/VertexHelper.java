@@ -13,7 +13,10 @@ public class VertexHelper {
      * GL_TRIANGLE_STRIP的绘制方式详见：https://blog.csdn.net/xiajun07061225/article/details/7455283。
      */
     public static final float[] GL_VERTEX_FLOATS = {
-            -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f,};
+            -1.0f, -1.0f,
+            1.0f, -1.0f,
+            -1.0f, 1.0f,
+            1.0f, 1.0f,};
     /**
      * 纹理顶点数组，左下、右下、左上、右上4个顶点。
      */

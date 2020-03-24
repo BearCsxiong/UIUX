@@ -115,10 +115,6 @@ public class AlbumActivity extends XActivity<ActivityAlbumBinding, AlbumViewMode
         super.onActivityReenter(resultCode, data);
         supportPostponeEnterTransition();
         ImageEntity currentVisiableImage = AlbumRepository.getInstance().getCurrentVisiableImage();
-//        mAdapter.updateItemEntities(AdapterDataBuilder.create()
-//                .addEntities(AlbumRepository.getInstance().getAlbumDataEvent().getValue(), AlbumViewHolder.class)
-//                .build());
-
         if (currentVisiableImage != null) {
             int position = AlbumRepository.getInstance().getAlbumDataEvent().getValue().indexOf(currentVisiableImage);
             mViewBinding.rv.scrollToPosition(position);
