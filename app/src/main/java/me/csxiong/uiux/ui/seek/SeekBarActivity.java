@@ -24,6 +24,8 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
 
     @Override
     public void initView() {
+        mViewBinding.xsb.setMinProgress(-250);
+        mViewBinding.xsb.setMaxProgress(170);
         mViewBinding.xsb.setOnProgressChangeListener(new XSeekBar.OnProgressChangeListener() {
             @Override
             public void onStartTracking(int progress, float leftDx) {

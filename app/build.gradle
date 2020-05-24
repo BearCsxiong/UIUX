@@ -12,4 +12,8 @@ dependencies {
     annotationProcessor aroutercompiler
     annotationProcessor dagger2compiler
     annotationProcessor dagger2androidprocessor
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

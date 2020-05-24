@@ -117,7 +117,7 @@ public class PhotoActivity extends BaseActivity<ActivityPhotoBinding> {
 
             //暂停动画
             supportPostponeEnterTransition();
-
+            //展示动画图片
             ImageLoader.url(image.getDisplayPath())
                     .withLoadListener(new IImageLoader.OnLoadListener() {
                         @Override

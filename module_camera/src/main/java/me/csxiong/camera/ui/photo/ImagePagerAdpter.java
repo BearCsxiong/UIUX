@@ -8,10 +8,6 @@ import me.csxiong.camera.databinding.ItemPagerImageBinding;
 import me.csxiong.library.integration.adapter.XPagerAdapter;
 import me.csxiong.library.integration.imageloader.ImageLoader;
 
-/**
- * @Desc : 图片Pager
- * @Author : csxiong - 2020-01-31
- */
 public class ImagePagerAdpter extends XPagerAdapter<ItemPagerImageBinding, ImageEntity> {
 
     @Override
