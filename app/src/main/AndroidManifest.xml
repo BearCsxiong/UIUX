@@ -36,6 +36,8 @@
 
         <activity android:name=".ui.blur.BlurActivity"/>
 
+        <activity android:name=".ui.gradient.GradientViewAcitivity"/>
+
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

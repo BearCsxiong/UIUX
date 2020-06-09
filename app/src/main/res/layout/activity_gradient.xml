@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <me.csxiong.uiux.ui.gradient.GradientView
+            android:id="@+id/gv"
+            android:layout_width="match_parent"
+            android:layout_height="70dp" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x30"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/x70">
+
+            <me.csxiong.uiux.ui.gradient.GradientView
+                android:id="@+id/gvCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+</layout>

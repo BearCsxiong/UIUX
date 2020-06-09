@@ -2,8 +2,11 @@ package me.csxiong.camera.ui.album;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -44,8 +47,12 @@ public class AlbumActivity extends XActivity<ActivityAlbumBinding, AlbumViewMode
         return R.layout.activity_album;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initView() {
+
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         mAdapter = new XRecyclerViewAdapter(this);
         mViewBinding.rv.setLayoutManager(new GridLayoutManager(this, 3));
         mViewBinding.rv.addItemDecoration(new RecyclerView.ItemDecoration() {
