@@ -49,6 +49,7 @@ public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> 
         mDataList.add(new FeatureBean("DataMask测试", "/main/data/mask"));
         mDataList.add(new FeatureBean("高斯模糊图片测试", "/main/blur"));
         mDataList.add(new FeatureBean("渐变顶部栏", "/main/gradient"));
+        mDataList.add(new FeatureBean("滚动Fliper", "/main/fliper"));
         mAdapter.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder.class).build());
 

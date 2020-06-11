@@ -42,7 +42,7 @@ public class GradientView extends View {
     /**
      * 是否倒播
      */
-    private boolean isReverse = false;
+    private boolean isReverse;
     /**
      * 画布位移
      */
@@ -50,7 +50,7 @@ public class GradientView extends View {
     /**
      * 是否销毁
      */
-    private boolean isDestory = false;
+    private boolean isStop;
     /**
      * 动画回调
      */
@@ -74,7 +74,7 @@ public class GradientView extends View {
 
                 @Override
                 public void onAnimationEnd(XAnimator animation) {
-                    if (!isDestory) {
+                    if (!isStop) {
                         isReverse = !isReverse;
                         mAnimator.cancel();
                         mAnimator.start();
@@ -139,23 +139,26 @@ public class GradientView extends View {
     public void initSize(int w, int h) {
         this.w = w;
         this.h = h;
-        fullDistance = (int) (w * 2.5f);
+        fullDistance = (int) (w * 3f);
         scrollDistance = fullDistance - w;
         mVisibleRect.set(0, 0, w, h);
         mFullRect.set(0, 0, fullDistance, h);
-        mLinearGradient = new LinearGradient(0, 0, fullDistance, h * 2, new int[]{0xFFFFC75C, 0xFFFFAB6C, 0xFFFF87F7, 0xFFB397FE, 0xFFFF88F2, 0xFFFFC55E},
+        mLinearGradient = new LinearGradient(0, 0, fullDistance, h, new int[]{0xFFFFC75C, 0xFFFFAB6C, 0xFFFF87F7, 0xFFB397FE, 0xFFFF88F2, 0xFFFFC55E},
                 new float[]{0.0f, 0.17f, 0.39f, 0.59f, 0.81f, 1.0f},
                 Shader.TileMode.CLAMP);
         mPaint.setShader(mLinearGradient);
     }
 
     public void start() {
-        isDestory = false;
+        isStop = false;
         mAnimator.start();
+        invalidate();
     }
 
-    public void destroy() {
-        isDestory = true;
+    public void stop() {
+        isStop = true;
         mAnimator.cancel();
+        translateX = 0;
+        invalidate();
     }
 }
