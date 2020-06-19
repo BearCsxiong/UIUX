@@ -40,6 +40,10 @@
 
         <activity android:name=".ui.fliper.FliperActivity"/>
 
+        <activity android:name=".ui.color.ColorWheelActivity"/>
+
+        <activity android:name=".ui.transition.RecyclerTransitionActivity"/>
+
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
