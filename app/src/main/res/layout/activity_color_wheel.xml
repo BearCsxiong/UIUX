@@ -9,7 +9,11 @@
             android:id="@+id/rv"
             android:layout_width="@dimen/x100"
             android:layout_height="@dimen/x500"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/x200"
+            android:paddingBottom="@dimen/x200" />
 
     </FrameLayout>
 </layout>

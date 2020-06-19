@@ -33,10 +33,10 @@ public class RecyclerTransitionActivity extends BaseActivity<ActivityRecyclerTra
                 @Override
                 public void onAnimationUpdate(float fraction, float value) {
                     if (isExpand) {
-                        mAdapter.notifyAllItemChanged(1 - fraction);
+                        mAdapter.notifyAllItemChanged(fraction);
                         mViewBinding.rv.setTranslationY(translateY.caculateValue(fraction));
                     } else {
-                        mAdapter.notifyAllItemChanged(fraction);
+                        mAdapter.notifyAllItemChanged(1 - fraction);
                         mViewBinding.rv.setTranslationY(translateY.caculateValue(1 - fraction));
                     }
                 }

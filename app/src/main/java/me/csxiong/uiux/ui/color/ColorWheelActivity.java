@@ -13,6 +13,7 @@ import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityColorWheelBinding;
+import me.csxiong.uiux.ui.layoutManager.CenterScrollLayoutManager;
 import me.csxiong.uiux.ui.layoutManager.active.ActiveScrollListener;
 import me.csxiong.uiux.ui.layoutManager.active.CenterActiveStrategy;
 
@@ -27,11 +28,19 @@ public class ColorWheelActivity extends BaseActivity<ActivityColorWheelBinding> 
     @Override
     public void initView() {
         XRecyclerViewAdapter mAdapter = new XRecyclerViewAdapter(this);
-        mViewBinding.rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mViewBinding.rv.setLayoutManager(new CenterScrollLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mViewBinding.rv.setAdapter(mAdapter);
         mAdapter.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(Arrays.asList(1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), ColorWheelViewHolder.class)
                 .build());
+
+        mAdapter.setOnEntityClickListener(new XRecyclerViewAdapter.OnEntityClickListener<Integer>() {
+            @Override
+            public boolean onClick(int position, Integer entity) {
+                mViewBinding.rv.smoothScrollToPosition(position);
+                return false;
+            }
+        }, Integer.class);
 
         mViewBinding.rv.addOnScrollListener(new ActiveScrollListener(mViewBinding.rv, new CenterActiveStrategy(true), false) {
             @Override
