@@ -11,13 +11,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
+import me.csxiong.library.utils.XDisplayUtil;
+
 public class FadingRecyclerView extends RecyclerView {
 
     private static final String TAG = "FadingRecyclerView";
     private Paint paint;
     private int height;
     private int width;
-    private int spanPixel = 300;
+    private int spanPixel = XDisplayUtil.dpToPxInt(50);
 
     public FadingRecyclerView(Context context) {
         super(context);

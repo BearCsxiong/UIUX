@@ -18,7 +18,7 @@ public class CenterScrollLayoutManager extends LinearLayoutManager {
         int CENTER = 2;
     }
 
-    private static final int SPEED_PER_SECOND = XDisplayUtil.dpToPxInt(120);
+    private static final int SPEED_PER_SECOND = XDisplayUtil.dpToPxInt(40);
 
     @Snap
     private int snap = Snap.CENTER;

@@ -63,7 +63,8 @@ public abstract class ActiveScrollListener extends RecyclerView.OnScrollListener
         if (isLazyActive) {
             onScrollFirstPosition(mLayoutManager.findFirstVisibleItemPosition());
             onScrollLastPosition(mLayoutManager.findLastVisibleItemPosition());
-            checkDeActive();
+            resetActive();
+//            checkDeActive();
         } else {
             checkActive();
         }
@@ -90,7 +91,7 @@ public abstract class ActiveScrollListener extends RecyclerView.OnScrollListener
     private Rect parentRect = new Rect();
 
     /**
-     * 获取Skicky百分比
+     * 获取Active百分比
      *
      * @param childView 子View
      * @return
@@ -208,6 +209,16 @@ public abstract class ActiveScrollListener extends RecyclerView.OnScrollListener
             activePosition = -1;
         }
         checkActive();
+    }
+
+    /**
+     * 重置选中态
+     */
+    public void resetActive() {
+        if (activePosition != -1) {
+            onDeActive(activePosition);
+            activePosition = -1;
+        }
     }
 
     public void onScrollLastPosition(int lastPosition) {

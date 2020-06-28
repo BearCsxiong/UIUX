@@ -42,7 +42,7 @@ public class ColorWheelActivity extends BaseActivity<ActivityColorWheelBinding> 
             }
         }, Integer.class);
 
-        mViewBinding.rv.addOnScrollListener(new ActiveScrollListener(mViewBinding.rv, new CenterActiveStrategy(true), false) {
+        mViewBinding.rv.addOnScrollListener(new ActiveScrollListener(mViewBinding.rv, new CenterActiveStrategy(true), true) {
             @Override
             public View getTargetView(int position) {
                 RecyclerView.ViewHolder holder = mViewBinding.rv.findViewHolderForLayoutPosition(position);
@@ -62,6 +62,7 @@ public class ColorWheelActivity extends BaseActivity<ActivityColorWheelBinding> 
                             .setDuration(200)
                             .start();
                 }
+                mViewBinding.rv.smoothScrollToPosition(position);
             }
 
             @Override
