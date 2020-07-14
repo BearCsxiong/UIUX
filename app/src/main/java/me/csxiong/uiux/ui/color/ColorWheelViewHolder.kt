@@ -15,5 +15,6 @@ class ColorWheelViewHolder(context: Context?, parent: ViewGroup?) : XViewHolder<
 
     override fun onBindViewHolder(position: Int, item: XItem<Int>?, payloads: MutableList<Any>?) {
         super.onBindViewHolder(position, item, payloads)
+        mViewBinding.tv.setText(position.toString())
     }
 }

@@ -13,5 +13,11 @@
             android:layout_margin="@dimen/x10"
             android:background="#ff0000" />
 
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+
     </FrameLayout>
 </layout>

@@ -9,7 +9,7 @@ import android.view.View;
 public interface AbsActiveScrollListener {
 
     /**
-     * 获取测量对象处于
+     * 获取测量对象
      *
      * @return
      */

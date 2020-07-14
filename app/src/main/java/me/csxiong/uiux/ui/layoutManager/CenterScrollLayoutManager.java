@@ -1,7 +1,6 @@
 package me.csxiong.uiux.ui.layoutManager;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +9,6 @@ import me.csxiong.library.utils.XDisplayUtil;
 
 
 public class CenterScrollLayoutManager extends LinearLayoutManager {
-
-    @IntDef({Snap.LEFT, Snap.RIGHT, Snap.CENTER})
-    public @interface Snap {
-        int LEFT = 0;
-        int RIGHT = 1;
-        int CENTER = 2;
-    }
 
     private static final int SPEED_PER_SECOND = XDisplayUtil.dpToPxInt(40);
 

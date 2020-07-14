@@ -52,6 +52,7 @@ public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> 
         mDataList.add(new FeatureBean("滚动Fliper", "/main/fliper"));
         mDataList.add(new FeatureBean("色轮", "/main/color/wheel"));
         mDataList.add(new FeatureBean("Recycler", "/main/transition"));
+        mDataList.add(new FeatureBean("数字", "/main/number"));
         mAdapter.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder.class).build());
 

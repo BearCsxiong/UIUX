@@ -16,14 +16,14 @@
             android:layout_height="@dimen/x50"
             android:layout_gravity="bottom"
             android:onClick="onExpand"
-            android:text="Expand" />
+            android:text="ScrollToEnd" />
 
         <Button
             android:layout_width="@dimen/x100"
             android:layout_height="@dimen/x50"
             android:layout_gravity="bottom|right"
             android:onClick="onShrink"
-            android:text="Shrink" />
+            android:text="ScrollToTop" />
 
     </FrameLayout>
 </layout>
