@@ -40,6 +40,9 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 app:isEnableStroke="false"
+                android:requiresFadingEdge="horizontal"
+                android:fadingEdgeLength="@dimen/x30"
+                android:fadingEdge="horizontal"
                 app:xBackgroundColor="#E5E5E5"
                 app:xProgressColor="#FB5986" />
 

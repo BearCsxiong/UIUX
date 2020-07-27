@@ -46,6 +46,8 @@
 
         <activity android:name=".ui.clock.NumberActivity"/>
 
+        <activity android:name=".ui.disseek.DisSeekActivity"/>
+
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

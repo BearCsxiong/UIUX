@@ -4,6 +4,8 @@
     <declare-styleable name="XSeekBar">
         <attr name="isEnableStroke" format="boolean">true</attr>
         <attr name="isEnableCenterPoint" format="boolean">true</attr>
+        <attr name="isEnableThumbIndicator" format="boolean">false</attr>
+        <attr name="xThumbIndicatorColor" format="color"/>
         <attr name="xBackgroundColor" format="color" />
         <attr name="xStrokeColor" format="color" />
         <attr name="xProgressColor" format="color" />

@@ -1,7 +1,5 @@
 package me.csxiong.uiux.ui.seek;
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -26,6 +24,9 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
     public void initView() {
         mViewBinding.xsb.setMinProgress(-250);
         mViewBinding.xsb.setMaxProgress(170);
+        mViewBinding.xsb.setEnableCenterPoint(true);
+        mViewBinding.xsb.setDefaultPosition(0.1f);
+        mViewBinding.xsb.setCenterPointPercent(250f/420);
         mViewBinding.xsb.setOnProgressChangeListener(new XSeekBar.OnProgressChangeListener() {
             @Override
             public void onStartTracking(int progress, float leftDx) {
@@ -69,6 +70,7 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
         mViewBinding.xsb2.setCenterPointPercent(0.3f);
         mViewBinding.xsb2.setMinProgress(-30);
         mViewBinding.xsb2.setMaxProgress(70);
+        mViewBinding.xsb2.setEnableStroke(true);
 
         mViewBinding.btn
                 .setOnClickListener(new View.OnClickListener() {
@@ -86,14 +88,6 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
     }
 
     private int i = 0;
-
-    public static class Tran implements ViewPager.PageTransformer {
-
-        @Override
-        public void transformPage(@NonNull View view, float v) {
-
-        }
-    }
 
     @Override
     public void initData() {
