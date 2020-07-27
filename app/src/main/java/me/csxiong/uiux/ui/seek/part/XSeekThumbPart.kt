@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import me.csxiong.uiux.ui.seek.XSeekBar
 import me.csxiong.uiux.ui.seek.XSeekDrawPart
 
-class XSeekThumbPart(xSeekBar: XSeekBar?) : XSeekDrawPart(xSeekBar) {
+class XSeekThumbPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
     override fun onDraw(canvas: Canvas) {
 
