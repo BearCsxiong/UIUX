@@ -21,4 +21,8 @@ class XSeekThumbIndicatorPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
     override fun initSize(width: Int, height: Int) {
     }
+
+    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+
+    }
 }

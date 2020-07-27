@@ -25,13 +25,16 @@ class XSeekDefaultPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     override fun initSize(width: Int, height: Int) {
     }
 
+    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+    }
+
     /**
      * 设置默认位置
      *
      * @param defaultPosition
      */
     fun setDefaultPosition(@FloatRange(from = 0.0, to = 1.0) defaultPosition: Float) { // 计算推荐值的位置问题 使用真实计算bar长 但是又要以右为终点
-        parent.defaultProgress = defaultPosition * (parent.maxProgress - parent.minProgress)
+        parent.defaultProgress = (defaultPosition * (parent.maxProgress - parent.minProgress)).toInt()
     }
 
 }

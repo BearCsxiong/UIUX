@@ -23,4 +23,9 @@ abstract class XSeekDrawPart(val parent: XSeekBar) {
      */
     abstract fun initSize(width: Int, height: Int)
 
+    /**
+     * 进度改变回调
+     */
+    abstract fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean)
+
 }

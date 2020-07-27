@@ -35,6 +35,9 @@ class XSeekCenterPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
     }
 
+    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+    }
+
     /**
      * 设置中心比例
      *

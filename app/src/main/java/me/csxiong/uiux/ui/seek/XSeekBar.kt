@@ -3,7 +3,6 @@ package me.csxiong.uiux.ui.seek
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -35,6 +34,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 是否支持图钉中心指示器
      */
     var isEnableThumbIndicator = false
+    /**
+     * 是否支持自动吸附
+     */
+    var isEnableAutoAdsorbPosition = true
     /**
      * 背景颜色
      */
@@ -112,18 +115,6 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      */
     var backgroundWidth = 0f
     /**
-     * 背景矩形
-     */
-    val mBackgroundRectf: RectF? = RectF()
-    /**
-     * 背景描边矩形
-     */
-    val mBackgroundStrokeRectf: RectF? = RectF()
-    /**
-     * 进度矩形
-     */
-    val mProgressRectf: RectF = RectF()
-    /**
      * 普通颜色笔
      */
     var mProgressPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -154,7 +145,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /**
      * 默认进度
      */
-    var defaultProgress = 0f
+    var defaultProgress = 0
     /**
      * 期望进度
      */
@@ -174,6 +165,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     val defaultPositionPart = XSeekDefaultPositionPart(this)
     val thumbPart = XSeekThumbPart(this)
     val thumbIndicatorPart = XSeekThumbIndicatorPart(this)
+    val drawParts = arrayListOf<XSeekDrawPart>(backgroundPart, progressPart, centerPositionPart, defaultPositionPart, thumbPart, thumbIndicatorPart)
     /**
      * 执行动画
      */
@@ -288,10 +280,6 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             } else {
                 this.progress = progress
                 intProgress = progress.toInt()
-                progressPercent = progress / (maxProgress - minProgress).toFloat() + centerPointPercent
-                val left = if (progressPercent > centerPointPercent) paddingLeft + strokeWidth * 2 + centerPointPercent * backgroundWidth else backgroundWidth * progressPercent + paddingLeft + strokeWidth * 2
-                val right = if (progressPercent > centerPointPercent) backgroundWidth * progressPercent + paddingRight + strokeWidth * 2 else paddingRight + strokeWidth * 2 + centerPointPercent * backgroundWidth
-                mProgressRectf!![left, customHeight / 2f - mSeekBarHeight / 2f, right] = customHeight / 2f + mSeekBarHeight / 2f
                 invalidate()
             }
         }
@@ -308,10 +296,6 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     /**
-     * 是否触控
-     */
-    private var isTouch = false
-    /**
      * 进度改变监听
      */
     private var onProgressChangeListener: OnProgressChangeListener? = null
@@ -321,8 +305,9 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             return super.onTouchEvent(event)
         }
         val action = event.action
+        //计算手势触控进度百分比
         progressPercent = getTouchPercent(event)
-        // boolean isSeekLeft = isSeekLeft(event);
+        // 控制可滑动的范围区间
         if (progressPercent < 0) {
             progressPercent = 0f
         } else if (progressPercent > 1) {
@@ -330,51 +315,57 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
         // 计算新进度
         var newProgress = (progressPercent - centerPointPercent) * (maxProgress - minProgress)
+        var newIntProgress: Int = newProgress.toInt()
+        //支持中心吸附
+        if (isEnableCenterPoint && isEnableAutoAdsorbPosition) {
+            if (newIntProgress >= -FIXED_VALUE && newIntProgress <= FIXED_VALUE) {
+                progressPercent = centerPointPercent
+                newProgress = 0f
+                newIntProgress = 0
+            }
+        }
+        //支持默认值吸附
+        if (defaultProgress != 0 && isEnableAutoAdsorbPosition) {
+            if (newIntProgress >= defaultProgress - FIXED_VALUE && newIntProgress <= defaultProgress + FIXED_VALUE) {
+                progressPercent = defaultPosition
+                newProgress = defaultProgress.toFloat()
+                newIntProgress = defaultProgress
+            }
+        }
+        //判断Int级别的数值是否改变
+        //浮点数progress只是为了滑动顺畅使用
+        var isChange = newIntProgress != intProgress
+        //如果自动吸附 需要自动吸附 + 震动
+        if (isEnableAutoAdsorbPosition && isChange
+                && ((defaultProgress != 0 && newIntProgress == defaultProgress)
+                        || (isEnableCenterPoint && newIntProgress == 0))) {
+            VibratorUtils.onShot(30)
+        }
+
+        if (onProgressChangeListener != null) {
+            onProgressChangeListener!!.onPositionChange(newIntProgress, limitLeft + barWidth * progressPercent)
+        }
+        for (drawPart in drawParts) {
+            drawPart.onProgressChange(progressPercent, newProgress, newIntProgress, true)
+        }
+//        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
+        //对应发生变化
         if (action == MotionEvent.ACTION_DOWN) {
-            isTouch = true
             setProgress(newProgress, true, false)
             if (onProgressChangeListener != null) {
                 onProgressChangeListener!!.onStartTracking(intProgress, limitLeft + barWidth * progressPercent)
             }
             return true
-        } else if (isTouch && action == MotionEvent.ACTION_MOVE) { // 自动吸附功能
-// 中心点和默认推荐值 均需要做自动吸附
-// 默认推荐值吸附
-            if (defaultPosition != 0.0f) {
-                if (newProgress >= defaultProgress - 3 && newProgress <= defaultProgress + 3) {
-                    newProgress = defaultProgress
-                }
-            }
-            // 中心点吸附
-            if (isEnableCenterPoint) {
-                if (newProgress >= -3 && newProgress <= 3) {
-                    newProgress = 0f
-                }
-            }
-            val intNewProgress = newProgress.toInt()
-            val isChange = intNewProgress != intProgress
+        } else if (action == MotionEvent.ACTION_MOVE) { // 自动吸附功能
             setProgress(newProgress, false, false)
             if (isChange) {
                 if (onProgressChangeListener != null) {
-                    if (defaultPosition != 0.0f) {
-                        if (newProgress == defaultProgress) {
-                            VibratorUtils.onShot(30)
-                        }
-                    }
-                    if (isEnableCenterPoint) {
-                        if (newProgress == 0f) {
-                            VibratorUtils.onShot(30)
-                        }
-                    }
                     onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
                             true)
                 }
             }
-            if (onProgressChangeListener != null) {
-                onProgressChangeListener!!.onPositionChange(intProgress, limitLeft + barWidth * progressPercent)
-            }
-        } else if (isTouch && action == MotionEvent.ACTION_UP) { // setProgress(newProgress, true, false);
-            isTouch = false
+        } else if (action == MotionEvent.ACTION_UP && action == MotionEvent.ACTION_CANCEL) { // setProgress(newProgress, true, false);
+            setProgress(newProgress, false, false)
             if (onProgressChangeListener != null) {
                 onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
                         true)
@@ -422,12 +413,11 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         barWidth = width - limitLeft - limitRight
         backgroundWidth = width - paddingLeft - paddingRight - strokeWidth * 4
         // 这边背景rect不是用LimitLeft or LimitRight是因为 滑杆头尾不以thumb的圆心为中心
-// 初始化基础图形结构
-        mBackgroundRectf!![paddingLeft + strokeWidth * 2, height / 2f - mSeekBarHeight / 2f, width - paddingRight - strokeWidth * 2] = height / 2f + mSeekBarHeight / 2f
-        // 背景描边
-        mBackgroundStrokeRectf!![mBackgroundRectf.left - strokeWidth, mBackgroundRectf.top - strokeWidth, mBackgroundRectf.right + strokeWidth] = mBackgroundRectf.bottom + strokeWidth
         // 进度基础Rectf
         setProgress(progress, true, false)
+        for (drawPart in drawParts) {
+            drawPart.initSize(customWidth, customHeight)
+        }
         // 设置中心点比例
         centerPositionPart.setCenterPointPercent(centerPointPercent)
     }
@@ -492,6 +482,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
          * 气泡展示时间
          */
         const val BUBBLE_SHOW_DURATION: Long = 200
+        /**
+         * 合并值
+         */
+        const val FIXED_VALUE = 2
     }
 
     init {
