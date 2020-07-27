@@ -76,6 +76,7 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        mViewBinding.xcsb.start();
                         i = 1 - i;
                         boolean isUp = i == 0;
                         if (isUp) {

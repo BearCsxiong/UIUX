@@ -73,6 +73,13 @@
                 android:layout_marginTop="@dimen/x20"
                 android:layout_marginRight="20dp" />
 
+            <me.csxiong.uiux.utils.XCustomSeekBar
+                android:id="@+id/xcsb"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/x50"/>
+
             <Button
                 android:id="@+id/btn"
                 android:layout_width="@dimen/x100"

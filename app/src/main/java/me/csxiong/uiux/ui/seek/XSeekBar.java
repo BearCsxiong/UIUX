@@ -1,8 +1,5 @@
 package me.csxiong.uiux.ui.seek;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -14,7 +11,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import me.csxiong.library.utils.VibratorUtils;
+import me.csxiong.library.utils.XAnimator;
+import me.csxiong.library.utils.XAnimatorCaculateValuer;
 import me.csxiong.library.utils.XDisplayUtil;
 import me.csxiong.uiux.R;
 
@@ -22,6 +23,8 @@ import me.csxiong.uiux.R;
  * @Desc : 一个内容可编辑的Seekbar 比较简易
  * 添加自动滚动和中心可移动模式
  * @Author : csxiong - 2020-01-14
+ * {@link #defaultPosition} SeekBar默认位置
+ * {@link #centerPointPercent} SeekBar进度中心位置
  */
 public class XSeekBar extends View {
     /**
@@ -172,28 +175,10 @@ public class XSeekBar extends View {
      * 默认位置
      */
     private float defaultPosition = 0.0f;
-
     /**
      * 默认进度
      */
     private float defaultProgress = 0;
-
-    /**
-     * 进度回调
-     */
-    private ValueAnimator animator = ValueAnimator.ofFloat(0, 1).setDuration(350);
-    /**
-     * 是否开始
-     */
-    private boolean isStart;
-    /**
-     * 动画其实进度
-     */
-    private float startProgress;
-    /**
-     * 动画差异进度
-     */
-    private float diffProgress;
     /**
      * 期望进度
      */
@@ -202,46 +187,46 @@ public class XSeekBar extends View {
      * 是否可用
      */
     private boolean isSeekEnable = true;
+    /**
+     * 进度计算
+     */
+    private XAnimatorCaculateValuer progressValuer = new XAnimatorCaculateValuer();
+    /**
+     * 绘制组成部分
+     */
+    private ArrayList<XSeekDrawPart> drawParts = new ArrayList<>();
+    /**
+     * 执行动画
+     */
+    private XAnimator animator = XAnimator.ofFloat(0f, 1f)
+            .duration(300)
+            .setAnimationListener(new XAnimator.XAnimationListener() {
+                @Override
+                public void onAnimationUpdate(float fraction, float value) {
+                    setProgress((int) progressValuer.caculateValue(fraction), false);
+                }
 
-    private ValueAnimator.AnimatorUpdateListener updateListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            if (isStart) {
-                float fraction = animation.getAnimatedFraction();
-                setProgress((int) (startProgress + fraction * diffProgress), false);
-            }
-        }
-    };
+                @Override
+                public void onAnimationStart(XAnimator animation) {
+                    progressValuer.mark(progress,forwardProgress);
+                }
 
-    private ValueAnimator.AnimatorListener animatorListener = new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationCancel(Animator animation) {
-            super.onAnimationCancel(animation);
-            isStart = false;
-            if (onProgressChangeListener != null) {
-                onProgressChangeListener.onProgressChange(intProgress, getLimitLeft() + barWidth * progressPercent,
-                        false);
-            }
-        }
+                @Override
+                public void onAnimationEnd(XAnimator animation) {
+                    if (onProgressChangeListener != null) {
+                        onProgressChangeListener.onProgressChange(intProgress, getLimitLeft() + barWidth * progressPercent,
+                                false);
+                    }
+                }
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            super.onAnimationEnd(animation);
-            isStart = false;
-            if (onProgressChangeListener != null) {
-                onProgressChangeListener.onProgressChange(intProgress, getLimitLeft() + barWidth * progressPercent,
-                        false);
-            }
-        }
-
-        @Override
-        public void onAnimationStart(Animator animation) {
-            super.onAnimationStart(animation);
-            isStart = true;
-            startProgress = progress;
-            diffProgress = forwardProgress - progress;
-        }
-    };
+                @Override
+                public void onAnimationCancel(XAnimator animation) {
+                    if (onProgressChangeListener != null) {
+                        onProgressChangeListener.onProgressChange(intProgress, getLimitLeft() + barWidth * progressPercent,
+                                false);
+                    }
+                }
+            });
 
     public XSeekBar(Context context) {
         this(context, null);
@@ -296,9 +281,6 @@ public class XSeekBar extends View {
         mThumbIndicatorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mThumbIndicatorPaint.setColor(mThumbIndicatorColor);
         mThumbIndicatorPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-        animator.addListener(animatorListener);
-        animator.addUpdateListener(updateListener);
     }
 
     @Override
@@ -353,7 +335,7 @@ public class XSeekBar extends View {
      *
      * @param defaultPosition
      */
-    public void setDefaultPosition(float defaultPosition) {
+    public void setDefaultPosition(@FloatRange(from = 0.0f, to = 1.0f)float defaultPosition) {
         // 计算推荐值的位置问题 使用真实计算bar长 但是又要以右为终点
         this.defaultPosition = defaultPosition;
         this.defaultProgress = defaultPosition * (maxProgress - minProgress);
@@ -566,7 +548,6 @@ public class XSeekBar extends View {
         // 计算新进度
         float newProgress = (progressPercent - centerPointPercent) * (maxProgress - minProgress);
         if (action == MotionEvent.ACTION_DOWN) {
-            lastX = event.getX();
             isTouch = true;
             setProgress(newProgress, true, false);
             if (onProgressChangeListener != null) {
@@ -636,24 +617,6 @@ public class XSeekBar extends View {
     }
 
     /**
-     * 上一次位置X
-     */
-    private float lastX;
-
-    /**
-     * 获取滑动方向
-     *
-     * @param event
-     * @return
-     */
-    private boolean isSeekLeft(MotionEvent event) {
-        float x = event.getX();
-        boolean isSeekLeft = x < lastX;
-        lastX = x;
-        return isSeekLeft;
-    }
-
-    /**
      * 适配ViewPadding
      *
      * @return
@@ -706,7 +669,8 @@ public class XSeekBar extends View {
          *
          * @param progress
          */
-        default void onStartTracking(int progress, float leftDx){}
+        default void onStartTracking(int progress, float leftDx) {
+        }
 
         /**
          * 进度改变
@@ -714,21 +678,24 @@ public class XSeekBar extends View {
          * @param progress
          * @param fromUser
          */
-        default void onProgressChange(int progress, float leftDx, boolean fromUser){}
+        default void onProgressChange(int progress, float leftDx, boolean fromUser) {
+        }
 
         /**
          * 位置改变监听
          *
          * @param leftDx
          */
-        default void onPositionChange(int progress, float leftDx){}
+        default void onPositionChange(int progress, float leftDx) {
+        }
 
         /**
          * 停止拖动
          *
          * @param progress
          */
-        default void onStopTracking(int progress, float leftDx, boolean fromUser){}
+        default void onStopTracking(int progress, float leftDx, boolean fromUser) {
+        }
     }
 
     public void setSeekEnable(boolean seekEnable) {
