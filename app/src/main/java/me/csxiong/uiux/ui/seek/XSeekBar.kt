@@ -72,9 +72,9 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      */
     var mSeekBarHeight = XDisplayUtil.dpToPx(2.5f)
     /**
-     * 进度百分比 0~1之间的浮点数
+     * 进度坐标X
      */
-    var progressPercent = 0f
+    var progressX = 0f
     /**
      * 进度浮点 为了UI渲染在progress范围小时 UI显得卡顿
      */
@@ -87,6 +87,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 中心点位于滑杆位置
      */
     var centerPointPercent = 0f
+    /**
+     * 中心点X坐标
+     */
+    var centerPointPositionX = 0f
     /**
      * 描边宽度
      */
@@ -111,6 +115,8 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * bar宽度 -> 0-100 真实的bar宽度 背景因为兼容滑杆非圆心对称 不是真实progress的宽度
      */
     var barWidth = 0f
+    var progressStartX = 0f
+    var progressEndX = 0f
     /**
      * bar长条真实宽度
      */
@@ -174,8 +180,9 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             .duration(300)
             .setAnimationListener(object : XAnimationListener {
                 override fun onAnimationUpdate(fraction: Float, value: Float) {
-                    progressPercent = (progress - minProgress) / (maxProgress - minProgress)
-                    setProgressInner(progressValuer.caculateValue(fraction), false)
+                    var curProgress = progressValuer.caculateValue(fraction)
+                    progressX = calculateProgressX(curProgress)
+                    setProgressInner(curProgress, false)
                 }
 
                 override fun onAnimationStart(animation: XAnimator) {
@@ -183,11 +190,11 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                 }
 
                 override fun onAnimationEnd(animation: XAnimator) {
-                    onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, false)
+                    onProgressChangeListener?.onProgressChange(intProgress, progressX, false)
                 }
 
                 override fun onAnimationCancel(animation: XAnimator) {
-                    onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, false)
+                    onProgressChangeListener?.onProgressChange(intProgress, progressX, false)
                 }
             })
 
@@ -274,16 +281,15 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
         //校准Progress
         var newIntProgress = if (this.progress < 0) (this.progress - .1f).toInt() else (this.progress + .1f).toInt()
-        "${newIntProgress} -- ${progressPercent} -- ${this.progress}".print("csx")
         if (intProgress != newIntProgress) {
             intProgress = newIntProgress
-            onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, fromUser)
+            onProgressChangeListener?.onProgressChange(intProgress, progressX, fromUser)
         }
         //基础的回调
-        onProgressChangeListener?.onPositionChange(intProgress, limitLeft + barWidth * progressPercent)
+        onProgressChangeListener?.onPositionChange(intProgress, progressX)
         //内部回调
         for (drawPart in drawParts) {
-            drawPart.onProgressChange(progressPercent, this.progress, intProgress, true)
+            drawPart.onProgressChange(progressX, this.progress, intProgress, true)
         }
         //刷新
         invalidate()
@@ -310,20 +316,19 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
         val action = event.action
         //计算手势触控进度百分比
-        progressPercent = getTouchPercent(event)
-        // 控制可滑动的范围区间
-        if (progressPercent < 0) {
-            progressPercent = 0f
-        } else if (progressPercent > 1) {
-            progressPercent = 1f
+        progressX = event.x
+        when {
+            progressX < progressStartX -> progressX = progressStartX
+            progressX > progressEndX -> progressX = progressEndX
         }
         // 计算新进度
-        var newProgress = (progressPercent - centerPointPercent) * (maxProgress - minProgress)
+        var newProgress = (progressX - limitLeft) * (maxProgress - minProgress) / barWidth + minProgress
         var newIntProgress: Int = newProgress.toInt()
+        "${newProgress}".print("csx")
         //支持中心吸附
         if (isEnableCenterPoint && isEnableAutoAdsorbPosition) {
             if (newIntProgress >= -FIXED_VALUE && newIntProgress <= FIXED_VALUE) {
-                progressPercent = centerPointPercent
+                progressX = calculateProgressX(0f)
                 newProgress = 0f
                 newIntProgress = 0
             }
@@ -331,7 +336,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         //支持默认值吸附
         if (defaultProgress != 0 && isEnableAutoAdsorbPosition) {
             if (newIntProgress >= defaultProgress - FIXED_VALUE && newIntProgress <= defaultProgress + FIXED_VALUE) {
-                progressPercent = defaultPosition
+                progressX = calculateProgressX(defaultProgress.toFloat())
                 newProgress = defaultProgress.toFloat()
                 newIntProgress = defaultProgress
             }
@@ -349,30 +354,17 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 //        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
         //对应发生变化
         if (action == MotionEvent.ACTION_DOWN) {
-            onProgressChangeListener?.onStartTracking(intProgress, limitLeft + barWidth * progressPercent)
+            onProgressChangeListener?.onStartTracking(intProgress, progressX)
             return true
         } else if (action == MotionEvent.ACTION_MOVE) { // 自动吸附功能
             if (isChange) {
-                onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, true)
+                onProgressChangeListener?.onProgressChange(intProgress, progressX, true)
             }
         } else if (action == MotionEvent.ACTION_UP && action == MotionEvent.ACTION_CANCEL) { // setProgress(newProgress, true, false);
-            onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, true)
-            onProgressChangeListener?.onStopTracking(intProgress, limitLeft + barWidth * progressPercent, true)
+            onProgressChangeListener?.onProgressChange(intProgress, progressX, true)
+            onProgressChangeListener?.onStopTracking(intProgress, progressX, true)
         }
         return super.onTouchEvent(event)
-    }
-
-    /**
-     * 获取接触百分比
-     * 以左向右作为基准
-     * 均使用百分比触控计算所有值  因为这样有利控制原点和其他参数的关系
-     *
-     * @param event 手指触控事件
-     * @return
-     */
-    private fun getTouchPercent(event: MotionEvent): Float {
-        val x = event.x - limitLeft
-        return x / barWidth
     }
 
     /**
@@ -398,6 +390,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         this.customWidth = width
         this.customHeight = height
         barWidth = width - limitLeft - limitRight
+        progressStartX = limitLeft
+        progressEndX = width - limitRight
+        progressX = calculateProgressX(progress)
+        centerPointPositionX = calculateProgressX(0f)
         backgroundWidth = width - paddingLeft - paddingRight - strokeWidth * 4
         // 这边背景rect不是用LimitLeft or LimitRight是因为 滑杆头尾不以thumb的圆心为中心
         // 进度基础Rectf
@@ -445,6 +441,18 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
          * @param progress
          */
         fun onStopTracking(progress: Int, leftDx: Float, fromUser: Boolean) {}
+    }
+
+    /**
+     * 计算获得正确的ProgressX
+     */
+    fun calculateProgressX(progress: Float): Float {
+        var curProgressX = (progress - minProgress) * barWidth / (maxProgress - minProgress) + limitLeft
+        when {
+            curProgressX < progressStartX -> curProgressX = progressStartX
+            curProgressX > progressEndX -> curProgressX = progressEndX
+        }
+        return curProgressX
     }
 
     fun setSeekEnable(seekEnable: Boolean) {

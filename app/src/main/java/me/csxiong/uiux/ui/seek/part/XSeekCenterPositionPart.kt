@@ -45,7 +45,7 @@ class XSeekCenterPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
      */
     fun setCenterPointPercent(@FloatRange(from = 0.0, to = 1.0) centerPointPercent: Float) {
         // 设置中心的Rectf
-        var x = parent.paddingLeft + parent.strokeWidth +  parent.backgroundWidth* centerPointPercent
+        var x = parent.centerPointPositionX
         var y = parent.customHeight/2f
         mCenterPointRectf[x - parent.mCenterPointWidth / 2f, y - parent.mCenterPointHeight / 2f, x + parent.mCenterPointWidth / 2f] = y + parent.mCenterPointHeight / 2f
         mCenterStrokePointRectf.set(mCenterPointRectf)

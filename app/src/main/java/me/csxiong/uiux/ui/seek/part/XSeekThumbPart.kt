@@ -33,8 +33,8 @@ class XSeekThumbPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
     }
 
-    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-        cx = parent.limitLeft + parent.barWidth * parent.progressPercent
+    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+        cx = progressX
         cy = parent.customHeight / 2f
     }
 }

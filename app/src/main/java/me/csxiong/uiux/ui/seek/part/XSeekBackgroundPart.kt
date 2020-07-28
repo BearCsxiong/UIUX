@@ -27,11 +27,6 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
      */
     val backgroundPath: Path = Path()
 
-    /**
-     * 背景描边
-     */
-    val backgroundStrokePath: Path = Path()
-
     val leftRectF: RectF = RectF()
 
     val rightRectF: RectF = RectF()
@@ -43,7 +38,7 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         canvas.drawPath(backgroundPath, parent.mBackgroundPaint)
         // 绘制描边
         if (parent.isEnableStroke) {
-            canvas.drawPath(backgroundStrokePath, parent.mStrokePaint)
+            canvas.drawPath(backgroundPath, parent.mStrokePaint)
         }
     }
 
@@ -53,8 +48,6 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 //        // 背景描边
 //        mBackgroundStrokeRectf[mBackgroundRectf.left - parent.strokeWidth, mBackgroundRectf.top - parent.strokeWidth, mBackgroundRectf.right + parent.strokeWidth] = mBackgroundRectf.bottom + parent.strokeWidth
         var limitLeft = parent.paddingLeft + parent.strokeWidth * 2
-        var halfHeight = parent.mSeekBarHeight / 2
-
 
         backgroundPath.reset()
         backgroundPath.moveTo(limitLeft + parent.mSeekBarHeight, parent.customHeight / 2f - parent.mSeekBarHeight / 2f)
@@ -64,8 +57,6 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         rightRectF.set(parent.customWidth - parent.paddingRight - parent.strokeWidth * 2 - rightHeight, parent.customHeight / 2f - (rightHeight - parent.mSeekBarHeight / 2f), parent.customWidth.toFloat() - parent.paddingRight - parent.strokeWidth * 2, parent.customHeight / 2f + parent.mSeekBarHeight / 2f)
         backgroundPath.arcTo(rightRectF, 90f, -180f, false)
         backgroundPath.close()
-
-        backgroundStrokePath.set(backgroundPath)
     }
 
     override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {

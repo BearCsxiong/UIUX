@@ -14,7 +14,7 @@ class XSeekThumbIndicatorPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     override fun onDraw(canvas: Canvas) {
         // 绘制手指拖动的thumb中的indicator标记点
         if (parent.isEnableThumbIndicator) {
-            canvas.drawCircle(parent.limitLeft + parent.barWidth * parent.progressPercent, parent.customHeight / 2f, XDisplayUtil.dpToPxInt(2.5f).toFloat(),
+            canvas.drawCircle(parent.progressX, parent.customHeight / 2f, XDisplayUtil.dpToPxInt(2.5f).toFloat(),
                     parent.mThumbIndicatorPaint)
         }
     }
@@ -22,7 +22,7 @@ class XSeekThumbIndicatorPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     override fun initSize(width: Int, height: Int) {
     }
 
-    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
 
     }
 }

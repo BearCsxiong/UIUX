@@ -1,6 +1,7 @@
 package me.csxiong.uiux.ui.seek.part
 
 import android.graphics.Canvas
+import android.graphics.Path
 import android.graphics.RectF
 import me.csxiong.uiux.ui.seek.XSeekBar
 import me.csxiong.uiux.ui.seek.XSeekDrawPart
@@ -10,6 +11,11 @@ import me.csxiong.uiux.ui.seek.XSeekDrawPart
  * @Author : Bear - 2020/7/27
  */
 class XSeekProgressPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
+
+    /**
+     * 进度Path
+     */
+    val progressPath: Path = Path()
 
     /**
      * 进度矩形
@@ -24,9 +30,9 @@ class XSeekProgressPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     override fun initSize(width: Int, height: Int) {
     }
 
-    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-        val left = if (progressPercent > parent.centerPointPercent) parent.paddingLeft + parent.strokeWidth * 2 + parent.centerPointPercent * parent.backgroundWidth else parent.backgroundWidth * progressPercent + parent.paddingLeft + parent.strokeWidth * 2
-        val right = if (progressPercent > parent.centerPointPercent) parent.backgroundWidth * progressPercent + parent.paddingRight + parent.strokeWidth * 2 else parent.paddingRight + parent.strokeWidth * 2 + parent.centerPointPercent * parent.backgroundWidth
+    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+        val left = if (progressX < parent.centerPointPositionX) progressX else parent.centerPointPositionX
+        val right = if (progressX < parent.centerPointPositionX) parent.centerPointPositionX else progressX
         mProgressRectf[left, parent.customHeight / 2f - parent.mSeekBarHeight / 2f, right] = parent.customHeight / 2f + parent.mSeekBarHeight / 2f
     }
 
