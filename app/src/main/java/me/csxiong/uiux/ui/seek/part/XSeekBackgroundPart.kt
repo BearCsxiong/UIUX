@@ -5,6 +5,7 @@ import android.graphics.Path
 import android.graphics.RectF
 import me.csxiong.uiux.ui.seek.XSeekBar
 import me.csxiong.uiux.ui.seek.XSeekDrawPart
+import me.csxiong.uiux.utils.print
 
 /**
  * @Desc : SeekBar背景
@@ -31,18 +32,11 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         }
     }
 
-    override fun initSize(width: Int, height: Int) {
-        calculateBackground()
-    }
-
-    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-
-    }
-
-    fun calculateBackground() {
+    override fun calculateDrawValue(fromUser: Boolean) {
         var barHeight = parent.mSeekBarHeight + parent.strokeWidth * 2
         rightHeight = parent.contentHeight + parent.strokeWidth * 2
         var limitLeft = parent.paddingLeft + parent.strokeWidth * 2
+        "${barHeight} -- ${rightHeight}".print()
 
         backgroundPath.reset()
         backgroundPath.moveTo(limitLeft + barHeight, parent.customHeight / 2f - barHeight / 2f)

@@ -22,6 +22,7 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
 
     @Override
     public void initView() {
+        mViewBinding.xsb.setEnableExpandMode(true);
         mViewBinding.xsb.setOnProgressChangeListener(new XSeekBar.OnProgressChangeListener() {
             @Override
             public void onStartTracking(int progress, float leftDx) {
@@ -59,10 +60,10 @@ public class SeekBarActivity extends BaseActivity<ActivitySeekBarBinding> {
         });
 
 
-        mViewBinding.xsb1.setEnableCenterPoint(false);
+        mViewBinding.xsb1.setEnableCenterPoint(true);
         mViewBinding.xsb1.setCenterPointPercent(0);
         mViewBinding.xsb1.setMinProgress(0);
-        mViewBinding.xsb1.setMaxProgress(30);
+        mViewBinding.xsb1.setMaxProgress(100);
 
         mViewBinding.xsb2.setCenterPointPercent(0.3f);
         mViewBinding.xsb2.setMinProgress(-30);

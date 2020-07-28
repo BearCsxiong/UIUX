@@ -26,7 +26,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /**
      * 是否允许描边
      */
-    var isEnableStroke = false
+    var isEnableStroke = true
     /**
      * 是否需要中心点
      */
@@ -39,6 +39,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 是否支持自动吸附
      */
     var isEnableAutoAdsorbPosition = true
+    /**
+     * 是否支持扩张模式
+     */
+    var isEnableExpandMode = false
     /**
      * 背景颜色
      */
@@ -79,7 +83,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /**
      * 扩展的高度
      */
-    var mExpandHeight = XDisplayUtil.dpToPx(10f)
+    var mExpandHeight = XDisplayUtil.dpToPx(15f)
     /**
      * 进度坐标X
      */
@@ -177,13 +181,16 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      */
     val progressValuer = XAnimatorCaculateValuer()
 
-    val backgroundPart = XSeekBackgroundPart(this)
-    val progressPart = XSeekProgressPart(this)
-    val centerPositionPart = XSeekCenterPositionPart(this)
-    val defaultPositionPart = XSeekDefaultPositionPart(this)
-    val thumbPart = XSeekThumbPart(this)
-    val thumbIndicatorPart = XSeekThumbIndicatorPart(this)
-    val drawParts = arrayListOf<XSeekDrawPart>(backgroundPart, progressPart, centerPositionPart, defaultPositionPart, thumbPart, thumbIndicatorPart)
+    val drawParts = ArrayList<XSeekDrawPart>()
+            .apply {
+                add(XSeekBackgroundPart(this@XSeekBar))
+                add(XSeekProgressPart(this@XSeekBar))
+                add(XSeekExpandProgressPart(this@XSeekBar))
+                add(XSeekCenterPositionPart(this@XSeekBar))
+                add(XSeekDefaultPositionPart(this@XSeekBar))
+                add(XSeekThumbPart(this@XSeekBar))
+                add(XSeekThumbIndicatorPart(this@XSeekBar))
+            }
 
     /**
      * Progress执行动画
@@ -210,7 +217,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                 }
             })
 
-    private var isExpand = false
+    var isExpand = false
 
     var contentHeightValuer = XAnimatorCaculateValuer()
     /**
@@ -230,9 +237,9 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
                 override fun onAnimationUpdate(fraction: Float, value: Float) {
                     contentHeight = contentHeightValuer.caculateValue(fraction)
-                    backgroundPart.calculateBackground()
-                    thumbPart.calculateThumb()
-                    thumbIndicatorPart.calculateThumb()
+                    for (drawPart in drawParts) {
+                        drawPart.calculateDrawValue(false)
+                    }
                     invalidate()
                 }
             })
@@ -251,6 +258,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             mCenterPointWidth = ta.getDimensionPixelSize(R.styleable.XSeekBar_xCenterPointWidth, XDisplayUtil.dpToPxInt(3f))
             mCenterPointHeight = ta.getDimensionPixelSize(R.styleable.XSeekBar_xCenterPointHeight, XDisplayUtil.dpToPxInt(7f))
             mSeekBarHeight = ta.getDimensionPixelSize(R.styleable.XSeekBar_xSeekbarHeight, XDisplayUtil.dpToPxInt(2.5f)).toFloat()
+            contentHeight = mSeekBarHeight
             centerPointPercent = ta.getFloat(R.styleable.XSeekBar_xCenterPointPercent, 0f)
             maxProgress = ta.getInteger(R.styleable.XSeekBar_xMaxProgress, 100)
             minProgress = ta.getInteger(R.styleable.XSeekBar_xMinProgress, 0)
@@ -274,12 +282,9 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        backgroundPart.onDraw(canvas)
-        progressPart.onDraw(canvas)
-        centerPositionPart.onDraw(canvas)
-        defaultPositionPart.onDraw(canvas)
-        thumbPart.onDraw(canvas)
-        thumbIndicatorPart.onDraw(canvas)
+        for (drawPart in drawParts) {
+            drawPart.onDraw(canvas)
+        }
     }
 
     /**
@@ -329,7 +334,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         onProgressChangeListener?.onPositionChange(intProgress, progressX)
         //内部回调
         for (drawPart in drawParts) {
-            drawPart.onProgressChange(progressX, this.progress, intProgress, true)
+            drawPart.calculateDrawValue(fromUser)
         }
         //刷新
         invalidate()
@@ -434,14 +439,13 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         progressX = calculateProgressX(progress)
         centerPointPositionX = calculateProgressX(0f)
         backgroundWidth = width - paddingLeft - paddingRight - strokeWidth * 4
+        contentHeight = mSeekBarHeight
         // 这边背景rect不是用LimitLeft or LimitRight是因为 滑杆头尾不以thumb的圆心为中心
         // 进度基础Rectf
         setProgressInner(progress, false)
         for (drawPart in drawParts) {
-            drawPart.initSize(customWidth, customHeight)
+            drawPart.calculateDrawValue(false)
         }
-        // 设置中心点比例
-        centerPositionPart.setCenterPointPercent(centerPointPercent)
     }
 
     fun setOnProgressChangeListener(onProgressChangeListener: OnProgressChangeListener?) {
@@ -494,6 +498,10 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         return curProgressX
     }
 
+    fun calculateProgressPercent(progress: Float): Float {
+        return (progress - minProgress) / (maxProgress - minProgress)
+    }
+
     fun setSeekEnable(seekEnable: Boolean) {
         isSeekEnable = seekEnable
         alpha = if (isSeekEnable) {
@@ -523,14 +531,14 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     fun expand(isExpand: Boolean) {
-        if (this.isExpand == isExpand) {
+        if (!isEnableExpandMode || this.isExpand == isExpand) {
             return
         }
         this.isExpand = isExpand
         if (this.isExpand) {
             contentHeightValuer.mark(contentHeight, mExpandHeight)
         } else {
-            contentHeightValuer.mark(contentHeight, mSeekBarHeight)
+            contentHeightValuer.mark(contentHeight, mSeekBarHeight + strokeWidth * 2)
         }
         expandAnimator.cancel()
         expandAnimator.start()

@@ -2,7 +2,6 @@ package me.csxiong.uiux.ui.seek.part
 
 import android.graphics.Canvas
 import android.graphics.RectF
-import android.support.annotation.FloatRange
 import me.csxiong.uiux.ui.seek.XSeekBar
 import me.csxiong.uiux.ui.seek.XSeekDrawPart
 
@@ -31,25 +30,13 @@ class XSeekCenterPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         }
     }
 
-    override fun initSize(width: Int, height: Int) {
-
-    }
-
-    override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-    }
-
-    /**
-     * 设置中心比例
-     *
-     * @param centerPointPercent
-     */
-    fun setCenterPointPercent(@FloatRange(from = 0.0, to = 1.0) centerPointPercent: Float) {
+    override fun calculateDrawValue(fromUser: Boolean) {
         // 设置中心的Rectf
         var x = parent.centerPointPositionX
-        var y = parent.customHeight/2f
+        var y = parent.customHeight / 2f
         mCenterPointRectf[x - parent.mCenterPointWidth / 2f, y - parent.mCenterPointHeight / 2f, x + parent.mCenterPointWidth / 2f] = y + parent.mCenterPointHeight / 2f
         mCenterStrokePointRectf.set(mCenterPointRectf)
-        mCenterStrokePointRectf.offset(parent.strokeWidth,parent.strokeWidth)
+        mCenterStrokePointRectf.offset(parent.strokeWidth, parent.strokeWidth)
         parent.invalidate()
     }
 

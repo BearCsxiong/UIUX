@@ -29,17 +29,10 @@ class XSeekThumbPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         }
     }
 
-    override fun initSize(width: Int, height: Int) {
-
-    }
-
-    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-        calculateThumb()
-    }
-
-    fun calculateThumb() {
+    override fun calculateDrawValue( fromUser: Boolean) {
         cx = parent.progressX
         var percent = (parent.progressX - parent.limitLeft) / parent.barWidth
         cy = parent.customHeight / 2f - (parent.contentHeight - parent.mSeekBarHeight) * percent / 2f
     }
+
 }

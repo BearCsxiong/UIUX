@@ -54,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x40"
                 android:layout_gravity="center"
+                app:isEnableStroke="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="@dimen/x20"
                 android:layout_marginRight="20dp" />

@@ -16,16 +16,8 @@ abstract class XSeekDrawPart(val parent: XSeekBar) {
     abstract fun onDraw(canvas: Canvas)
 
     /**
-     * 初始化尺寸
-     *
-     * @param width  控件总宽度
-     * @param height 控件总高度
+     * 重新计算绘制值
      */
-    abstract fun initSize(width: Int, height: Int)
-
-    /**
-     * 进度改变回调
-     */
-    abstract fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean)
+    abstract fun calculateDrawValue(fromUser: Boolean)
 
 }

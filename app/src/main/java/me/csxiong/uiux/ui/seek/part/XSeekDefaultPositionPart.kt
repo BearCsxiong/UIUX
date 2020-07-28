@@ -32,11 +32,8 @@ class XSeekDefaultPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
         }
     }
 
-    override fun initSize(width: Int, height: Int) {
 
-    }
-
-    override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+    override fun calculateDrawValue(fromUser: Boolean) {
         parent.defaultPositionX = parent.barWidth * parent.defaultPosition + parent.paddingLeft + (1 + parent.defaultPosition) * parent.mThumbRadius + parent.strokeWidth * 2 - parent.defaultRadius
         cx = parent.defaultPositionX
         cy = parent.customHeight / 2f
