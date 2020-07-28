@@ -10,12 +10,22 @@ import me.csxiong.uiux.ui.seek.XSeekDrawPart
  */
 class XSeekThumbPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
+    /**
+     * 中心点X
+     */
+    var cx = 0f
+
+    /**
+     * 中心点Y
+     */
+    var cy = 0f
+
     override fun onDraw(canvas: Canvas) {
         // 绘制手指拖动的thumb
-        canvas.drawCircle(parent.limitLeft + parent.barWidth * parent.progressPercent, parent.customHeight / 2f, parent.mThumbRadius.toFloat(), parent.mProgressPaint)
-        if (parent.isEnableStroke) { // 描边
-            canvas.drawCircle(parent.limitLeft + parent.barWidth * parent.progressPercent, parent.customHeight / 2f, parent.mThumbRadius + parent.strokeWidth,
-                    parent.mStrokePaint)
+        canvas.drawCircle(cx, cy, parent.mThumbRadius.toFloat(), parent.mProgressPaint)
+        // 描边
+        if (parent.isEnableStroke) {
+            canvas.drawCircle(cx, cy, parent.mThumbRadius + parent.strokeWidth, parent.mStrokePaint)
         }
     }
 
@@ -24,6 +34,7 @@ class XSeekThumbPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     }
 
     override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-
+        cx = parent.limitLeft + parent.barWidth * parent.progressPercent
+        cy = parent.customHeight / 2f
     }
 }

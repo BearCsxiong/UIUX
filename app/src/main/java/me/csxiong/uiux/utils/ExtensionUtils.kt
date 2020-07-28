@@ -49,7 +49,7 @@ fun View.alphaDismiss(duration: Long) {
             .start()
 }
 
-fun String.print(tag: String? = null, debugLevel: DebugLevel = DebugLevel.INFO) {
+fun String.print(tag: String? = null, debugLevel: DebugLevel = DebugLevel.ERROR) {
     when (debugLevel) {
         DebugLevel.ERROR -> {
             Log.e(tag ?: "csx", this)

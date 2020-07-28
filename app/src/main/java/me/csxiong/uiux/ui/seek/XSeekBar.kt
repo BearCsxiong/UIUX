@@ -13,6 +13,7 @@ import me.csxiong.library.utils.XAnimatorCaculateValuer
 import me.csxiong.library.utils.XDisplayUtil
 import me.csxiong.uiux.R
 import me.csxiong.uiux.ui.seek.part.*
+import me.csxiong.uiux.utils.print
 
 /**
  * @Desc : 一个内容可编辑的Seekbar 比较简易
@@ -173,7 +174,8 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             .duration(300)
             .setAnimationListener(object : XAnimationListener {
                 override fun onAnimationUpdate(fraction: Float, value: Float) {
-                    setProgress(progressValuer.caculateValue(fraction).toInt(), false)
+                    progressPercent = (progress - minProgress) / (maxProgress - minProgress)
+                    setProgressInner(progressValuer.caculateValue(fraction), false)
                 }
 
                 override fun onAnimationStart(animation: XAnimator) {
@@ -181,17 +183,11 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                 }
 
                 override fun onAnimationEnd(animation: XAnimator) {
-                    if (onProgressChangeListener != null) {
-                        onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
-                                false)
-                    }
+                    onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, false)
                 }
 
                 override fun onAnimationCancel(animation: XAnimator) {
-                    if (onProgressChangeListener != null) {
-                        onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
-                                false)
-                    }
+                    onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, false)
                 }
             })
 
@@ -255,34 +251,36 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * @param withAnimation
      */
     fun setProgress(progress: Int, withAnimation: Boolean) {
-        val isChange = progress != intProgress
-        setProgress(progress.toFloat(), false, withAnimation)
-        // 手动设置也是需要回调的
-        // 若执行动画 会在动画执行之后 回调结果
-        if (isChange && !withAnimation && onProgressChangeListener != null) {
-            onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, false)
+        if (withAnimation) {
+            forwardProgress = progress.toFloat()
+            animator.cancel()
+            animator.start()
+        } else {
+            setProgressInner(progress.toFloat(), false)
         }
     }
 
     /**
-     * 设置进度
+     * 内部设置进度
      *
-     * @param progress      期望进度
-     * @param isReset       是否重置设置
-     * @param withAnimation 是否执行动画
+     * @param progress 期望进度
      */
-    private fun setProgress(progress: Float, isReset: Boolean, withAnimation: Boolean) {
-        if (isReset || progress >= minProgress && progress <= maxProgress) {
-            if (withAnimation) {
-                forwardProgress = progress
-                animator.cancel()
-                animator.start()
-            } else {
-                this.progress = progress
-                intProgress = progress.toInt()
-                invalidate()
-            }
+    private fun setProgressInner(progress: Float, fromUser: Boolean) {
+        when {
+            progress < minProgress -> this.progress = minProgress.toFloat()
+            progress > maxProgress -> this.progress = maxProgress.toFloat()
+            else -> this.progress = progress
         }
+        var newIntProgress = if (this.progress < 0) (this.progress - .1f).toInt() else (this.progress + .1f).toInt()
+        if (intProgress != newIntProgress) {
+            intProgress = newIntProgress
+            onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, fromUser)
+        }
+        onProgressChangeListener?.onPositionChange(intProgress, limitLeft + barWidth * progressPercent)
+        for (drawPart in drawParts) {
+            drawPart.onProgressChange(progressPercent, this.progress, intProgress, true)
+        }
+        invalidate()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -341,36 +339,19 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                         || (isEnableCenterPoint && newIntProgress == 0))) {
             VibratorUtils.onShot(30)
         }
-
-        if (onProgressChangeListener != null) {
-            onProgressChangeListener!!.onPositionChange(newIntProgress, limitLeft + barWidth * progressPercent)
-        }
-        for (drawPart in drawParts) {
-            drawPart.onProgressChange(progressPercent, newProgress, newIntProgress, true)
-        }
-//        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
+        setProgressInner(newProgress, true)
+        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
         //对应发生变化
         if (action == MotionEvent.ACTION_DOWN) {
-            setProgress(newProgress, true, false)
-            if (onProgressChangeListener != null) {
-                onProgressChangeListener!!.onStartTracking(intProgress, limitLeft + barWidth * progressPercent)
-            }
+            onProgressChangeListener?.onStartTracking(intProgress, limitLeft + barWidth * progressPercent)
             return true
         } else if (action == MotionEvent.ACTION_MOVE) { // 自动吸附功能
-            setProgress(newProgress, false, false)
             if (isChange) {
-                if (onProgressChangeListener != null) {
-                    onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
-                            true)
-                }
+                onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, true)
             }
         } else if (action == MotionEvent.ACTION_UP && action == MotionEvent.ACTION_CANCEL) { // setProgress(newProgress, true, false);
-            setProgress(newProgress, false, false)
-            if (onProgressChangeListener != null) {
-                onProgressChangeListener!!.onProgressChange(intProgress, limitLeft + barWidth * progressPercent,
-                        true)
-                onProgressChangeListener!!.onStopTracking(intProgress, limitLeft + barWidth * progressPercent, true)
-            }
+            onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, true)
+            onProgressChangeListener?.onStopTracking(intProgress, limitLeft + barWidth * progressPercent, true)
         }
         return super.onTouchEvent(event)
     }
@@ -380,7 +361,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 以左向右作为基准
      * 均使用百分比触控计算所有值  因为这样有利控制原点和其他参数的关系
      *
-     * @param event
+     * @param event 手指触控事件
      * @return
      */
     private fun getTouchPercent(event: MotionEvent): Float {
@@ -414,7 +395,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         backgroundWidth = width - paddingLeft - paddingRight - strokeWidth * 4
         // 这边背景rect不是用LimitLeft or LimitRight是因为 滑杆头尾不以thumb的圆心为中心
         // 进度基础Rectf
-        setProgress(progress, true, false)
+        setProgressInner(progress, false)
         for (drawPart in drawParts) {
             drawPart.initSize(customWidth, customHeight)
         }

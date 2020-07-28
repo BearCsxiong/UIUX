@@ -11,21 +11,35 @@ import me.csxiong.uiux.ui.seek.XSeekDrawPart
  */
 class XSeekDefaultPositionPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
+    /**
+     * 中心点X
+     */
+    var cx = 0f
+
+    /**
+     * 中心点Y
+     */
+    var cy = 0f
+
     override fun onDraw(canvas: Canvas) {
         // 默认位置点
-        if (parent.defaultPosition != 0f) { // 绘制默认点
-            parent.defaultPositionX = parent.barWidth * parent.defaultPosition + parent.paddingLeft + (1 + parent.defaultPosition) * parent.mThumbRadius + parent.strokeWidth * 2 - parent.defaultRadius
-            canvas.drawCircle(parent.defaultPositionX, parent.customHeight / 2f, parent.defaultRadius.toFloat(), parent.mProgressPaint)
+        if (parent.defaultProgress != 0) {
+            canvas.drawCircle(cx, cy, parent.defaultRadius.toFloat(), parent.mProgressPaint)
+            //描边
             if (parent.isEnableStroke) {
-                canvas.drawCircle(parent.defaultPositionX, parent.customHeight / 2f, parent.defaultRadius + parent.strokeWidth, parent.mStrokePaint)
+                canvas.drawCircle(cx, cy, parent.defaultRadius + parent.strokeWidth, parent.mStrokePaint)
             }
         }
     }
 
     override fun initSize(width: Int, height: Int) {
+
     }
 
     override fun onProgressChange(progressPercent: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
+        parent.defaultPositionX = parent.barWidth * parent.defaultPosition + parent.paddingLeft + (1 + parent.defaultPosition) * parent.mThumbRadius + parent.strokeWidth * 2 - parent.defaultRadius
+        cx = parent.defaultPositionX
+        cy = parent.customHeight / 2f
     }
 
     /**
