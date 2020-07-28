@@ -38,7 +38,6 @@
                 android:layout_height="@dimen/x40"
                 android:layout_gravity="center"
                 android:paddingLeft="20dp"
-                android:background="#ff0000"
                 android:paddingRight="20dp"
                 app:isEnableStroke="false"
                 android:requiresFadingEdge="horizontal"

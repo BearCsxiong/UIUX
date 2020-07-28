@@ -31,7 +31,9 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 
     val rightRectF: RectF = RectF()
 
-    val rightHeight = parent.mSeekBarHeight
+    var contentHeight = parent.mSeekBarHeight
+
+    var rightHeight = parent.mSeekBarHeight + parent.strokeWidth * 2
 
     override fun onDraw(canvas: Canvas) {
         // 绘制背景
@@ -47,14 +49,17 @@ class XSeekBackgroundPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
 //        mBackgroundRectf[parent.paddingLeft + parent.strokeWidth * 2, height / 2f - parent.mSeekBarHeight / 2f, width - parent.paddingRight - parent.strokeWidth * 2] = height / 2f + parent.mSeekBarHeight / 2f
 //        // 背景描边
 //        mBackgroundStrokeRectf[mBackgroundRectf.left - parent.strokeWidth, mBackgroundRectf.top - parent.strokeWidth, mBackgroundRectf.right + parent.strokeWidth] = mBackgroundRectf.bottom + parent.strokeWidth
+        var barHeight = parent.mSeekBarHeight + parent.strokeWidth * 2
+        rightHeight = contentHeight + parent.strokeWidth * 2
         var limitLeft = parent.paddingLeft + parent.strokeWidth * 2
 
+
         backgroundPath.reset()
-        backgroundPath.moveTo(limitLeft + parent.mSeekBarHeight, parent.customHeight / 2f - parent.mSeekBarHeight / 2f)
-        leftRectF.set(limitLeft, parent.customHeight / 2f - parent.mSeekBarHeight / 2, limitLeft + parent.mSeekBarHeight, parent.customHeight / 2f + parent.mSeekBarHeight / 2f)
+        backgroundPath.moveTo(limitLeft + barHeight, parent.customHeight / 2f - barHeight / 2f)
+        leftRectF.set(limitLeft, parent.customHeight / 2f - barHeight / 2, limitLeft + barHeight, parent.customHeight / 2f + barHeight / 2f)
         backgroundPath.arcTo(leftRectF, 270f, -180f, false)
-        backgroundPath.lineTo(parent.customWidth - parent.paddingRight - parent.strokeWidth * 2 - rightHeight, parent.customHeight / 2f + parent.mSeekBarHeight / 2f)
-        rightRectF.set(parent.customWidth - parent.paddingRight - parent.strokeWidth * 2 - rightHeight, parent.customHeight / 2f - (rightHeight - parent.mSeekBarHeight / 2f), parent.customWidth.toFloat() - parent.paddingRight - parent.strokeWidth * 2, parent.customHeight / 2f + parent.mSeekBarHeight / 2f)
+        backgroundPath.lineTo(parent.customWidth - parent.paddingRight - parent.strokeWidth * 2 - rightHeight, parent.customHeight / 2f + barHeight / 2f)
+        rightRectF.set(parent.customWidth - parent.paddingRight - parent.strokeWidth * 2 - rightHeight, parent.customHeight / 2f - (rightHeight - barHeight / 2f), parent.customWidth.toFloat() - parent.paddingRight - parent.strokeWidth * 2, parent.customHeight / 2f + barHeight / 2f)
         backgroundPath.arcTo(rightRectF, 90f, -180f, false)
         backgroundPath.close()
     }
