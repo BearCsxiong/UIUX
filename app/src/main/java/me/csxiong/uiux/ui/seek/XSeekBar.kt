@@ -214,15 +214,15 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     private fun init(context: Context, attrs: AttributeSet?) {
         initAttrs(context, attrs)
-        mBackgroundPaint!!.color = mBackgroundColor
-        mBackgroundPaint!!.style = Paint.Style.FILL_AND_STROKE
-        mStrokePaint!!.color = strokeColor
-        mStrokePaint!!.strokeWidth = strokeWidth
-        mStrokePaint!!.style = Paint.Style.STROKE
-        mProgressPaint!!.color = progressColor
-        mProgressPaint!!.style = Paint.Style.FILL_AND_STROKE
-        mThumbIndicatorPaint!!.color = mThumbIndicatorColor
-        mThumbIndicatorPaint!!.style = Paint.Style.FILL_AND_STROKE
+        mBackgroundPaint.color = mBackgroundColor
+        mBackgroundPaint.style = Paint.Style.FILL
+        mStrokePaint.color = strokeColor
+        mStrokePaint.strokeWidth = strokeWidth
+        mStrokePaint.style = Paint.Style.STROKE
+        mProgressPaint.color = progressColor
+        mProgressPaint.style = Paint.Style.FILL
+        mThumbIndicatorPaint.color = mThumbIndicatorColor
+        mThumbIndicatorPaint.style = Paint.Style.FILL_AND_STROKE
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -266,20 +266,26 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * @param progress 期望进度
      */
     private fun setProgressInner(progress: Float, fromUser: Boolean) {
+        //安全范围
         when {
             progress < minProgress -> this.progress = minProgress.toFloat()
             progress > maxProgress -> this.progress = maxProgress.toFloat()
             else -> this.progress = progress
         }
+        //校准Progress
         var newIntProgress = if (this.progress < 0) (this.progress - .1f).toInt() else (this.progress + .1f).toInt()
+        "${newIntProgress} -- ${progressPercent} -- ${this.progress}".print("csx")
         if (intProgress != newIntProgress) {
             intProgress = newIntProgress
             onProgressChangeListener?.onProgressChange(intProgress, limitLeft + barWidth * progressPercent, fromUser)
         }
+        //基础的回调
         onProgressChangeListener?.onPositionChange(intProgress, limitLeft + barWidth * progressPercent)
+        //内部回调
         for (drawPart in drawParts) {
             drawPart.onProgressChange(progressPercent, this.progress, intProgress, true)
         }
+        //刷新
         invalidate()
     }
 
@@ -340,7 +346,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             VibratorUtils.onShot(30)
         }
         setProgressInner(newProgress, true)
-        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
+//        "${progressPercent} -- ${newProgress} -- ${newIntProgress}".print("csx")
         //对应发生变化
         if (action == MotionEvent.ACTION_DOWN) {
             onProgressChangeListener?.onStartTracking(intProgress, limitLeft + barWidth * progressPercent)
