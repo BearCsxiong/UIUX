@@ -37,7 +37,7 @@ class XSeekProgressPart(xSeekBar: XSeekBar) : XSeekDrawPart(xSeekBar) {
     }
 
     override fun onProgressChange(progressX: Float, progress: Float, intProgress: Int, fromUser: Boolean) {
-        var centerPointPositionX = if (parent.centerPointPercent == 0.0f) parent.strokeWidth else parent.centerPointPositionX
+        var centerPointPositionX = if (parent.centerPointPercent == 0.0f) parent.paddingLeft + parent.strokeWidth else parent.centerPointPositionX
         val left = if (progressX < parent.centerPointPositionX) progressX else centerPointPositionX
         val right = if (progressX < parent.centerPointPositionX) centerPointPositionX else progressX
         mProgressRectf[left, parent.customHeight / 2f - parent.mSeekBarHeight / 2f, right] = parent.customHeight / 2f + parent.mSeekBarHeight / 2f

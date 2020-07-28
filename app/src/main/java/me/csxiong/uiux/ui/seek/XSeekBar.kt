@@ -2,6 +2,7 @@ package me.csxiong.uiux.ui.seek
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -13,7 +14,6 @@ import me.csxiong.library.utils.XAnimatorCaculateValuer
 import me.csxiong.library.utils.XDisplayUtil
 import me.csxiong.uiux.R
 import me.csxiong.uiux.ui.seek.part.*
-import me.csxiong.uiux.utils.print
 
 /**
  * @Desc : 一个内容可编辑的Seekbar 比较简易
@@ -54,7 +54,8 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /**
      * 图钉中心指示器颜色
      */
-    var mThumbIndicatorColor = -0x4a67a
+//    var mThumbIndicatorColor = -0x4a67a
+    var mThumbIndicatorColor = Color.WHITE
     /**
      * 图钉半径
      */
@@ -71,6 +72,14 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * bar高度
      */
     var mSeekBarHeight = XDisplayUtil.dpToPx(2.5f)
+    /**
+     * bar内容高度 可变
+     */
+    var contentHeight = mSeekBarHeight
+    /**
+     * 扩展的高度
+     */
+    var mExpandHeight = XDisplayUtil.dpToPx(10f)
     /**
      * 进度坐标X
      */
@@ -157,10 +166,12 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      * 期望进度
      */
     var forwardProgress = 0f
+
     /**
      * 是否可用
      */
     private var isSeekEnable = true
+
     /**
      * 进度计算
      */
@@ -173,10 +184,11 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     val thumbPart = XSeekThumbPart(this)
     val thumbIndicatorPart = XSeekThumbIndicatorPart(this)
     val drawParts = arrayListOf<XSeekDrawPart>(backgroundPart, progressPart, centerPositionPart, defaultPositionPart, thumbPart, thumbIndicatorPart)
+
     /**
-     * 执行动画
+     * Progress执行动画
      */
-    private val animator = XAnimator.ofFloat(0f, 1f)
+    private val progressAnimator = XAnimator.ofFloat(0f, 1f)
             .duration(300)
             .setAnimationListener(object : XAnimationListener {
                 override fun onAnimationUpdate(fraction: Float, value: Float) {
@@ -198,6 +210,33 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                 }
             })
 
+    private var isExpand = false
+
+    var contentHeightValuer = XAnimatorCaculateValuer()
+    /**
+     * 滑杆内容扩展动画
+     */
+    val expandAnimator = XAnimator.ofFloat(0f, 1f)
+            .duration(300)
+            .setAnimationListener(object : XAnimator.XAnimationListener {
+                override fun onAnimationEnd(animation: XAnimator?) {
+                }
+
+                override fun onAnimationCancel(animation: XAnimator?) {
+                }
+
+                override fun onAnimationStart(animation: XAnimator?) {
+                }
+
+                override fun onAnimationUpdate(fraction: Float, value: Float) {
+                    contentHeight = contentHeightValuer.caculateValue(fraction)
+                    backgroundPart.calculateBackground()
+                    thumbPart.calculateThumb()
+                    thumbIndicatorPart.calculateThumb()
+                    invalidate()
+                }
+            })
+
     private fun initAttrs(context: Context?, attrs: AttributeSet?) {
         if (context != null && attrs != null) {
             val ta = context.obtainStyledAttributes(attrs, R.styleable.XSeekBar)
@@ -216,6 +255,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             maxProgress = ta.getInteger(R.styleable.XSeekBar_xMaxProgress, 100)
             minProgress = ta.getInteger(R.styleable.XSeekBar_xMinProgress, 0)
             progress = ta.getInteger(R.styleable.XSeekBar_xProgress, 0).toFloat()
+            ta.recycle()
         }
     }
 
@@ -260,8 +300,8 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     fun setProgress(progress: Int, withAnimation: Boolean) {
         if (withAnimation) {
             forwardProgress = progress.toFloat()
-            animator.cancel()
-            animator.start()
+            progressAnimator.cancel()
+            progressAnimator.start()
         } else {
             setProgressInner(progress.toFloat(), false)
         }
@@ -324,7 +364,6 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         // 计算新进度
         var newProgress = (progressX - limitLeft) * (maxProgress - minProgress) / barWidth + minProgress
         var newIntProgress: Int = newProgress.toInt()
-        "${newProgress}".print("csx")
         //支持中心吸附
         if (isEnableCenterPoint && isEnableAutoAdsorbPosition) {
             if (newIntProgress >= -FIXED_VALUE && newIntProgress <= FIXED_VALUE) {
@@ -360,7 +399,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             if (isChange) {
                 onProgressChangeListener?.onProgressChange(intProgress, progressX, true)
             }
-        } else if (action == MotionEvent.ACTION_UP && action == MotionEvent.ACTION_CANCEL) { // setProgress(newProgress, true, false);
+        } else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) { // setProgress(newProgress, true, false);
             onProgressChangeListener?.onProgressChange(intProgress, progressX, true)
             onProgressChangeListener?.onStopTracking(intProgress, progressX, true)
         }
@@ -481,6 +520,20 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
          * 合并值
          */
         const val FIXED_VALUE = 2
+    }
+
+    fun expand(isExpand: Boolean) {
+        if (this.isExpand == isExpand) {
+            return
+        }
+        this.isExpand = isExpand
+        if (this.isExpand) {
+            contentHeightValuer.mark(contentHeight, mExpandHeight)
+        } else {
+            contentHeightValuer.mark(contentHeight, mSeekBarHeight)
+        }
+        expandAnimator.cancel()
+        expandAnimator.start()
     }
 
     init {
