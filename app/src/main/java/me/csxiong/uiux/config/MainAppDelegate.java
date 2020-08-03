@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.Map;
 
@@ -19,6 +21,10 @@ import me.csxiong.uiux.ui.dataMask.mask.BaseMask;
 import me.csxiong.uiux.ui.dataMask.mask.EmptyMask;
 import me.csxiong.uiux.ui.dataMask.mask.ErrorMask;
 import me.csxiong.uiux.ui.dataMask.mask.LoadingMask;
+import me.csxiong.uiux.ui.http.HttpLogger;
+import me.csxiong.uiux.ui.http.Preconditions;
+import me.csxiong.uiux.ui.http.XHttp;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @Desc : 主App代理
@@ -33,6 +39,9 @@ public class MainAppDelegate implements IAppDelegate {
 
     @Override
     public void onCreate(@NonNull Application application) {
+
+        Logger.addLogAdapter(new AndroidLogAdapter());
+
         if (BuildConfig.DEBUG) {
             ARouter.openLog();
             ARouter.openDebug();
@@ -58,6 +67,9 @@ public class MainAppDelegate implements IAppDelegate {
                 masks.put(MaskType.LOADING, new LoadingMask());
             }
         });
+
+        XHttp.init(new XHttp.Config().addInterceptors(new HttpLoggingInterceptor(new HttpLogger(Preconditions.TAG)))
+                .apply());
     }
 
     @Override
