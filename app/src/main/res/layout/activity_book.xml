@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp">
+
+            <fragment
+                android:id="@+id/fg_page"
+                android:name="me.csxiong.uiux.ui.studio.page.PageFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x300"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvBottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom" />
+
+    </FrameLayout>
+
+
+</layout>

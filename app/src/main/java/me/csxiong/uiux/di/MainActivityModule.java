@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import me.csxiong.library.di.scope.ActivityScope;
 import me.csxiong.uiux.ui.MainActivity;
-import me.csxiong.uiux.ui.book.BookListActivity;
+import me.csxiong.uiux.ui.studio.BookStudioActivity;
 
 /**
  * @Desc : 模块内部Activity注册 注册需要注入的Activity
@@ -19,6 +19,6 @@ public abstract class MainActivityModule {
 
     @ActivityScope
     @ContributesAndroidInjector
-    abstract BookListActivity injectScrect();
+    abstract BookStudioActivity injectScrect();
 
 }

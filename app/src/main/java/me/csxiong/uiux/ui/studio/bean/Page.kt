@@ -1,4 +1,4 @@
-package me.csxiong.uiux.ui.book.bean
+package me.csxiong.uiux.ui.studio.bean
 
 class Page {
 

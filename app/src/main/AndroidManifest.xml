@@ -57,7 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.book.BookListActivity" />
+        <activity android:name=".ui.studio.BookStudioActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
 
         <receiver android:name=".ui.widget.WidgetProvider">

@@ -1,10 +1,9 @@
 package me.csxiong.uiux.di;
 
-import android.support.v4.app.Fragment;
-
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import me.csxiong.library.di.scope.FragmentScope;
+import me.csxiong.uiux.ui.studio.book.BookFragment;
 
 /**
  * @Desc : Fragment注入
@@ -15,5 +14,5 @@ public abstract class MainFragmentModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract Fragment inject();
+    abstract BookFragment injectBook();
 }

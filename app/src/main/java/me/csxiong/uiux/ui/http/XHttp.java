@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import me.csxiong.uiux.ui.http.api.ScrectApi;
+import me.csxiong.uiux.ui.http.api.BookApi;
 import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -173,7 +173,7 @@ public class XHttp {
         }
 
         public String getMainHost() {
-            return ScrectApi.Host;
+            return BookApi.Host;
         }
 
         public Config apply() {

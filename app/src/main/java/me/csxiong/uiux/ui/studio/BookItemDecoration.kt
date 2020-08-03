@@ -1,4 +1,4 @@
-package me.csxiong.uiux.ui.book
+package me.csxiong.uiux.ui.studio
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView

@@ -1,4 +1,4 @@
-package me.csxiong.uiux.ui.book.bean
+package me.csxiong.uiux.ui.studio.bean
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
  * @Desc : 选集
  * @Author : Bear - 2020/8/3
  */
-class Episode {
+class Selection {
     var id: String? = null
     var title: String? = null
     var image: String? = null

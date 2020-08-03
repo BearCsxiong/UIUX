@@ -1,28 +1,31 @@
-package me.csxiong.uiux.ui.book
+package me.csxiong.uiux.ui.studio.book
 
 import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import me.csxiong.library.base.XViewModel
 import me.csxiong.library.utils.XToast
-import me.csxiong.uiux.ui.book.bean.Book
-import me.csxiong.uiux.ui.book.bean.BookList
 import me.csxiong.uiux.ui.http.HttpResult
 import me.csxiong.uiux.ui.http.ResponseListener
 import me.csxiong.uiux.ui.http.XHttp
-import me.csxiong.uiux.ui.http.api.ScrectApi
+import me.csxiong.uiux.ui.http.api.BookApi
+import me.csxiong.uiux.ui.studio.bean.Book
+import me.csxiong.uiux.ui.studio.bean.BookList
+import me.csxiong.uiux.utils.RefreshState
 import javax.inject.Inject
 
 class BookViewModel @Inject constructor(application: Application) : XViewModel(application) {
-
-    var hostPah = "http://101.71.85.97/a1.jiayouzhibo.com/"
 
     var dataList = ArrayList<Book>()
 
     var dataEvent = MutableLiveData<List<Book>>()
 
+    var refreshStateEvent = MutableLiveData<Int>()
+
     var page = 0
 
     var hasNext = true
+
+    val selectBookEvent = MutableLiveData<Book>()
 
 //    fun request(capterId: Int) {
 //        XHttp.getService(ScrectApi::class.java)
@@ -56,15 +59,41 @@ class BookViewModel @Inject constructor(application: Application) : XViewModel(a
 //                })
 //    }
 
-    fun requestBookList() {
-        if (!hasNext) {
-            XToast.error("没有更多了")
-        }
-        page++
-        XHttp.getService(ScrectApi::class.java)
+    fun select(book: Book) {
+        selectBookEvent.value = book
+    }
+
+    fun refreshBookList() {
+        hasNext = true
+        page = 1
+        XHttp.getService(BookApi::class.java)
                 .newBookList(page, object : ResponseListener<HttpResult<BookList>> {
 
                     override fun onNext(t: HttpResult<BookList>?) {
+                        refreshStateEvent.value = RefreshState.COMPLETE
+                        t?.data?.let {
+                            hasNext = !it.lastPage
+                            dataList.clear()
+                            it.list?.let {
+                                dataList.addAll(it)
+                            }
+                            dataEvent.value = dataList
+                        }
+                    }
+                })
+    }
+
+    fun loadMoreBookList() {
+        if (!hasNext) {
+            XToast.error("没有更多了")
+            refreshStateEvent.value = RefreshState.COMPLETE
+        }
+        page++
+        XHttp.getService(BookApi::class.java)
+                .newBookList(page, object : ResponseListener<HttpResult<BookList>> {
+
+                    override fun onNext(t: HttpResult<BookList>?) {
+                        refreshStateEvent.value = RefreshState.COMPLETE
                         t?.data?.let {
                             hasNext = !it.lastPage
                             it?.list?.let {
