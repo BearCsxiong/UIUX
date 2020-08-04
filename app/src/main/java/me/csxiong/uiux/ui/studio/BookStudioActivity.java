@@ -1,5 +1,6 @@
 package me.csxiong.uiux.ui.studio;
 
+import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
@@ -10,7 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
 import java.util.Arrays;
+import java.util.List;
 
+import me.csxiong.ipermission.EnsureAllPermissionCallBack;
+import me.csxiong.ipermission.IPermission;
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
@@ -38,6 +42,19 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
 
     @Override
     public void initView() {
+        new IPermission(this)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .excute(new EnsureAllPermissionCallBack() {
+                    @Override
+                    public void onAllPermissionEnable(boolean isEnable) {
+
+                    }
+
+                    @Override
+                    public void onPreRequest(List<String> requestList) {
+
+                    }
+                });
         mViewModel = ViewModelProviders.of(this).get(BookStudioViewModel.class);
         fm = getSupportFragmentManager();
         mBottomAdapter = new XRecyclerViewAdapter(this);

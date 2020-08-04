@@ -71,6 +71,7 @@ public class MainAppDelegate implements IAppDelegate {
         XHttp.init(new XHttp.Config()
                 .addInterceptors(new HttpLoggingInterceptor(new HttpLogger(Preconditions.TAG)))
                 .apply());
+
     }
 
     @Override
