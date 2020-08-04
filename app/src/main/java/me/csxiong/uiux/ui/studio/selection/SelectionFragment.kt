@@ -71,6 +71,7 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
             override fun onClick(position: Int, entity: Selection?): Boolean {
                 entity?.let {
                     mViewModel.applySelection(it)
+                    mAdapter.currentSelectEntity = entity
                     bookStudioViewModel.show(null)
                 }
                 return false

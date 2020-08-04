@@ -1,6 +1,7 @@
 package me.csxiong.uiux.ui.studio.selection
 
 import android.content.Context
+import android.graphics.Color
 import android.view.ViewGroup
 import me.csxiong.library.integration.adapter.XItem
 import me.csxiong.library.integration.adapter.XViewHolder
@@ -23,6 +24,11 @@ class SelectionViewHolder(context: Context?, parent: ViewGroup?) : XViewHolder<I
                     .into(mViewBinding.iv)
 
             mViewBinding.tvTitle.text = it.title
+            if (item.isSelect) {
+                mViewBinding.tvTitle.setTextColor(Color.RED)
+            } else {
+                mViewBinding.tvTitle.setTextColor(Color.WHITE)
+            }
         }
     }
 }

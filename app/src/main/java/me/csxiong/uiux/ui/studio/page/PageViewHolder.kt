@@ -23,6 +23,7 @@ class PageViewHolder(context: Context, parent: ViewGroup) : XViewHolder<ItemScre
         super.onBindViewHolder(position, item, payloads)
         item?.entity?.let {
             it.path!!.print("csx")
+            val finalPosition = position
             Glide.with(APP.get())
                     .downloadOnly()
                     .load(it.path)
@@ -33,7 +34,9 @@ class PageViewHolder(context: Context, parent: ViewGroup) : XViewHolder<ItemScre
 
                         override fun onResourceReady(resource: File?, model: Any?, target: Target<File>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                             resource?.let {
-                                mViewBinding.iv.setImage(FileBitmapDecoderFactory(it.path))
+                                if (adapterPosition == finalPosition) {
+                                    mViewBinding.iv.setImage(FileBitmapDecoderFactory(resource))
+                                }
                             }
                             return true
                         }

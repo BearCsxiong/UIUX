@@ -15,7 +15,8 @@ dependencies {
     annotationProcessor dagger2androidprocessor
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
-    compile 'com.shizhefei:LargeImageView:1.1.0'
+    implementation 'com.shizhefei:LargeImageView:1.1.0'
+
 }
 repositories {
     mavenCentral()
