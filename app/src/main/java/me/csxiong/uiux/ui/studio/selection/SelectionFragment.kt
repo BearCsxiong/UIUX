@@ -52,6 +52,10 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
                     .build())
         })
 
+        mViewBinding.ivClose.setOnClickListener {
+            bookStudioViewModel.show(null)
+        }
+
         mViewModel.refreshStateEvent.observe(activity!!, Observer {
             mViewBinding.refresh.finishRefresh()
             mViewBinding.refresh.finishLoadMore()

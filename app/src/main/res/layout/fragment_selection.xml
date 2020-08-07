@@ -11,10 +11,17 @@
         android:layout_height="match_parent"
         android:background="#b3000000">
 
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:src="@mipmap/close" />
+
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/x50"
             app:srlEnableRefresh="false">
 
             <android.support.v7.widget.RecyclerView

@@ -16,12 +16,26 @@ class BookApi {
     /**
      * 书本 以及对应的下一集的数据
      */
-    fun chapterNearBy(capterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
+    private fun chapterNearBy(next: Int, manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
         XHttp.getInstance()["/home/api/chapter_nearby"]
-                .addParameters("manhua_id", 14389)
-                .addParameters("capter_id", capterId)
-                .addParameters("next", 0)
+                .addParameters("manhua_id", manhuaId)
+                .addParameters("capter_id", chapterId)
+                .addParameters("next", next)
                 .execute(responseListener)
+    }
+
+    /**
+     * 下一话
+     */
+    private fun chapterNext(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
+        chapterNearBy(1, manhuaId, chapterId, responseListener)
+    }
+
+    /**
+     * 上一话
+     */
+    private fun chapterPre(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
+        chapterNearBy(0, manhuaId, chapterId, responseListener)
     }
 
     /**

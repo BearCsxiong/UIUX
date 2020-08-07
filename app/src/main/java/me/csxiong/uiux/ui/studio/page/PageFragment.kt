@@ -2,16 +2,11 @@ package me.csxiong.uiux.ui.studio.page
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.widget.LinearLayoutManager
 import me.csxiong.library.base.BaseFragment
-import me.csxiong.library.integration.adapter.AdapterDataBuilder
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.FragmentPageBinding
-import me.csxiong.uiux.ui.studio.bean.Page
 import me.csxiong.uiux.ui.studio.selection.SelectionViewModel
-import me.csxiong.uiux.utils.ImageUtils
-import me.csxiong.uiux.utils.print
 
 class PageFragment : BaseFragment<FragmentPageBinding>() {
 
@@ -27,22 +22,18 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
     }
 
     override fun initView() {
-        mViewBinding.rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        mViewBinding.rv.adapter = mAdapter
-
         selectionViewModel.applySelectionEvent.observe(activity!!, Observer {
-            var array = ArrayList<Page>()
+            var sb = StringBuilder().append("<html><body><center>")
             it?.imagelist?.let {
                 var splits = it.split(",")
                 for (path in splits) {
-                    path.print("csx")
-                    array.add(Page().apply { this.path = ImageUtils.getImagePath(path) })
+                    sb.append("<img width=\"100%\" src=\"")
+                            .append(me.csxiong.uiux.utils.ImageUtils.getImagePath(path))
+                            .append("\"></img>")
                 }
             }
-
-            mAdapter.updateItemEntities(AdapterDataBuilder.create()
-                    .addEntities(array, PageViewHolder::class.java)
-                    .build())
+            sb.append("</body></html>")
+            mViewBinding.web.loadData(sb.toString(),"text/html","UTF-8")
         })
     }
 }
