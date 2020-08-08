@@ -3,8 +3,6 @@ package me.csxiong.uiux.ui.studio.selection
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.LinearLayoutManager
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import me.csxiong.library.base.BaseFragment
 import me.csxiong.library.integration.adapter.AdapterDataBuilder
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter
@@ -13,6 +11,7 @@ import me.csxiong.uiux.databinding.FragmentSelectionBinding
 import me.csxiong.uiux.ui.studio.BookStudioViewModel
 import me.csxiong.uiux.ui.studio.bean.Selection
 import me.csxiong.uiux.ui.studio.book.BookViewModel
+import me.csxiong.uiux.utils.RefreshState
 
 /**
  * @Desc : 选集界面
@@ -57,17 +56,9 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
         }
 
         mViewModel.refreshStateEvent.observe(activity!!, Observer {
-            mViewBinding.refresh.finishRefresh()
-            mViewBinding.refresh.finishLoadMore()
-        })
-
-        mViewBinding.refresh.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
-            override fun onLoadMore(refreshLayout: RefreshLayout) {
-                mViewModel.loadMoreSelection()
-            }
-
-            override fun onRefresh(refreshLayout: RefreshLayout) {
-
+            when (it) {
+                RefreshState.FINISH_REFRESH -> mViewBinding.refresh.finishRefresh()
+                RefreshState.FINISH_LOAD_MORE -> mViewBinding.refresh.finishLoadMore()
             }
         })
 
@@ -81,7 +72,6 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
                 return false
             }
         }, Selection::class.java)
-
 
     }
 }

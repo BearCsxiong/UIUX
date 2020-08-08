@@ -19,11 +19,9 @@ class SelectionViewModel(application: Application) : XViewModel(application) {
 
     var page = 1
 
-    var pageSize = 10
+    var pageSize = 1000
 
     var capterId = 0
-
-    var hasNext = true
 
     val dataList = ArrayList<Selection>()
 
@@ -34,39 +32,16 @@ class SelectionViewModel(application: Application) : XViewModel(application) {
     val applySelectionEvent by lazy { MutableLiveData<Selection>() }
 
     fun refreshSelection() {
-        hasNext = true
         page = 1
         XHttp.getService(BookApi::class.java)
                 .chapterList(capterId, page, pageSize, object : ResponseListener<HttpResult<SelectionList>> {
 
                     override fun onNext(t: HttpResult<SelectionList>?) {
-                        refreshStateEvent.value = RefreshState.COMPLETE
+                        page++
+                        refreshStateEvent.value = RefreshState.FINISH_REFRESH
                         t?.data?.let {
-                            hasNext = !it.lastPage
                             dataList.clear()
                             it.list?.let {
-                                dataList.addAll(it)
-                            }
-                            dataEvent.value = dataList
-                        }
-                    }
-                })
-    }
-
-    fun loadMoreSelection() {
-        if (!hasNext) {
-            refreshStateEvent.value = RefreshState.COMPLETE
-            return
-        }
-        page++
-        XHttp.getService(BookApi::class.java)
-                .chapterList(capterId, page, pageSize, object : ResponseListener<HttpResult<SelectionList>> {
-
-                    override fun onNext(t: HttpResult<SelectionList>?) {
-                        refreshStateEvent.value = RefreshState.COMPLETE
-                        t?.data?.let {
-                            hasNext = !it.lastPage
-                            it?.list?.let {
                                 dataList.addAll(it)
                             }
                             dataEvent.value = dataList

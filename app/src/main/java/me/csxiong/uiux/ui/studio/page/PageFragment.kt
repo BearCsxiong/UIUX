@@ -22,6 +22,7 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
     }
 
     override fun initView() {
+        //选中某一话 直接使用html加载漫画内容
         selectionViewModel.applySelectionEvent.observe(activity!!, Observer {
             var sb = StringBuilder().append("<html><body><center>")
             it?.imagelist?.let {
@@ -33,7 +34,7 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
                 }
             }
             sb.append("</body></html>")
-            mViewBinding.web.loadData(sb.toString(),"text/html","UTF-8")
+            mViewBinding.web.loadData(sb.toString(), "text/html", "UTF-8")
         })
     }
 }

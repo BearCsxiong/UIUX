@@ -3,6 +3,7 @@ package me.csxiong.uiux.ui.studio;
 import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityBookBinding;
+import me.csxiong.uiux.utils.StatusBarUtil;
 
 /**
  * 主要的书本界面
@@ -41,6 +43,12 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
     private FragmentManager fm;
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.useImmersiveMode(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void initView() {
         new IPermission(this)
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -58,7 +66,7 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
         mViewModel = ViewModelProviders.of(this).get(BookStudioViewModel.class);
         fm = getSupportFragmentManager();
         mBottomAdapter = new XRecyclerViewAdapter(this);
-        mViewBinding.rvBottom.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mViewBinding.rvBottom.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mViewBinding.rvBottom.setAdapter(mBottomAdapter);
 
         mBottomAdapter.updateItemEntities(AdapterDataBuilder.create()
@@ -69,7 +77,11 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
         mBottomAdapter.setOnEntityClickListener(new XRecyclerViewAdapter.OnEntityClickListener<BottomFunction>() {
             @Override
             public boolean onClick(int position, BottomFunction entity) {
-                mViewModel.show(entity);
+                if (mViewModel.isShow(entity)) {
+                    mViewModel.show(null);
+                } else {
+                    mViewModel.show(entity);
+                }
                 return false;
             }
         }, BottomFunction.class);
@@ -80,6 +92,7 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
                 show(bottomFunction);
             }
         });
+
     }
 
     public void show(BottomFunction bottomFunction) {
@@ -127,8 +140,11 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
         return fg;
     }
 
+    private boolean isRead = false;
+
     @Override
     public void initData() {
 
     }
+
 }

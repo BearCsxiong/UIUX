@@ -13,10 +13,10 @@ enum class BottomFunction(var tag: String, var functionName: String, var fgClass
     /**
      * 书本集合的界面
      */
-    Book("Book", "Book", BookFragment::class.java),
+    Book("Book", "漫画", BookFragment::class.java),
     /**
      * 选集界面
      */
-    Selection("Selection", "Selection", SelectionFragment::class.java);
+    Selection("Selection", "选集", SelectionFragment::class.java);
 
 }

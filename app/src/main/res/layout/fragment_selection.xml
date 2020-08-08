@@ -11,17 +11,12 @@
         android:layout_height="match_parent"
         android:background="#b3000000">
 
-        <ImageView
-            android:id="@+id/iv_close"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x50"
-            android:src="@mipmap/close" />
-
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/x50"
+            android:layout_marginBottom="@dimen/x50"
             app:srlEnableRefresh="false">
 
             <android.support.v7.widget.RecyclerView
@@ -30,6 +25,15 @@
                 android:layout_height="match_parent" />
 
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:layout_gravity="bottom"
+            android:paddingTop="@dimen/x10"
+            android:paddingBottom="@dimen/x10"
+            android:src="@mipmap/icon_back" />
 
     </FrameLayout>
 </layout>

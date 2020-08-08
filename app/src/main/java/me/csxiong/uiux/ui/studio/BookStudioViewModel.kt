@@ -17,4 +17,8 @@ class BookStudioViewModel @Inject constructor(application: Application) : XViewM
         return bottomFunctionChangeEvent.value != null
     }
 
+    fun isShow(bottomFunction: BottomFunction): Boolean {
+        return bottomFunctionChangeEvent.value == bottomFunction
+    }
+
 }

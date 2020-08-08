@@ -71,6 +71,10 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
                 mViewBinding.refresh.finishLoadMore()
             }
         })
+
+        mViewBinding.ivClose.setOnClickListener {
+            bookStudioViewModel.show(null)
+        }
     }
 
 

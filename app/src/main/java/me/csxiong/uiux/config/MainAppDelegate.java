@@ -8,6 +8,10 @@ import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshFooter;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 
 import java.util.Map;
 
@@ -24,6 +28,7 @@ import me.csxiong.uiux.ui.dataMask.mask.LoadingMask;
 import me.csxiong.uiux.ui.http.HttpLogger;
 import me.csxiong.uiux.ui.http.Preconditions;
 import me.csxiong.uiux.ui.http.XHttp;
+import me.csxiong.uiux.ui.widget.SimpleFooter;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
@@ -71,6 +76,14 @@ public class MainAppDelegate implements IAppDelegate {
         XHttp.init(new XHttp.Config()
                 .addInterceptors(new HttpLoggingInterceptor(new HttpLogger(Preconditions.TAG)))
                 .apply());
+
+        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+            @NonNull
+            @Override
+            public RefreshFooter createRefreshFooter(@NonNull Context context, @NonNull RefreshLayout layout) {
+                return new SimpleFooter(context);
+            }
+        });
 
     }
 

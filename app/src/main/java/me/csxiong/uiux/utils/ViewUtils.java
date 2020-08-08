@@ -15,6 +15,8 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
 
+import me.csxiong.library.utils.XDisplayUtil;
+
 /**
  * 关于View的工具类
  * Created by lhy on 2017/8/31.
@@ -295,6 +297,22 @@ public class ViewUtils {
      */
     public static boolean isAvailable(Activity activity) {
         return activity != null && !activity.isDestroyed() && !activity.isFinishing();
+    }
+
+    /**
+     *非完全全面屏。
+     * @return
+     */
+    public static boolean isFullScreenDevice() {
+        return XDisplayUtil.getScreenHeight() * 1f / XDisplayUtil.getScreenWidth() >= 1.85f;
+    }
+
+    /**
+     * 完全全面屏。
+     * @return
+     */
+    public static boolean isTotalFullScreenDevice() {
+        return XDisplayUtil.getScreenHeight() * 1f / XDisplayUtil.getScreenWidth() > 2f;
     }
 
 }

@@ -8,8 +8,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_height="match_parent">
 
             <fragment
                 android:id="@+id/fg_page"
@@ -21,16 +20,16 @@
 
         <FrameLayout
             android:id="@+id/fl_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x300"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="50dp" />
+            android:layout_width="@dimen/x200"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvBottom"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom" />
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x100"
+            android:layout_gravity="bottom|right"
+            android:background="#b3000000" />
 
     </FrameLayout>
 

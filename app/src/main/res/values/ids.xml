@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="load_more" type="id" />
+    <item name="load_more_progress" type="id" />
+    <item name="load_more_success" type="id" />
+    <item name="load_more_fail" type="id" />
+</resources>
