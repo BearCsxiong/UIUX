@@ -1,6 +1,7 @@
 package me.csxiong.uiux.ui.layoutManager;
 
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
 
 @IntDef({Snap.LEFT, Snap.RIGHT, Snap.CENTER})
 public @interface Snap {

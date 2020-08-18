@@ -1,8 +1,8 @@
 package me.csxiong.uiux.ui.studio
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 
 class BookStudioViewModel  constructor(application: Application) : AndroidViewModel(application) {
 

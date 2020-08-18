@@ -2,7 +2,8 @@ package me.csxiong.uiux.config;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 

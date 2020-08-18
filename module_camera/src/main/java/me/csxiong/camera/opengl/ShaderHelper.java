@@ -3,8 +3,9 @@ package me.csxiong.camera.opengl;
 import android.content.Context;
 import android.content.res.Resources;
 import android.opengl.GLES20;
-import android.support.annotation.RawRes;
 import android.util.Log;
+
+import androidx.annotation.RawRes;
 
 import java.io.BufferedReader;
 import java.io.IOException;

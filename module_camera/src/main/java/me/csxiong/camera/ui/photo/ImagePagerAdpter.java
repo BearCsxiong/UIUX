@@ -1,6 +1,6 @@
 package me.csxiong.camera.ui.photo;
 
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 
 import me.csxiong.camera.R;
 import me.csxiong.camera.album.ImageEntity;

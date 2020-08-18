@@ -1,7 +1,7 @@
 package me.csxiong.uiux.ui.seek.part
 
 import android.graphics.Canvas
-import android.support.annotation.FloatRange
+import androidx.annotation.FloatRange
 import me.csxiong.uiux.ui.seek.XSeekBar
 import me.csxiong.uiux.ui.seek.XSeekDrawPart
 

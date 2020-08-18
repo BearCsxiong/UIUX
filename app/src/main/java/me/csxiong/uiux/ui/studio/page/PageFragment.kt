@@ -1,13 +1,14 @@
 package me.csxiong.uiux.ui.studio.page
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import me.csxiong.library.base.BaseFragment
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.FragmentPageBinding
 import me.csxiong.uiux.ui.studio.book.BookViewModel
 import me.csxiong.uiux.ui.studio.selection.PageViewModel
+import me.csxiong.uiux.utils.ImageUtils
 
 class PageFragment : BaseFragment<FragmentPageBinding>() {
 
@@ -32,7 +33,7 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
                 var splits = it.split(",")
                 for (path in splits) {
                     sb.append("<img width=\"100%\" src=\"")
-                            .append(me.csxiong.uiux.utils.ImageUtils.getImagePath(path))
+                            .append(ImageUtils.getImagePath(path))
                             .append("\"></img>")
                 }
             }

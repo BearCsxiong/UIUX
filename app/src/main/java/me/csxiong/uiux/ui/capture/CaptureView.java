@@ -12,13 +12,14 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntRange;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.IntRange;
+import androidx.core.content.ContextCompat;
 
 import me.csxiong.library.base.APP;
 import me.csxiong.library.utils.ThreadExecutor;

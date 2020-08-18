@@ -1,8 +1,8 @@
 package me.csxiong.uiux.ui.studio.selection
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import me.csxiong.library.base.BaseFragment
 import me.csxiong.library.integration.adapter.AdapterDataBuilder
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter

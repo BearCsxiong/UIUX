@@ -2,8 +2,9 @@ package me.csxiong.uiux.ui.transition;
 
 import android.os.Looper;
 import android.os.MessageQueue;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 

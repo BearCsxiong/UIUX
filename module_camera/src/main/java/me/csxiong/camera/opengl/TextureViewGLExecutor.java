@@ -1,6 +1,6 @@
 package me.csxiong.camera.opengl;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Gl渲染环境提供者。

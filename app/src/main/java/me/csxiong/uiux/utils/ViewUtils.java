@@ -4,16 +4,17 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.support.annotation.ColorLong;
-import android.support.annotation.UiThread;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.ColorLong;
+import androidx.annotation.UiThread;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import me.csxiong.library.utils.XDisplayUtil;
 

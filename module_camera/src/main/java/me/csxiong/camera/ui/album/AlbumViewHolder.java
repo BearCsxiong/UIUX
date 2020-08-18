@@ -1,9 +1,10 @@
 package me.csxiong.camera.ui.album;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.core.view.ViewCompat;
 
 import java.util.List;
 

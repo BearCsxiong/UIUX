@@ -1,9 +1,9 @@
 package com.commsource.util.scroll
 
 import android.graphics.Rect
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import me.csxiong.uiux.ui.layoutManager.active.ActiveStrategy
 
 /**

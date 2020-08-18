@@ -1,6 +1,7 @@
 package me.csxiong.camera.ui.album;
 
-import android.arch.lifecycle.MutableLiveData;
+
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 

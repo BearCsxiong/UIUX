@@ -6,8 +6,9 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.support.annotation.IntDef;
 import android.text.TextUtils;
+
+import androidx.annotation.IntDef;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

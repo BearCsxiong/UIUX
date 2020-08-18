@@ -6,7 +6,8 @@ import android.opengl.EGLContext;
 import android.opengl.EGLDisplay;
 import android.opengl.EGLSurface;
 import android.opengl.GLUtils;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import javax.microedition.khronos.egl.EGL10;
 

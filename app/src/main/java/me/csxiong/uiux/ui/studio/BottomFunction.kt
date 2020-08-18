@@ -1,6 +1,6 @@
 package me.csxiong.uiux.ui.studio
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import me.csxiong.uiux.ui.studio.book.BookFragment
 import me.csxiong.uiux.ui.studio.selection.SelectionFragment
 

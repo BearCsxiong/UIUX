@@ -4,11 +4,12 @@ import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.DecelerateInterpolator;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import me.csxiong.library.utils.MathUtil;
 import me.csxiong.library.utils.XAnimator;

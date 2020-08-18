@@ -2,7 +2,8 @@ package me.csxiong.camera.opengl;
 
 import android.opengl.EGL14;
 import android.opengl.EGLContext;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

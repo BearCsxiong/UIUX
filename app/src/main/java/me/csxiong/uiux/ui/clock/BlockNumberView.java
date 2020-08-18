@@ -5,10 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.annotation.IntRange;
-import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.UiThread;
 
 import me.csxiong.library.utils.XDisplayUtil;
 

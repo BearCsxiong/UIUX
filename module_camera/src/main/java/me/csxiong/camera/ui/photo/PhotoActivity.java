@@ -2,12 +2,13 @@ package me.csxiong.camera.ui.photo;
 
 import android.app.SharedElementCallback;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
 import android.transition.Transition;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
