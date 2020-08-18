@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.RemoteViews;
 
 import me.csxiong.library.utils.XDisplayUtil;
 
@@ -18,6 +19,7 @@ import me.csxiong.library.utils.XDisplayUtil;
  * @Desc : 雷达图
  * @Author : csxiong - 2020-01-06
  */
+@RemoteViews.RemoteView
 public class RadarView extends View {
 
     //一周为360度

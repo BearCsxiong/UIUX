@@ -15,10 +15,8 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 
 import java.util.Map;
 
-import me.csxiong.library.base.APP;
 import me.csxiong.library.base.IAppDelegate;
 import me.csxiong.uiux.BuildConfig;
-import me.csxiong.uiux.di.DaggerUIComponent;
 import me.csxiong.uiux.ui.dataMask.MaskContainer;
 import me.csxiong.uiux.ui.dataMask.MaskType;
 import me.csxiong.uiux.ui.dataMask.mask.BaseMask;
@@ -52,14 +50,6 @@ public class MainAppDelegate implements IAppDelegate {
             ARouter.openDebug();
         }
         ARouter.init(application);
-
-        /**
-         * 所有UI组件反注入到APP中的Injector中
-         */
-        DaggerUIComponent.builder()
-                .appComponent(APP.get().getAppComponent())
-                .build()
-                .inject((APP) application);
 
         /**
          * mask代理

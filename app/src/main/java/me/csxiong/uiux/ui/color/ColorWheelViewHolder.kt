@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import me.csxiong.library.integration.adapter.XItem
 import me.csxiong.library.integration.adapter.XViewHolder
-import me.csxiong.library.utils.XAnimatorCaculateValuer
+import me.csxiong.library.utils.XAnimatorCalculateValuer
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.ItemColorBinding
 
@@ -14,7 +14,7 @@ import me.csxiong.uiux.databinding.ItemColorBinding
  */
 class ColorWheelViewHolder(context: Context?, parent: ViewGroup?) : XViewHolder<ItemColorBinding, Int>(context, parent, R.layout.item_color) {
 
-    val scaleValuer = XAnimatorCaculateValuer()
+    val scaleValuer = XAnimatorCalculateValuer()
             .apply {
                 mark(1.0f, 1.2f)
             }

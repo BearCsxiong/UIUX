@@ -19,7 +19,7 @@ import me.csxiong.uiux.utils.RefreshState
  */
 class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
 
-    val mViewModel by lazy { ViewModelProviders.of(activity!!)[SelectionViewModel::class.java] }
+    val mViewModel by lazy { ViewModelProviders.of(activity!!)[PageViewModel::class.java] }
 
     val bookViewModel by lazy { ViewModelProviders.of(activity!!)[BookViewModel::class.java] }
 

@@ -27,14 +27,14 @@ class BookApi {
     /**
      * 下一话
      */
-    private fun chapterNext(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
+    fun chapterNext(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
         chapterNearBy(1, manhuaId, chapterId, responseListener)
     }
 
     /**
      * 上一话
      */
-    private fun chapterPre(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
+    fun chapterPre(manhuaId: Int, chapterId: Int, responseListener: ResponseListener<HttpResult<Selection>>?) {
         chapterNearBy(0, manhuaId, chapterId, responseListener)
     }
 

@@ -5,8 +5,8 @@ import android.support.v4.view.ViewCompat;
 import me.csxiong.camera.R;
 import me.csxiong.camera.album.ImageEntity;
 import me.csxiong.camera.databinding.ItemPagerImageBinding;
+import me.csxiong.camera.ui.imageloader.ImageLoader;
 import me.csxiong.library.integration.adapter.XPagerAdapter;
-import me.csxiong.library.integration.imageloader.ImageLoader;
 
 public class ImagePagerAdpter extends XPagerAdapter<ItemPagerImageBinding, ImageEntity> {
 

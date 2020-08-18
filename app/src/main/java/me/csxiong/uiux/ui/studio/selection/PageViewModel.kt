@@ -1,8 +1,9 @@
 package me.csxiong.uiux.ui.studio.selection
 
 import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import me.csxiong.library.base.XViewModel
+import me.csxiong.library.utils.XToast
 import me.csxiong.uiux.ui.http.HttpResult
 import me.csxiong.uiux.ui.http.ResponseListener
 import me.csxiong.uiux.ui.http.XHttp
@@ -15,7 +16,7 @@ import me.csxiong.uiux.utils.RefreshState
  * @Desc : 选集ViewModel
  * @Author : Bear - 2020/8/3
  */
-class SelectionViewModel(application: Application) : XViewModel(application) {
+class PageViewModel(application: Application) : AndroidViewModel(application) {
 
     var page = 1
 
@@ -47,6 +48,40 @@ class SelectionViewModel(application: Application) : XViewModel(application) {
                             dataEvent.value = dataList
                         }
                     }
+                })
+    }
+
+    fun pre(manhuaId: Int, chapterId: Int) {
+        XHttp.getService(BookApi::class.java)
+                .chapterPre(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>> {
+
+                    override fun onNext(t: HttpResult<Selection>?) {
+                        if (t == null) {
+                            XToast.error("失败")
+                            return
+                        }
+                        t.data?.let {
+                            applySelectionEvent.value = it
+                        }
+                    }
+
+                })
+    }
+
+    fun next(manhuaId: Int, chapterId: Int) {
+        XHttp.getService(BookApi::class.java)
+                .chapterNext(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>> {
+
+                    override fun onNext(t: HttpResult<Selection>?) {
+                        if (t == null) {
+                            XToast.error("失败")
+                            return
+                        }
+                        t.data?.let {
+                            applySelectionEvent.value = it
+                        }
+                    }
+
                 })
     }
 

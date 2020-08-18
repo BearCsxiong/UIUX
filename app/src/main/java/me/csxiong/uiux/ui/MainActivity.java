@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.csxiong.library.base.XActivity;
+import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
 import me.csxiong.uiux.R;
@@ -19,7 +19,7 @@ import me.csxiong.uiux.databinding.ActivityMainBinding;
  * @Author : csxiong - 2019-11-13
  */
 @Route(path = "/app/main", name = "主页")
-public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private XRecyclerViewAdapter mAdapter;
 
@@ -49,7 +49,7 @@ public class MainActivity extends XActivity<ActivityMainBinding, MainViewModel> 
         mDataList.add(new FeatureBean("DataMask测试", "/main/data/mask"));
         mDataList.add(new FeatureBean("高斯模糊图片测试", "/main/blur"));
         mDataList.add(new FeatureBean("渐变顶部栏", "/main/gradient"));
-        mDataList.add(new FeatureBean("滚动Fliper", "/main/fliper"));
+        mDataList.add(new FeatureBean("NestedScrollListener", "/main/fliper"));
         mDataList.add(new FeatureBean("色轮", "/main/color/wheel"));
         mDataList.add(new FeatureBean("Recycler", "/main/transition"));
         mDataList.add(new FeatureBean("数字", "/main/number"));

@@ -1,8 +1,8 @@
 package me.csxiong.uiux.ui.studio.book
 
 import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import me.csxiong.library.base.XViewModel
 import me.csxiong.library.utils.XToast
 import me.csxiong.uiux.ui.http.HttpResult
 import me.csxiong.uiux.ui.http.ResponseListener
@@ -11,9 +11,8 @@ import me.csxiong.uiux.ui.http.api.BookApi
 import me.csxiong.uiux.ui.studio.bean.Book
 import me.csxiong.uiux.ui.studio.bean.BookList
 import me.csxiong.uiux.utils.RefreshState
-import javax.inject.Inject
 
-class BookViewModel @Inject constructor(application: Application) : XViewModel(application) {
+class BookViewModel  constructor(application: Application) : AndroidViewModel(application) {
 
     var dataList = ArrayList<Book>()
 

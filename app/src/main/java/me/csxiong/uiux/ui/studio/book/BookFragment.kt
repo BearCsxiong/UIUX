@@ -54,6 +54,7 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
         })
 
         mAdapter.setOnEntityClickListener({ position, entity ->
+
             mViewModel.select(entity)
             bookStudioViewModel.show(BottomFunction.Selection)
             false

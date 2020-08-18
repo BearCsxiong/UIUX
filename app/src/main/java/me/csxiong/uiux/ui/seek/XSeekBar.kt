@@ -7,11 +7,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import me.csxiong.library.utils.VibratorUtils
-import me.csxiong.library.utils.XAnimator
+import me.csxiong.library.utils.*
 import me.csxiong.library.utils.XAnimator.XAnimationListener
-import me.csxiong.library.utils.XAnimatorCaculateValuer
-import me.csxiong.library.utils.XDisplayUtil
 import me.csxiong.uiux.R
 import me.csxiong.uiux.ui.seek.part.*
 
@@ -179,7 +176,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /**
      * 进度计算
      */
-    val progressValuer = XAnimatorCaculateValuer()
+    val progressValuer = XAnimatorCalculateValuer()
 
     val drawParts = ArrayList<XSeekDrawPart>()
             .apply {
@@ -219,7 +216,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     var isExpand = false
 
-    var contentHeightValuer = XAnimatorCaculateValuer()
+    var contentHeightValuer = XAnimatorCalculateValuer()
     /**
      * 滑杆内容扩展动画
      */

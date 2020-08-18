@@ -26,7 +26,7 @@ public class BlurActivity extends BaseActivity<ActivityBlurBinding> {
 
     @Override
     public void initView() {
-        ThreadExecutor.get().executorService.execute(() -> {
+        ThreadExecutor.runOnBackgroundThread(() -> {
             BitmapDrawable draw = (BitmapDrawable) XResUtils.getDrawable(R.mipmap.icon_bubble);
             Bitmap outPutBitmap = Bitmap.createBitmap(draw.getBitmap().getWidth(), draw.getBitmap().getHeight(), Bitmap.Config.ARGB_8888);
 

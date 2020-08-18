@@ -10,9 +10,9 @@ import java.util.List;
 import me.csxiong.camera.R;
 import me.csxiong.camera.album.ImageEntity;
 import me.csxiong.camera.databinding.ItemAlbumBinding;
+import me.csxiong.camera.ui.imageloader.ImageLoader;
 import me.csxiong.library.integration.adapter.XItem;
 import me.csxiong.library.integration.adapter.XViewHolder;
-import me.csxiong.library.integration.imageloader.ImageLoader;
 import me.csxiong.library.utils.XDisplayUtil;
 
 /**

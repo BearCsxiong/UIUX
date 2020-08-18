@@ -26,7 +26,7 @@ import me.csxiong.camera.album.ImageEntity;
 import me.csxiong.camera.databinding.ActivityAlbumBinding;
 import me.csxiong.ipermission.EnsureAllPermissionCallBack;
 import me.csxiong.ipermission.IPermission;
-import me.csxiong.library.base.XActivity;
+import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.OnItemChildClickListener;
 import me.csxiong.library.integration.adapter.XItem;
@@ -38,7 +38,7 @@ import me.csxiong.library.utils.XDisplayUtil;
  * @Author : csxiong create on 2019/12/17
  */
 @Route(path = "/camera/album")
-public class AlbumActivity extends XActivity<ActivityAlbumBinding, AlbumViewModel> {
+public class AlbumActivity extends BaseActivity<ActivityAlbumBinding> {
 
     private XRecyclerViewAdapter mAdapter;
 
@@ -84,9 +84,9 @@ public class AlbumActivity extends XActivity<ActivityAlbumBinding, AlbumViewMode
                     }
                 });
 
-        mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+        mAdapter.setOnItemChildClickListener(new OnItemChildClickListener<Object>() {
             @Override
-            public void onItemChildClick(int position, XItem<?> item, View view) {
+            public void onItemChildClick(int position, XItem<Object> item, View view) {
                 AlbumRepository.getInstance().setCurrentVisiableImage((ImageEntity) item.getEntity());
                 ARouter.getInstance()
                         .build("/camera/photo")

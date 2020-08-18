@@ -8,7 +8,7 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import me.csxiong.library.utils.XAnimator
-import me.csxiong.library.utils.XAnimatorCaculateValuer
+import me.csxiong.library.utils.XAnimatorCalculateValuer
 import me.csxiong.library.utils.XDisplayUtil
 
 class XCustomSeekBar @JvmOverloads constructor(
@@ -65,7 +65,7 @@ class XCustomSeekBar @JvmOverloads constructor(
 
     var isHeight = false
 
-    var heightValuer = XAnimatorCaculateValuer()
+    var heightValuer = XAnimatorCalculateValuer()
 
     val animator = XAnimator.ofFloat(0f, 1f)
             .duration(300)

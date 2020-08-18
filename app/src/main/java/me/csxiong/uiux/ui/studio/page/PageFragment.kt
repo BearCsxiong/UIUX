@@ -6,11 +6,14 @@ import me.csxiong.library.base.BaseFragment
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.FragmentPageBinding
-import me.csxiong.uiux.ui.studio.selection.SelectionViewModel
+import me.csxiong.uiux.ui.studio.book.BookViewModel
+import me.csxiong.uiux.ui.studio.selection.PageViewModel
 
 class PageFragment : BaseFragment<FragmentPageBinding>() {
 
-    val selectionViewModel by lazy { ViewModelProviders.of(activity!!)[SelectionViewModel::class.java] }
+    val selectionViewModel by lazy { ViewModelProviders.of(activity!!)[PageViewModel::class.java] }
+
+    val bookViewModel by lazy { ViewModelProviders.of(activity!!)[BookViewModel::class.java] }
 
     val mAdapter by lazy { XRecyclerViewAdapter(context) }
 
@@ -36,5 +39,21 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
             sb.append("</body></html>")
             mViewBinding.web.loadData(sb.toString(), "text/html", "UTF-8")
         })
+
+        mViewBinding.tvPre.setOnClickListener {
+            bookViewModel.selectBookEvent.value?.let { book ->
+                selectionViewModel.applySelectionEvent.value?.let { selection ->
+                    selectionViewModel.pre(book.id, selection.id!!.toInt())
+                }
+            }
+        }
+
+        mViewBinding.tvNext.setOnClickListener {
+            bookViewModel.selectBookEvent.value?.let { book ->
+                selectionViewModel.applySelectionEvent.value?.let { selection ->
+                    selectionViewModel.next(book.id, selection.id!!.toInt())
+                }
+            }
+        }
     }
 }

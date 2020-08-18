@@ -2,9 +2,9 @@ package me.csxiong.uiux.ui.studio
 
 import android.content.Context
 import android.view.ViewGroup
+import me.csxiong.camera.ui.imageloader.ImageLoader
 import me.csxiong.library.integration.adapter.XItem
 import me.csxiong.library.integration.adapter.XViewHolder
-import me.csxiong.library.integration.imageloader.ImageLoader
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.ItemBookListBinding
 import me.csxiong.uiux.ui.studio.bean.Book

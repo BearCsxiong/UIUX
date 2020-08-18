@@ -12,7 +12,7 @@ import java.util.Arrays;
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
-import me.csxiong.library.utils.XAnimatorCaculateValuer;
+import me.csxiong.library.utils.XAnimatorCalculateValuer;
 import me.csxiong.library.utils.XDisplayUtil;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityRecyclerTransitionBinding;
@@ -27,7 +27,7 @@ public class RecyclerTransitionActivity extends BaseActivity<ActivityRecyclerTra
         return R.layout.activity_recycler_transition;
     }
 
-    XAnimatorCaculateValuer translateY = new XAnimatorCaculateValuer();
+    XAnimatorCalculateValuer translateY = new XAnimatorCalculateValuer();
 
     XRecyclerViewAdapter mAdapter;
 

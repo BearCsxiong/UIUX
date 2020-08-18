@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.utils.XAnimator;
-import me.csxiong.library.utils.XAnimatorCaculateValuer;
+import me.csxiong.library.utils.XAnimatorCalculateValuer;
 import me.csxiong.library.utils.XDisplayUtil;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityGradientBinding;
@@ -33,9 +33,9 @@ public class GradientViewAcitivity extends BaseActivity<ActivityGradientBinding>
         mViewBinding.gvCenter.stop();
     }
 
-    private XAnimatorCaculateValuer totalWidthValuer = new XAnimatorCaculateValuer();
-    private XAnimatorCaculateValuer contentWidthValuer = new XAnimatorCaculateValuer();
-    private XAnimatorCaculateValuer translateXValuer = new XAnimatorCaculateValuer();
+    private XAnimatorCalculateValuer totalWidthValuer = new XAnimatorCalculateValuer();
+    private XAnimatorCalculateValuer contentWidthValuer = new XAnimatorCalculateValuer();
+    private XAnimatorCalculateValuer translateXValuer = new XAnimatorCalculateValuer();
 
     @Override
     public void initData() {
