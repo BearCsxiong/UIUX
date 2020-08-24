@@ -25,7 +25,17 @@ class VernierView @JvmOverloads constructor(
          * 过限阻尼
          */
         val DAMP_VALUE = 5
+
+        /**
+         * 每份分割的Progress
+         */
+        val PER_SPACE_PROGRESS = 10
     }
+
+    /**
+     * 每份分割的Progress
+     */
+    private var perSpaceProgress = PER_SPACE_PROGRESS
 
     /**
      * 宽度
@@ -50,7 +60,7 @@ class VernierView @JvmOverloads constructor(
     /**
      * 最大Progress
      */
-    private var maxProgress = 450
+    var maxProgress = 450
         set(value) {
             field = value
             invalidate()
@@ -59,7 +69,7 @@ class VernierView @JvmOverloads constructor(
     /**
      * 最小Progress
      */
-    private var minProgress = -450
+    var minProgress = -450
         set(value) {
             field = value
             invalidate()
@@ -287,7 +297,7 @@ class VernierView @JvmOverloads constructor(
      * 分割maxProgress 和minProgress
      */
     private fun getSpaceCount(): Int {
-        return (maxProgress - minProgress) / 10
+        return (maxProgress - minProgress) / perSpaceProgress
     }
 
     /**
