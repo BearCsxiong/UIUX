@@ -22,6 +22,7 @@ public class ImagePagerAdpter extends XPagerAdapter<ItemPagerImageBinding, Image
 
         ImageLoader.url(entity.getDisplayPath())
                 .into(mViewBinding.iv);
+        mViewBinding.bl.startBlur();
     }
 
 }

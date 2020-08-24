@@ -38,6 +38,8 @@
 
         <activity android:name=".ui.blur.BlurActivity"/>
 
+        <activity android:name=".ui.vernier.VernierActivity"/>
+
         <activity android:name=".ui.gradient.GradientViewAcitivity"/>
 
         <activity android:name=".ui.fliper.FliperActivity"/>

@@ -1,4 +1,4 @@
-package me.csxiong.uiux.ui.http
+package me.csxiong.uiux.ui.studio
 
 import com.google.gson.annotations.SerializedName
 

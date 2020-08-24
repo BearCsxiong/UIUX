@@ -3,11 +3,11 @@ package me.csxiong.uiux.ui.studio.book
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import me.csxiong.library.integration.http.ResponseListener
+import me.csxiong.library.integration.http.XHttp
 import me.csxiong.library.utils.XToast
-import me.csxiong.uiux.ui.http.HttpResult
-import me.csxiong.uiux.ui.http.ResponseListener
-import me.csxiong.uiux.ui.http.XHttp
-import me.csxiong.uiux.ui.http.api.BookApi
+import me.csxiong.uiux.ui.studio.BookApi
+import me.csxiong.uiux.ui.studio.HttpResult
 import me.csxiong.uiux.ui.studio.bean.Book
 import me.csxiong.uiux.ui.studio.bean.BookList
 import me.csxiong.uiux.utils.RefreshState
@@ -66,7 +66,7 @@ class BookViewModel  constructor(application: Application) : AndroidViewModel(ap
         hasNext = true
         page = 1
         XHttp.getService(BookApi::class.java)
-                .newBookList(page, object : ResponseListener<HttpResult<BookList>> {
+                .newBookList(page, object : ResponseListener<HttpResult<BookList>>() {
 
                     override fun onNext(t: HttpResult<BookList>?) {
                         refreshStateEvent.value = RefreshState.COMPLETE
@@ -89,7 +89,7 @@ class BookViewModel  constructor(application: Application) : AndroidViewModel(ap
         }
         page++
         XHttp.getService(BookApi::class.java)
-                .newBookList(page, object : ResponseListener<HttpResult<BookList>> {
+                .newBookList(page, object : ResponseListener<HttpResult<BookList>>() {
 
                     override fun onNext(t: HttpResult<BookList>?) {
                         refreshStateEvent.value = RefreshState.COMPLETE

@@ -1,6 +1,14 @@
+import me.bear.plugin.Bear
+
+plugins {
+    id "me.bear.plugin"
+}
+
 apply from: config
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -11,11 +19,11 @@ dependencies {
     api xport
     api project(':module_camera')
     annotationProcessor aroutercompiler
-    annotationProcessor dagger2compiler
-    annotationProcessor dagger2androidprocessor
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    kapt aroutercompiler
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation Bear.ipermission
 }
 repositories {
     mavenCentral()

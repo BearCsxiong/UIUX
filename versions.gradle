@@ -2,11 +2,11 @@ ext {
 
     _versionCode = 1
     _versionName = "1.0.1"
-    _minSdkVersion = 19
+    _minSdkVersion = 21
     _targetSdkVersion = 23
     _compileSdkVersion = 28
     _buildToolsVersion = "28.0.2"
-    xportVersion = "v2.0.0-AndroidX"
+    xportVersion = "v2.0.3-AndroidX"
 
     support = [
             appcompatVersion    : "androidx.appcompat:appcompat:1.0.0",
@@ -76,6 +76,6 @@ ext {
     //permission
     ipermission = "com.github.csxiong:IPermission:${version.ipermission}"
     //base
-    xport = "com.github.csxiong:xPort:$xportVersion"
+    xport = "com.github.BearCsxiong:xPort:$xportVersion"
 }
 

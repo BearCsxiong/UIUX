@@ -1,8 +1,7 @@
-package me.csxiong.uiux.ui.http.api
+package me.csxiong.uiux.ui.studio
 
-import me.csxiong.uiux.ui.http.HttpResult
-import me.csxiong.uiux.ui.http.ResponseListener
-import me.csxiong.uiux.ui.http.XHttp
+import me.csxiong.library.integration.http.ResponseListener
+import me.csxiong.library.integration.http.XHttp
 import me.csxiong.uiux.ui.studio.bean.BookList
 import me.csxiong.uiux.ui.studio.bean.Selection
 import me.csxiong.uiux.ui.studio.bean.SelectionList

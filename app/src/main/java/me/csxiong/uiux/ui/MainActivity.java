@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mDataList.add(new FeatureBean("色轮", "/main/color/wheel"));
         mDataList.add(new FeatureBean("Recycler", "/main/transition"));
         mDataList.add(new FeatureBean("数字", "/main/number"));
+        mDataList.add(new FeatureBean("游标控件", "/main/vernier"));
         mDataList.add(new FeatureBean("设置", "/main/book"));
         mAdapter.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder.class).build());

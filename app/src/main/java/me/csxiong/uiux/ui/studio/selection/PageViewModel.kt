@@ -3,11 +3,11 @@ package me.csxiong.uiux.ui.studio.selection
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import me.csxiong.library.integration.http.ResponseListener
+import me.csxiong.library.integration.http.XHttp
 import me.csxiong.library.utils.XToast
-import me.csxiong.uiux.ui.http.HttpResult
-import me.csxiong.uiux.ui.http.ResponseListener
-import me.csxiong.uiux.ui.http.XHttp
-import me.csxiong.uiux.ui.http.api.BookApi
+import me.csxiong.uiux.ui.studio.BookApi
+import me.csxiong.uiux.ui.studio.HttpResult
 import me.csxiong.uiux.ui.studio.bean.Selection
 import me.csxiong.uiux.ui.studio.bean.SelectionList
 import me.csxiong.uiux.utils.RefreshState
@@ -35,7 +35,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
     fun refreshSelection() {
         page = 1
         XHttp.getService(BookApi::class.java)
-                .chapterList(capterId, page, pageSize, object : ResponseListener<HttpResult<SelectionList>> {
+                .chapterList(capterId, page, pageSize, object : ResponseListener<HttpResult<SelectionList>>() {
 
                     override fun onNext(t: HttpResult<SelectionList>?) {
                         page++
@@ -53,7 +53,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
 
     fun pre(manhuaId: Int, chapterId: Int) {
         XHttp.getService(BookApi::class.java)
-                .chapterPre(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>> {
+                .chapterPre(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>>() {
 
                     override fun onNext(t: HttpResult<Selection>?) {
                         if (t == null) {
@@ -70,7 +70,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
 
     fun next(manhuaId: Int, chapterId: Int) {
         XHttp.getService(BookApi::class.java)
-                .chapterNext(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>> {
+                .chapterNext(manhuaId, chapterId, object : ResponseListener<HttpResult<Selection>>() {
 
                     override fun onNext(t: HttpResult<Selection>?) {
                         if (t == null) {
