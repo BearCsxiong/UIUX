@@ -5,12 +5,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="50dp"
-            android:scaleType="center"
-            android:layout_height="50dp"
-            android:layout_gravity="center" />
+        <me.csxiong.uiux.ui.refresh.RefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </me.csxiong.uiux.ui.refresh.RefreshLayout>
 
     </FrameLayout>
 </layout>

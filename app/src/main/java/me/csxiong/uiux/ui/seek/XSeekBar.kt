@@ -7,8 +7,11 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import me.csxiong.library.utils.*
+import me.csxiong.library.utils.VibratorUtils
+import me.csxiong.library.utils.XAnimator
 import me.csxiong.library.utils.XAnimator.XAnimationListener
+import me.csxiong.library.utils.XAnimatorCalculateValuer
+import me.csxiong.library.utils.XDisplayUtil
 import me.csxiong.uiux.R
 import me.csxiong.uiux.ui.seek.part.*
 
@@ -180,13 +183,13 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     val drawParts = ArrayList<XSeekDrawPart>()
             .apply {
-                add(XSeekBackgroundPart(this@XSeekBar))
-                add(XSeekProgressPart(this@XSeekBar))
-                add(XSeekExpandProgressPart(this@XSeekBar))
+                add(XSeekCenterExpandBackgroundPart(this@XSeekBar))
+                add(XSeekCenterExpandProgressPart(this@XSeekBar))
+//                add(XSeekExpandProgressPart(this@XSeekBar))
                 add(XSeekCenterPositionPart(this@XSeekBar))
                 add(XSeekDefaultPositionPart(this@XSeekBar))
-                add(XSeekThumbPart(this@XSeekBar))
-                add(XSeekThumbIndicatorPart(this@XSeekBar))
+                add(XSeekCenterExpandThumbPart(this@XSeekBar))
+                add(XSeekCenterExpandThumbIndicatorPart(this@XSeekBar))
             }
 
     /**
