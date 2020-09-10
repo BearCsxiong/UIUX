@@ -1,8 +1,6 @@
-import me.bear.plugin.Bear
-
-plugins {
-    id "me.bear.plugin"
-}
+import me.bear.plugin.Alibaba
+import me.bear.plugin.GitHub
+import me.bear.plugin.Kotlin
 
 apply from: config
 apply plugin: 'kotlin-android'
@@ -16,14 +14,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    api xport
     api project(':module_camera')
-    annotationProcessor aroutercompiler
-    kapt aroutercompiler
+    api Alibaba.arouter
+    kapt Alibaba.arouterCompiler
+    annotationProcessor Alibaba.arouterCompiler
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
-    implementation Bear.ipermission
+    api Kotlin.coroutinesAndroid
+    api Kotlin.stdlib
+    api Kotlin.viewmodelKtx
+
+    api GitHub.smartRefreshLayout
+    api GitHub.logger
+    api GitHub.xport
+    api GitHub.ipermission
 }
 repositories {
     mavenCentral()

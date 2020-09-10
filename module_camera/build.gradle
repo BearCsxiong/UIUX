@@ -1,3 +1,6 @@
+import me.bear.plugin.Alibaba
+import me.bear.plugin.GitHub
+
 apply from: config
 
 dependencies {
@@ -6,7 +9,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    api xport
-    annotationProcessor aroutercompiler
-    implementation 'io.alterac.blurkit:blurkit:1.1.0'
+    api GitHub.xport
+    api Alibaba.arouter
+    annotationProcessor Alibaba.arouterCompiler
+    kapt Alibaba.arouterCompiler
 }

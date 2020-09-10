@@ -1,22 +1,11 @@
 apply from: versions
+
 if (isIndependent()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
 }
 android {
-    compileSdkVersion _compileSdkVersion
-
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-
-    dataBinding {
-        enabled = true
-    }
-
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
     defaultConfig {
         if (isIndependent()) {
             if (this.name.equals("app")) {
@@ -29,11 +18,12 @@ android {
                 println("this == ${this.name} , applicationId")
             }
         }
-        minSdkVersion _minSdkVersion
-        targetSdkVersion _targetSdkVersion
-        versionCode _versionCode//1 ~ 2147483647 17年10月30号1版本
-        versionName _versionName
 
+        compileSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0.1"
 
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
@@ -50,6 +40,18 @@ android {
             }
         }
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
     buildTypes {
         release {
             debuggable false
@@ -121,12 +123,7 @@ android {
         }
     }
     packagingOptions {
-//        exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/rxjava.properties'
-//        exclude 'META-INF/NOTICE'
-//        exclude 'META-INF/LICENSE'
-//        exclude 'META-INF/LICENSE.txt'
-//        exclude 'META-INF/NOTICE.txt'
     }
 }
 
