@@ -23,7 +23,6 @@ public class MainGlobalConfig implements GlobalConfig {
 
     @Override
     public void injectActivityLifecycle(Context context, List<Application.ActivityLifecycleCallbacks> lifecycles) {
-
     }
 
     @Override

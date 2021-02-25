@@ -290,6 +290,17 @@ public class ViewUtils {
         return rect;
     }
 
+    public static Rect getLocationRect(View view) {
+        if (view == null) {
+            return null;
+        }
+        Rect rect = new Rect();
+        int[] ints = new int[2];
+        view.getLocationOnScreen(ints);
+        rect.set(ints[0], ints[1], ints[0] + view.getMeasuredWidth(), ints[1] + view.getMeasuredHeight());
+        return rect;
+    }
+
     /**
      * 判断是否可行
      *
@@ -301,7 +312,8 @@ public class ViewUtils {
     }
 
     /**
-     *非完全全面屏。
+     * 非完全全面屏。
+     *
      * @return
      */
     public static boolean isFullScreenDevice() {
@@ -310,6 +322,7 @@ public class ViewUtils {
 
     /**
      * 完全全面屏。
+     *
      * @return
      */
     public static boolean isTotalFullScreenDevice() {

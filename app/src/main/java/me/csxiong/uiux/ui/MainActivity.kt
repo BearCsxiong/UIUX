@@ -1,5 +1,6 @@
 package me.csxiong.uiux.ui
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,10 +31,15 @@ class MainActivity : BaseActivity<ActivityMainBinding?>(){
         mAdapter = XRecyclerViewAdapter(this)
         mViewBinding!!.rv.layoutManager = LinearLayoutManager(this)
         mViewBinding!!.rv.adapter = mAdapter
+        Log.e("csx", "initView")
     }
 
     override fun initData() {
         val mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mDataList.add(FeatureBean("数字", "/main/number"))
+        mDataList.add(FeatureBean("游标控件", "/main/vernier"))
+        mDataList.add(FeatureBean("引导抠图", "/main/guide"))
+        mDataList.add(FeatureBean("设置", "/main/book"))
         mDataList.add(FeatureBean("相册页面", "/camera/album"))
         mDataList.add(FeatureBean("多人拍照的手势控件", "/main/capture"))
         mDataList.add(FeatureBean("新多人拍照的手势控件", "/main/new/capture"))
@@ -47,9 +53,6 @@ class MainActivity : BaseActivity<ActivityMainBinding?>(){
         mDataList.add(FeatureBean("NestedScrollListener", "/main/fliper"))
         mDataList.add(FeatureBean("色轮", "/main/color/wheel"))
         mDataList.add(FeatureBean("Recycler", "/main/transition"))
-        mDataList.add(FeatureBean("数字", "/main/number"))
-        mDataList.add(FeatureBean("游标控件", "/main/vernier"))
-        mDataList.add(FeatureBean("设置", "/main/book"))
         mAdapter!!.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder::class.java).build())
         mAdapter!!.onItemChildClickListener = OnItemChildClickListener<FeatureBean> { position: Int, item: XItem<FeatureBean>, view: View? ->
@@ -61,7 +64,21 @@ class MainActivity : BaseActivity<ActivityMainBinding?>(){
             }
         }
 
-        mainViewModel.main()
+        printThread()
+    }
 
+    fun printThread() {
+        val stacks = Thread.getAllStackTraces()
+        val set: Set<Thread> = stacks.keys
+        for (key in set) {
+            key.name
+            val stackTraceElements = stacks[key]
+            Log.d("ThreadExecutor.TAG", "---- print thread: " + key.name + " start ----")
+            //            for (StackTraceElement st : stackTraceElements) {
+//                Log.d(TAG, "StackTraceElement: " + st.toString());
+//            }
+//            Log.d(TAG, "---- print thread: " + key.getName() + " end ----");
+        }
+        Log.d("ThreadExecutor.TAG", "Thread count: " + set.size)
     }
 }

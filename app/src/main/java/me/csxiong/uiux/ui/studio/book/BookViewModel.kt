@@ -79,6 +79,11 @@ class BookViewModel  constructor(application: Application) : AndroidViewModel(ap
                             dataEvent.value = dataList
                         }
                     }
+
+                    override fun onError(throwable: Throwable?) {
+                        super.onError(throwable)
+                        throwable?.message?.let { com.orhanobut.logger.Logger.e(it) }
+                    }
                 })
     }
 

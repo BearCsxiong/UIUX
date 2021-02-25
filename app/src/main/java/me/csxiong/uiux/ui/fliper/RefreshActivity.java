@@ -9,13 +9,10 @@ import java.util.Arrays;
 import me.csxiong.library.base.BaseActivity;
 import me.csxiong.library.integration.adapter.AdapterDataBuilder;
 import me.csxiong.library.integration.adapter.XRecyclerViewAdapter;
-import me.csxiong.library.utils.ThreadExecutor;
-import me.csxiong.library.utils.XToast;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityFliperBinding;
 import me.csxiong.uiux.ui.color.ColorWheelViewHolder;
 import me.csxiong.uiux.ui.layoutManager.FastLinearLayoutManager;
-import me.csxiong.uiux.ui.refresh.OnRefreshLoadMoreListener;
 
 /**
  * @Desc : 滚动效果Fliper
@@ -42,23 +39,23 @@ public class RefreshActivity extends BaseActivity<ActivityFliperBinding> {
                 .addEntities(Arrays.asList(1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 22, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), ColorWheelViewHolder.class)
                 .build());
 
-        mViewBinding.refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onRefresh() {
-                XToast.success("刷新");
-                ThreadExecutor.runOnUiThread(()->{
-                    mViewBinding.refresh.finishRefresh();
-                },3000);
-            }
-
-            @Override
-            public void onLoadMore() {
-                XToast.success("刷新");
-                ThreadExecutor.runOnUiThread(()->{
-                    mViewBinding.refresh.finishLoadMore();
-                },3000);
-            }
-        });
+//        mViewBinding.refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+//            @Override
+//            public void onRefresh() {
+//                XToast.success("刷新");
+//                ThreadExecutor.runOnUiThread(()->{
+//                    mViewBinding.refresh.finishRefresh();
+//                },3000);
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//                XToast.success("刷新");
+//                ThreadExecutor.runOnUiThread(()->{
+//                    mViewBinding.refresh.finishLoadMore();
+//                },3000);
+//            }
+//        });
     }
 
     @Override

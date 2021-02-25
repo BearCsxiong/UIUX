@@ -3,9 +3,6 @@ import me.bear.plugin.GitHub
 import me.bear.plugin.Kotlin
 
 apply from: config
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

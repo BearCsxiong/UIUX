@@ -468,7 +468,6 @@ public class NewCaptureView extends View {
         canvas.drawCircle(0, -inRadius + 30, 8, mIndicatorPaint);
         canvas.restore();
 
-
         //7.绘制面部指示器 存在切换动画
         mCaptureIconPaint.setAlpha(captureIconAlpha);
         if (captureDrawable != null) {

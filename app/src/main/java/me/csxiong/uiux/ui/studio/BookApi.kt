@@ -9,7 +9,7 @@ import me.csxiong.uiux.ui.studio.bean.SelectionList
 class BookApi {
 
     companion object {
-        const val Host = "https://m.yymhz.com"
+        const val Host = "http://m.yymhz.com"
     }
 
     /**

@@ -5,17 +5,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <me.csxiong.uiux.ui.refresh.RefreshLayout
+        <me.csxiong.uiux.ui.refresh.ActionLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
+                android:layout_gravity="bottom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="300dp" />
 
-        </me.csxiong.uiux.ui.refresh.RefreshLayout>
+        </me.csxiong.uiux.ui.refresh.ActionLayout>
 
     </FrameLayout>
 </layout>

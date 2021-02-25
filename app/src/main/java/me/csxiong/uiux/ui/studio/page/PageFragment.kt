@@ -3,20 +3,19 @@ package me.csxiong.uiux.ui.studio.page
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import me.csxiong.library.base.BaseFragment
-import me.csxiong.library.integration.adapter.XRecyclerViewAdapter
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.FragmentPageBinding
 import me.csxiong.uiux.ui.studio.book.BookViewModel
 import me.csxiong.uiux.ui.studio.selection.PageViewModel
 import me.csxiong.uiux.utils.ImageUtils
+import me.csxiong.uiux.utils.print
+import kotlin.math.log
 
 class PageFragment : BaseFragment<FragmentPageBinding>() {
 
     val selectionViewModel by lazy { ViewModelProviders.of(activity!!)[PageViewModel::class.java] }
 
     val bookViewModel by lazy { ViewModelProviders.of(activity!!)[BookViewModel::class.java] }
-
-    val mAdapter by lazy { XRecyclerViewAdapter(context) }
 
     override fun initData() {
     }
@@ -35,6 +34,7 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
                     sb.append("<img width=\"100%\" src=\"")
                             .append(ImageUtils.getImagePath(path))
                             .append("\"></img>")
+                    "${ImageUtils.getImagePath(path)}".print("csx")
                 }
             }
             sb.append("</body></html>")

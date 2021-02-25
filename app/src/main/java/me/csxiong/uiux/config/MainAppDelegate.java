@@ -18,7 +18,6 @@ import java.util.Map;
 
 import me.csxiong.library.base.IAppDelegate;
 import me.csxiong.library.integration.http.HttpLogger;
-import me.csxiong.library.integration.http.Preconditions;
 import me.csxiong.library.integration.http.XHttp;
 import me.csxiong.uiux.BuildConfig;
 import me.csxiong.uiux.ui.dataMask.MaskContainer;
@@ -29,7 +28,6 @@ import me.csxiong.uiux.ui.dataMask.mask.ErrorMask;
 import me.csxiong.uiux.ui.dataMask.mask.LoadingMask;
 import me.csxiong.uiux.ui.studio.BookApi;
 import me.csxiong.uiux.ui.widget.SimpleFooter;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @Desc : 主App代理
@@ -66,7 +64,7 @@ public class MainAppDelegate implements IAppDelegate {
         });
 
         XHttp.init(new XHttp.Config()
-                .addInterceptors(new HttpLoggingInterceptor(new HttpLogger(Preconditions.TAG)))
+                .addInterceptors(HttpLogger.getLogInterceptor())
                 .mainHost(BookApi.Host)
                 .isLogFullPath(true)
                 .cache(null)
