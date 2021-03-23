@@ -16,6 +16,12 @@ import javax.microedition.khronos.egl.EGL10;
  */
 public class EglProducer {
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 500; i++) {
+            System.out.println("private MutableLiveData<Boolean> csxTestEvent" + i + " = new MutableLiveData<Boolean>();");
+        }
+    }
+
     private static final int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
     private static final int EGL_OPENGL_ES2_BIT = 4;
 
@@ -36,6 +42,7 @@ public class EglProducer {
 
     /**
      * 初始化EGL环境，底下是标准的EGL初始化流程，具体的内容我也是一知半解。http://cf.meitu.com/confluence/pages/viewpage.action?pageId=55552960
+     *
      * @param shareContext 共享Egl环境，可以跨线程访问GL资源 ，不需要时传EGL10.EGL_NO_CONTEXT。
      */
     public void createEGL(@NonNull EGLContext shareContext) {
@@ -53,8 +60,8 @@ public class EglProducer {
 
         // 配置EGL的颜色空间深度空间等信息。
         int[] configAttributes = {EGL14.EGL_BUFFER_SIZE, 32, EGL14.EGL_ALPHA_SIZE, 8, EGL14.EGL_BLUE_SIZE, 8,
-            EGL14.EGL_GREEN_SIZE, 8, EGL14.EGL_RED_SIZE, 8, EGL14.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-            EGL14.EGL_SURFACE_TYPE, EGL14.EGL_WINDOW_BIT, EGL14.EGL_NONE};
+                EGL14.EGL_GREEN_SIZE, 8, EGL14.EGL_RED_SIZE, 8, EGL14.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+                EGL14.EGL_SURFACE_TYPE, EGL14.EGL_WINDOW_BIT, EGL14.EGL_NONE};
 
         int[] numConfigs = new int[1];
         EGLConfig[] configs = new EGLConfig[1];
@@ -72,6 +79,7 @@ public class EglProducer {
 
     /**
      * 创建EGLSurface。在初始化和Surface发生变化的时候都要调用。
+     *
      * @param surface {@link android.view.Surface} 或者是 {@link android.graphics.SurfaceTexture}.
      */
     public void createSurface(Object surface) {
@@ -121,6 +129,7 @@ public class EglProducer {
 
     /**
      * 获取当前的Egl环境，用于共享。
+     *
      * @return
      */
     public EGLContext getEglContext() {
@@ -160,7 +169,7 @@ public class EglProducer {
 
         public EGLSurface createWindowSurface(EGLDisplay display, EGLConfig config) {
             int[] attribList =
-                new int[] {EGL14.EGL_WIDTH, DEFAULT_SIZE, EGL14.EGL_HEIGHT, DEFAULT_SIZE, EGL14.EGL_NONE};
+                    new int[]{EGL14.EGL_WIDTH, DEFAULT_SIZE, EGL14.EGL_HEIGHT, DEFAULT_SIZE, EGL14.EGL_NONE};
             return EGL14.eglCreatePbufferSurface(display, config, attribList, 0);
         }
     }

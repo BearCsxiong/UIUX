@@ -185,7 +185,7 @@ class XSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             .apply {
                 add(XSeekCenterExpandBackgroundPart(this@XSeekBar))
                 add(XSeekCenterExpandProgressPart(this@XSeekBar))
-//                add(XSeekExpandProgressPart(this@XSeekBar))
+                add(XSeekExpandProgressPart(this@XSeekBar))
                 add(XSeekCenterPositionPart(this@XSeekBar))
                 add(XSeekDefaultPositionPart(this@XSeekBar))
                 add(XSeekCenterExpandThumbPart(this@XSeekBar))

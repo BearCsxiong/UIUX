@@ -2,9 +2,7 @@ package me.csxiong.uiux.ui.gesture;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
-import me.csxiong.camera.opengl.AbsEglRenderer;
 import me.csxiong.library.base.BaseActivity;
-import me.csxiong.library.utils.XResUtils;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityGestureBinding;
 

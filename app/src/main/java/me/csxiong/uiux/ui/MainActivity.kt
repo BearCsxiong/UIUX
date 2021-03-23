@@ -35,9 +35,13 @@ class MainActivity : BaseActivity<ActivityMainBinding?>(){
     }
 
     override fun initData() {
+        val currentTimeMillis = System.currentTimeMillis()
+        ArViewModel(application)
+        Log.e("csx","${System.currentTimeMillis() - currentTimeMillis}")
         val mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mDataList.add(FeatureBean("数字", "/main/number"))
         mDataList.add(FeatureBean("游标控件", "/main/vernier"))
+        mDataList.add(FeatureBean("测试背景渐变", "/main/background"))
         mDataList.add(FeatureBean("引导抠图", "/main/guide"))
         mDataList.add(FeatureBean("设置", "/main/book"))
         mDataList.add(FeatureBean("相册页面", "/camera/album"))
@@ -53,6 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding?>(){
         mDataList.add(FeatureBean("NestedScrollListener", "/main/fliper"))
         mDataList.add(FeatureBean("色轮", "/main/color/wheel"))
         mDataList.add(FeatureBean("Recycler", "/main/transition"))
+        mDataList.add(FeatureBean("相机预览界面", "/main/camera"))
         mAdapter!!.updateItemEntities(AdapterDataBuilder.create()
                 .addEntities(mDataList, FeatureViewHolder::class.java).build())
         mAdapter!!.onItemChildClickListener = OnItemChildClickListener<FeatureBean> { position: Int, item: XItem<FeatureBean>, view: View? ->

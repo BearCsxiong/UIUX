@@ -1,5 +1,6 @@
 package me.csxiong.uiux.ui.studio.page
 
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import me.csxiong.library.base.BaseFragment
@@ -27,10 +28,16 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
     override fun initView() {
         //选中某一话 直接使用html加载漫画内容
         selectionViewModel.applySelectionEvent.observe(activity!!, Observer {
-            var sb = StringBuilder().append("<html><body><center>")
+            var sb = StringBuilder().append("<html>")
+//                    .append("<head>")
+//                    .append("" +
+//                            "")
+//                    .append("</head>")
+                    .append("<body><center>")
             it?.imagelist?.let {
                 var splits = it.split(",")
                 for (path in splits) {
+                    Log.e("csx",ImageUtils.getImagePath(path))
                     sb.append("<img width=\"100%\" src=\"")
                             .append(ImageUtils.getImagePath(path))
                             .append("\"></img>")
@@ -39,6 +46,7 @@ class PageFragment : BaseFragment<FragmentPageBinding>() {
             }
             sb.append("</body></html>")
             mViewBinding.web.loadData(sb.toString(), "text/html", "UTF-8")
+//            mViewBinding.web.loadData(sb.toString(), "text/html", "UTF-8")
         })
 
         mViewBinding.tvPre.setOnClickListener {

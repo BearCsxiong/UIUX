@@ -27,15 +27,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp" />
 
-        <me.csxiong.library.widget.round.RoundFrameLayout
-            android:layout_width="3dp"
-            android:layout_height="3dp"
-            android:layout_above="@+id/vv"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="4dp"
-            app:rv_backgroundColor="#FB5986"
-            app:rv_isRadiusHalfHeight="true" />
-
         <me.csxiong.uiux.ui.vernier.VernierView
             android:id="@+id/vv"
             android:layout_width="match_parent"

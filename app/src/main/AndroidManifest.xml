@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name="me.csxiong.library.base.APP"
@@ -27,6 +28,8 @@
         <activity android:name=".ui.capture.NewCaptureViewActivity" />
 
         <activity android:name=".ui.gesture.GestureViewActivity" />
+
+        <activity android:name=".ui.background.BackgroundActivity"/>
 
         <activity android:name=".ui.polygon.PolygonActivity" />
 
@@ -53,6 +56,8 @@
         <activity android:name=".ui.disseek.DisSeekActivity"/>
 
         <activity android:name=".ui.guide.GuideMaskActivity"/>
+
+        <activity android:name=".ui.camera.CameraActivity"/>
 
         <activity android:name="me.csxiong.uiux.ui.MainActivity">
             <intent-filter>

@@ -140,12 +140,12 @@ public class GradientView extends View {
     public void initSize(int w, int h) {
         this.w = w;
         this.h = h;
-        fullDistance = (int) (w * 3f);
+        fullDistance = (int) (w);
         scrollDistance = fullDistance - w;
         mVisibleRect.set(0, 0, w, h);
         mFullRect.set(0, 0, fullDistance, h);
-        mLinearGradient = new LinearGradient(0, 0, fullDistance, h, new int[]{0xFFFFC75C, 0xFFFFAB6C, 0xFFFF87F7, 0xFFB397FE, 0xFFFF88F2, 0xFFFFC55E},
-                new float[]{0.0f, 0.17f, 0.39f, 0.59f, 0.81f, 1.0f},
+        mLinearGradient = new LinearGradient(0, 0, fullDistance, 0, new int[]{0xFFFFC75C, 0xFFFFC75C, 0xFF000000, 0xFF000000},
+                new float[]{0.0f, 0.499f, 0.501f, 1.0f},
                 Shader.TileMode.CLAMP);
         mPaint.setShader(mLinearGradient);
     }
