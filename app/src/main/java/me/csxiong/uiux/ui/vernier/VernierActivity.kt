@@ -3,6 +3,7 @@ package me.csxiong.uiux.ui.vernier
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import me.csxiong.library.base.BaseActivity
+import me.csxiong.library.utils.VibratorUtils
 import me.csxiong.uiux.R
 import me.csxiong.uiux.databinding.ActivityVernierBinding
 
@@ -31,11 +32,13 @@ class VernierActivity : BaseActivity<ActivityVernierBinding>() {
     }
 
     fun noAnim(view: View) {
-        mViewBinding.vv.setProgress(30, true)
+        VibratorUtils.vibrator()
+        VibratorUtils.vibrator(longArrayOf(30,50,30))
+//        mViewBinding.vv.setProgress(30, true)
     }
 
     fun withAnim(view: View) {
-        mViewBinding.vv.setProgress(600, true)
+//        mViewBinding.vv.setProgress(600, true)
     }
 
 }

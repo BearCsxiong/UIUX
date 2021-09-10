@@ -28,6 +28,7 @@ import me.csxiong.uiux.ui.dataMask.mask.ErrorMask;
 import me.csxiong.uiux.ui.dataMask.mask.LoadingMask;
 import me.csxiong.uiux.ui.studio.BookApi;
 import me.csxiong.uiux.ui.widget.SimpleFooter;
+import me.csxiong.uiux.utils.anr.XSettler;
 
 /**
  * @Desc : 主App代理
@@ -43,6 +44,7 @@ public class MainAppDelegate implements IAppDelegate {
     @Override
     public void onCreate(@NonNull Application application) {
 
+        XSettler.Companion.init();
         Logger.addLogAdapter(new AndroidLogAdapter());
 
         if (BuildConfig.DEBUG) {

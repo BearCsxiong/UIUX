@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 
@@ -61,6 +62,13 @@ public class PhotoActivity extends BaseActivity<ActivityPhotoBinding> {
 
         //在过渡完成之后 需要有部分需要处理的逻辑 包括隐藏过渡imageView 注册额外的监听
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityCompat.setEnterSharedElementCallback(this, new androidx.core.app.SharedElementCallback() {
+                @Override
+                public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+                    super.onMapSharedElements(names, sharedElements);
+                    sharedElements.put(names.get(0), mViewBinding.ivTransition);
+                }
+            });
             getWindow().getEnterTransition().addListener(new SimpleTransitionAdapter() {
                 @Override
                 public void onTransitionEnd(@NonNull Transition transition) {

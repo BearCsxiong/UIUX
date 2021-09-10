@@ -51,6 +51,11 @@ public class BookStudioActivity extends BaseActivity<ActivityBookBinding> {
 
     @Override
     public void initView() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         new IPermission(this)
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .excute(new EnsureAllPermissionCallBack() {

@@ -3,23 +3,13 @@ package me.csxiong.uiux.ui.gesture;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
-import android.opengl.GLU;
-import android.opengl.GLUtils;
-import android.widget.ProgressBar;
-
-import java.nio.FloatBuffer;
 
 import me.csxiong.camera.opengl.AbsEglRenderer;
 import me.csxiong.camera.opengl.FBOEntity;
 import me.csxiong.camera.opengl.GlUtil;
-import me.csxiong.camera.opengl.Texture2dProgram;
 import me.csxiong.camera.opengl.TextureHelper;
-import me.csxiong.camera.opengl.VertexHelper;
 import me.csxiong.library.base.APP;
 import me.csxiong.uiux.R;
-
-import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
-import static android.opengl.GLES20.GL_DEPTH_BUFFER_BIT;
 
 /**
  * @Desc : 图片Render
@@ -44,8 +34,9 @@ public class ImageRender implements AbsEglRenderer {
     public void onSurfaceChanged(int width, int height) {
         //改变ViewPort
         //修改为全拼命的ViewPort
+        //其实都以修改viewport作为内部相片的绘制距离
         GLES20.glViewport(0, 0, width, height);
-        program.updateTextureSize(height, width, fbo.height, fbo.width);
+//        program.updateTextureSize(height, width, fbo.height, fbo.width);
     }
 
     @Override

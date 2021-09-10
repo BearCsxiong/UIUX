@@ -5,6 +5,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
 import me.csxiong.library.base.BaseActivity;
+import me.csxiong.library.utils.ThreadExecutor;
 import me.csxiong.uiux.R;
 import me.csxiong.uiux.databinding.ActivityRadarBinding;
 
@@ -20,6 +21,11 @@ public class RadarActivity extends BaseActivity<ActivityRadarBinding> {
 
     @Override
     public void initView() {
+        ThreadExecutor.runOnBackgroundThread(() -> {
+            mViewBinding.btn.animate().alpha(.5f)
+                    .setDuration(300)
+                    .start();
+        });
         mViewBinding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
