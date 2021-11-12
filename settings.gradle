@@ -1,3 +1,2 @@
-includeBuild("../AppVersionConfig")
 include ':app',
 'module_camera'

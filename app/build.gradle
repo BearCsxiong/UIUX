@@ -1,9 +1,3 @@
-import me.bear.plugin.Bear
-
-plugins {
-    id "me.bear.plugin"
-}
-
 apply from: config
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -23,7 +17,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
-    implementation Bear.ipermission
+//    implementation Bear.ipermission
 }
 repositories {
     mavenCentral()
